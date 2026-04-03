@@ -1,0 +1,110 @@
+[project]
+name = "petstore-test-python"
+version = "0.1.0"
+description = "Python test repository for petstore API and UI testing with shared interfaces and fluent assertions"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "petstore-test-python contributors" }]
+dependencies = []
+
+[dependency-groups]
+dev = [
+    # Testing
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "allure-pytest>=2.13.5",
+    "pytest-cov>=5.0.0",
+    "pytest-benchmark>=4.0.0",
+    # HTTP / API
+    "requests>=2.31.0",
+    "types-requests>=2.31.0",
+    # UI / Browser
+    "selenium>=4.21.0",
+    "webdriver-manager>=4.0.1",
+    # Test data
+    "faker>=24.0.0",
+    "factory-boy>=3.3.0",
+    # Type checking
+    "mypy>=1.9.0",
+    # Linting / formatting
+    "ruff>=0.4.0",
+    "black>=24.0.0",
+    # Pre-commit
+    "pre-commit>=3.7.0",
+    # Docs
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.25.0",
+]
+
+# ---------------------------------------------------------------------------
+# pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+addopts = [
+    "--strict-markers",
+    "-v",
+    "--tb=short",
+]
+markers = [
+    "api: API tests using the requests library",
+    "ui: UI tests using Selenium and the Page Object Model",
+    "integration: Integration tests across multiple components",
+    "e2e: End-to-end tests covering full user journeys",
+    "performance: Performance / benchmark tests (manual only, excluded from CI)",
+    "slow: Tests that take a long time to run",
+]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+# ---------------------------------------------------------------------------
+# Coverage
+# ---------------------------------------------------------------------------
+[tool.coverage.run]
+source = ["framework"]
+omit = ["tests/*", "*/__init__.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 0
+
+# ---------------------------------------------------------------------------
+# mypy
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.12"
+strict = true
+ignore_missing_imports = true
+exclude = ["tests/performance"]
+
+[[tool.mypy.overrides]]
+module = "framework.factories"
+ignore_errors = true  # factory_boy has no type stubs
+
+# ---------------------------------------------------------------------------
+# ruff
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4"]
+ignore = [
+    "E501",   # line too long (handled by black)
+    "N812",   # Selenium EC alias is conventional
+    "N815",   # factory_boy fields must match API camelCase names
+    "UP046",  # Generic[T] subclass style (kept for 3.12 compat)
+    "UP047",  # generic function type params (kept for 3.12 compat)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["framework"]
+
+# ---------------------------------------------------------------------------
+# black
+# ---------------------------------------------------------------------------
+[tool.black]
+line-length = 88
+target-version = ["py312"]
