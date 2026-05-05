@@ -23,7 +23,7 @@ initialize_logging(
     log_level="DEBUG",
     console_logging=True,
     logger_name="petstore-test-python",
-    patch_root_logger=True
+    patch_root_logger=True,
 )
 
 logging.getLogger("faker").setLevel(logging.WARNING)
@@ -51,10 +51,11 @@ def api_base_url() -> str:
     """Base URL for the Petstore REST API, read from the environment."""
     return os.getenv("PETSTORE_API_BASE_URL", "http://localhost:8000/api/v1")
 
+
 @pytest.fixture(scope="session")
 def api_key() -> str:
     """API key for authenticated requests, read from the environment.
-    
+
     Raises:
         ValueError: if PETSTORE_API_KEY is not set.
     """
