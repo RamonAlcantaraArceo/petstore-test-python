@@ -124,6 +124,7 @@ class TestFindByStatus:
         for pet in pets:
             assert_that(pet).has_key("id")
 
+    @pytest.mark.usefixtures("new_pet")
     def test_all_returned_pets_match_requested_status(
         self, api_client: PetstoreApiClient
     ) -> None:
@@ -133,3 +134,4 @@ class TestFindByStatus:
         assert_that(pets).is_not_empty()
         for pet in pets:
             assert_that(pet.get("status")).equals("available")
+        assert_that(len(pets)).equals(1)

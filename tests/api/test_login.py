@@ -14,6 +14,7 @@ from framework.assertions import assert_response, assert_that
 
 
 @pytest.mark.api
+@pytest.mark.usefixtures("new_user")
 class TestLogin:
     """Tests for the GET /user/login endpoint."""
 
@@ -23,7 +24,7 @@ class TestLogin:
         """A valid login request should return HTTP 200 with a session token."""
         response = api_client.raw_get(
             "/user/login",
-            params={"username": "user", "password": "user"},
+            params={"username": "user1", "password": "password1"},
         )
 
         assert_response(response).is_ok().body_contains("token-user")
