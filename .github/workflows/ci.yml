@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ["main", "copilot/**"]
+    branches: ["main"]
   pull_request:
     branches: ["main"]
   workflow_dispatch:
@@ -69,6 +69,24 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Start Petstore API container
+        run: |
+          docker run -d --rm \
+            --name petstore-api-test \
+            -p 8000:8000 \
+            ghcr.io/ramonalcantaraarceo/petstore-api:latest
+      - name: Wait for Petstore API to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:8000/health | grep 'memory'; then
+              echo "Petstore API is up!"
+              exit 0
+            fi
+            echo "Waiting for Petstore API to be healthy... ($i/30)"
+            sleep 2
+          done
+          echo "Petstore API did not become healthy in time." && exit 1
+
       - name: Install uv
         uses: astral-sh/setup-uv@v4
         with:
@@ -86,6 +104,10 @@ jobs:
             --cov-report=term-missing \
             --alluredir=allure-results/api \
             -v
+
+      - name: Stop Petstore API container
+        if: always()
+        run: docker stop petstore-api-test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
