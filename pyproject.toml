@@ -3,10 +3,10 @@ name = "petstore-test-python"
 version = "0.1.0"
 description = "Python test repository for petstore API and UI testing with shared interfaces and fluent assertions"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12, <4.0"
 license = { text = "MIT" }
 authors = [{ name = "petstore-test-python contributors" }]
-dependencies = []
+dependencies = ["r3a-minikit @ https://github.com/RamonAlcantaraArceo/r3a-minikit/releases/download/v0.0.2/r3a_minikit-0.0.2-py3-none-any.whl"]
 
 [dependency-groups]
 dev = [
@@ -119,6 +119,3 @@ known-first-party = ["framework"]
 [tool.black]
 line-length = 88
 target-version = ["py312"]
-
-[tool.uv.sources]
-r3a-minikit = { git = "ssh://git@github.com/RamonAlcantaraArceo/r3a-minikit.git", rev = "v0.0.2" }
