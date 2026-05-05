@@ -16,12 +16,12 @@ Example
 
 from __future__ import annotations
 
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 
 
-class FluentAssertion(Generic[T]):
+class FluentAssertion[T]:
     """Chainable assertion wrapper.
 
     Instantiate via :func:`assert_that` rather than directly.
@@ -143,6 +143,7 @@ class FluentAssertion(Generic[T]):
 
     def matches_pattern(self, pattern: str) -> FluentAssertion[T]:
         """Assert the string *value* matches the regex *pattern*."""
+        __tracebackhide__ = True
         import re
 
         assert isinstance(
@@ -242,11 +243,28 @@ class ResponseAssertion:
     def is_created(self) -> ResponseAssertion:
         return self.has_status(201)
 
-    def is_not_found(self) -> ResponseAssertion:
-        return self.has_status(404)
+    def is_client_error(self) -> ResponseAssertion:
+        """Assert response is a 4xx client error."""
+        actual = self._response.status_code
+        assert (
+            400 <= actual < 500
+        ), f"Expected HTTP 4xx client error, got {actual}. Body: {self._response.text[:200]}"
+        return self
 
     def is_unauthorized(self) -> ResponseAssertion:
         return self.has_status(401)
+
+    def is_not_found(self) -> ResponseAssertion:
+        return self.has_status(404)
+
+    def is_server_error(self) -> ResponseAssertion:
+        """Assert response is a 500 server error."""
+        actual = self._response.status_code
+        assert (
+            actual == 500
+        ), f"Expected HTTP 500 server error, got {actual}. Body: {self._response.text[:200]}"
+
+        return self
 
     def body_contains(self, text: str) -> ResponseAssertion:
         assert text in self._response.text, (
@@ -256,6 +274,7 @@ class ResponseAssertion:
         return self
 
     def json_has_key(self, key: str) -> ResponseAssertion:
+        __tracebackhide__ = True
         data = self._response.json()
         assert (
             key in data
@@ -275,7 +294,7 @@ class ResponseAssertion:
 # ---------------------------------------------------------------------------
 
 
-def assert_that(value: T, description: str = "") -> FluentAssertion[T]:
+def assert_that[T](value: T, description: str = "") -> FluentAssertion[T]:
     """Entry point for fluent assertions.
 
     Example

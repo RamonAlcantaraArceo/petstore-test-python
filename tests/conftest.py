@@ -5,11 +5,30 @@ Fixtures defined here are available to all tests without explicit import.
 
 from __future__ import annotations
 
+import logging
 import os
+from collections.abc import Generator
+from pathlib import Path
+from typing import Any
 
 import pytest
+from r3a_logger.logger import (
+    initialize_logging,
+)
 
-from framework.api_client import PetstoreApiClient
+# Call r3a_logger's initialize_logging with new signature
+log_dir = Path("/Users/ramonalcantaraarceo/github/logs")
+initialize_logging(
+    log_dir=log_dir,
+    log_level="DEBUG",
+    console_logging=True,
+    logger_name="petstore-test-python",
+    patch_root_logger=True
+)
+
+logging.getLogger("faker").setLevel(logging.WARNING)
+
+from framework.api_client import PetstoreApiClient  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Configuration / environment
@@ -30,25 +49,41 @@ def pytest_configure(config: pytest.Config) -> None:
 @pytest.fixture(scope="session")
 def api_base_url() -> str:
     """Base URL for the Petstore REST API, read from the environment."""
-    return os.getenv("PETSTORE_API_BASE_URL", "https://petstore.swagger.io/v2")
+    return os.getenv("PETSTORE_API_BASE_URL", "http://localhost:8000/api/v1")
+
+@pytest.fixture(scope="session")
+def api_key() -> str:
+    """API key for authenticated requests, read from the environment.
+    
+    Raises:
+        ValueError: if PETSTORE_API_KEY is not set.
+    """
+    api_key = os.getenv("PETSTORE_API_KEY")
+    if not api_key:
+        raise ValueError("PETSTORE_API_KEY environment variable must be set")
+    return api_key
 
 
 @pytest.fixture
-def api_client(api_base_url: str) -> PetstoreApiClient:
+def api_client(
+    api_base_url: str, api_key: str | None
+) -> Generator[PetstoreApiClient, None, None]:
     """Provide a fresh :class:`PetstoreApiClient` for each test.
 
     The client is automatically closed after the test completes.
     """
-    client = PetstoreApiClient(base_url=api_base_url)
+    client = PetstoreApiClient(base_url=api_base_url, api_key=api_key)
     yield client
     client.close()
 
 
 @pytest.fixture
-def authenticated_api_client(api_client: PetstoreApiClient) -> PetstoreApiClient:
+def authenticated_api_client(
+    api_client: PetstoreApiClient,
+) -> Generator[PetstoreApiClient, None, None]:
     """Provide an already-logged-in API client (uses the public demo credentials)."""
     api_client.login("user1", "password1")
-    return api_client
+    yield api_client
 
 
 # ---------------------------------------------------------------------------
@@ -63,7 +98,7 @@ def ui_base_url() -> str:
 
 
 @pytest.fixture
-def browser(ui_base_url: str):  # type: ignore[no-untyped-def]
+def browser(ui_base_url: str) -> Generator[Any, None, None]:
     """Provide a configured Selenium WebDriver for each UI test.
 
     Automatically quits the browser after the test completes.
@@ -81,7 +116,7 @@ def browser(ui_base_url: str):  # type: ignore[no-untyped-def]
 
 
 @pytest.fixture
-def ui_client(browser, ui_base_url: str):  # type: ignore[no-untyped-def]
+def ui_client(browser: Any, ui_base_url: str) -> Generator[Any, None, None]:
     """Provide a :class:`PetstoreUiClient` backed by the ``browser`` fixture."""
     from framework.ui_client import PetstoreUiClient  # noqa: PLC0415
 

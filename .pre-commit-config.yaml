@@ -3,17 +3,17 @@ repos:
   # Ruff – lint & import sort
   # ---------------------------------------------------------------------------
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.4
+    rev: v0.15.9
     hooks:
-      - id: ruff
+      - id: ruff-check
         args: [--fix]
-      - id: ruff-format
+      # - id: ruff-format
 
   # ---------------------------------------------------------------------------
   # Black – code formatting
   # ---------------------------------------------------------------------------
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 26.3.1
     hooks:
       - id: black
 

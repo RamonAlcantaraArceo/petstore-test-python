@@ -1,8 +1,7 @@
 # petstore-test-python
 
 A structured Python test repository supporting **API**, **UI** (Selenium + POM),
-**integration**, and **end-to-end** testing of the
-[Swagger Petstore](https://petstore.swagger.io/) with a shared interface and
+**integration**, and **end-to-end** testing of a Petstore API (originally inspired by [Swagger Petstore](https://petstore.swagger.io/), but now running locally at `http://localhost:8000`) with a shared interface and
 fluent assertions.
 
 ## What's Inside

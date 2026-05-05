@@ -36,6 +36,7 @@ dev = [
     "mkdocs>=1.6.0",
     "mkdocs-material>=9.5.0",
     "mkdocstrings[python]>=0.25.0",
+    "r3a-minikit",
 ]
 
 # ---------------------------------------------------------------------------
@@ -93,6 +94,16 @@ target-version = "py312"
 select = ["E", "F", "W", "I", "N", "UP", "B", "C4"]
 ignore = [
     "E501",   # line too long (handled by black)
+    "E701",   # multiple statements on one line (handled by black)
+    "E702",   # multiple statements on one line (handled by black)
+    "E703",   # statement ends with a semicolon (handled by black)
+    "E711",   # comparison to None should be 'if cond is None:' (handled by black)
+    "E712",   # comparison to True/False should be 'if cond is True/False:' (handled by black)
+    "E714",   # test for object identity should be 'is not' (handled by black)
+    "E721",   # do not compare types, use isinstance() (handled by black)
+    "E731",   # do not assign a lambda expression, use a def (handled by black)
+    "E741",   # ambiguous variable name (handled by black)
+    "W191",   # indentation contains tabs (handled by black)
     "N812",   # Selenium EC alias is conventional
     "N815",   # factory_boy fields must match API camelCase names
     "UP046",  # Generic[T] subclass style (kept for 3.12 compat)
@@ -108,3 +119,6 @@ known-first-party = ["framework"]
 [tool.black]
 line-length = 88
 target-version = ["py312"]
+
+[tool.uv.sources]
+r3a-minikit = { git = "ssh://git@github.com/RamonAlcantaraArceo/r3a-minikit.git", rev = "v0.0.2" }

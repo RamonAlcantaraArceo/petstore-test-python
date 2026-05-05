@@ -56,7 +56,7 @@ uv run pre-commit run --all-files
 
 | Variable | Default | Description |
 |---|---|---|
-| `PETSTORE_API_BASE_URL` | `https://petstore.swagger.io/v2` | API root URL |
+| `PETSTORE_API_BASE_URL` | `http://localhost:8000` | API root URL |
 | `PETSTORE_UI_BASE_URL` | `https://the-internet.herokuapp.com` | UI root URL |
 | `RUN_UI_TESTS` | `0` | Set to `1` to enable Selenium tests |
 | `HEADLESS` | `true` | Browser headless mode |

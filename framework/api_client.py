@@ -1,6 +1,6 @@
 """HTTP API client for the Swagger Petstore REST API.
 
-Target: https://petstore.swagger.io/v2  (public demo; no persistent state)
+Target: http://localhost:8000/api/v1  (Personal demo, still in development and pending deployment)
 
 This client implements :class:`~framework.interfaces.PetstoreClientProtocol`
 so it can be used interchangeably with the Selenium UI client wherever the
@@ -27,7 +27,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_BASE_URL = "https://petstore.swagger.io/v2"
+DEFAULT_BASE_URL = "http://localhost:8000/api/v1"
 DEFAULT_TIMEOUT = 10  # seconds
 
 
@@ -55,7 +55,7 @@ class PetstoreApiClient:
         self._session = requests.Session()
         self._session.headers.update({"Content-Type": "application/json"})
         if api_key:
-            self._session.headers.update({"api_key": api_key})
+            self._session.headers.update({"X-API-Key": api_key})
         self._logged_in = False
         self._auth_token: str | None = None
 
@@ -73,14 +73,79 @@ class PetstoreApiClient:
         **kwargs: Any,
     ) -> requests.Response:
         url = self._url(path)
-        logger.debug("%s %s", method.upper(), url)
+        import json as _json
+
+        # Prepare request log
+        from urllib.parse import urlencode, urlparse
+
+        parsed_url = urlparse(url)
+        base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
+        path_and_query = parsed_url.path
+        if parsed_url.query:
+            path_and_query += f"?{parsed_url.query}"
+        # If params are present, append as query string
+        params = kwargs.get("params")
+        if params:
+            # If there is already a query, append with &
+            sep = "&" if parsed_url.query else "?"
+            path_and_query += f"{sep}{urlencode(params)}"
+        summary = f"Request: {base_url} {method.upper()} {path_and_query}"
+
+        request_log = {
+            "event": "request",
+            "method": method.upper(),
+            "url": url,
+            "headers": dict(self._session.headers),
+            "extra_headers": kwargs.get("headers"),
+            "params": params,
+            "json": kwargs.get("json"),
+            "data": kwargs.get("data"),
+        }
+        pretty_request = _json.dumps(
+            request_log, default=str, ensure_ascii=False, indent=2
+        )
+        indented_request = "\n  " + pretty_request.replace("\n", "\n  ")
+        logger.debug(f"{summary}{indented_request}")
+
         response = self._session.request(
             method,
             url,
             timeout=self._timeout,
             **kwargs,
         )
-        logger.debug("→ %s", response.status_code)
+
+        # Prepare response log
+        # If the body is JSON, include as native object; else as string
+        try:
+            body_obj = response.json()
+        except Exception:
+            body_obj = response.text
+
+        # Parse the URL to split base, path, and query
+        from urllib.parse import urlparse
+
+        parsed_url = urlparse(response.url)
+        base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
+        path_and_query = parsed_url.path
+        if parsed_url.query:
+            path_and_query += f"?{parsed_url.query}"
+
+        # Compose summary line
+        summary = f"Response: {base_url} {method.upper()} {path_and_query} [{response.status_code}]"
+
+        response_log = {
+            "event": "response",
+            "status_code": response.status_code,
+            "reason": response.reason,
+            "headers": dict(response.headers),
+            "body": body_obj,
+            "url": response.url,
+        }
+        pretty_response = _json.dumps(
+            response_log, default=str, ensure_ascii=False, indent=2
+        )
+        indented_response = "\n  " + pretty_response.replace("\n", "\n  ")
+        logger.debug(f"{summary}{indented_response}")
         return response
 
     # ------------------------------------------------------------------

@@ -23,10 +23,10 @@ class TestLogin:
         """A valid login request should return HTTP 200 with a session token."""
         response = api_client.raw_get(
             "/user/login",
-            params={"username": "user1", "password": "password1"},
+            params={"username": "user", "password": "user"},
         )
 
-        assert_response(response).is_ok().body_contains("logged in user session")
+        assert_response(response).is_ok().body_contains("token-user")
 
     def test_login_sets_authenticated_state(
         self, api_client: PetstoreApiClient
@@ -45,9 +45,9 @@ class TestLogin:
             params={"username": "user1", "password": "password1"},
         )
 
-        assert_response(response).is_ok().json_has_key("message")
-        token = response.json()["message"]
-        assert_that(token).is_not_none().contains("logged in user session")
+        assert_response(response).is_ok().json_has_key("token")
+        token = response.json()["token"]
+        assert_that(token).is_not_none().contains("user1")
 
     def test_login_then_logout_clears_session(
         self, api_client: PetstoreApiClient
@@ -67,6 +67,4 @@ class TestLogin:
             params={"username": "user1", "password": "password1"},
         )
 
-        assert_response(response).is_ok().json_has_key("code").json_has_key("message")
-        data = response.json()
-        assert_that(data["code"]).equals(200)
+        assert_response(response).is_ok().json_has_key("token")

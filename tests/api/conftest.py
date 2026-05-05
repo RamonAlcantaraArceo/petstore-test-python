@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Generator
+
 import pytest
 
 from framework.api_client import PetstoreApiClient
@@ -9,7 +11,7 @@ from framework.factories import PetFactory
 
 
 @pytest.fixture
-def new_pet(api_client: PetstoreApiClient) -> dict:
+def new_pet(api_client: PetstoreApiClient) -> Generator:
     """Create a pet via the API and yield it; delete it after the test."""
     data = PetFactory.build(status="available")
     created = api_client.add_pet(

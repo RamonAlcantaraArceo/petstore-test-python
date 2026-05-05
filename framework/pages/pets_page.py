@@ -1,10 +1,10 @@
-"""Pets page object for the Swagger Petstore UI.
+"""Pets page object for the Petstore UI.
 
-Models the interactive API explorer at https://petstore.swagger.io/
+Models the interactive API explorer (originally inspired by https://petstore.swagger.io/, now intended for your local instance).
 The swagger-UI exposes pets operations visually; this POM wraps those
 interactions so UI tests can create/read pets through the browser.
 
-Note: In a real project this would target the actual petstore web
+Note: In a real project this would target your actual petstore web
 application. The swagger-ui interactions shown here demonstrate the
 POM pattern and can be adapted to any web front-end.
 """
@@ -17,7 +17,7 @@ from framework.pages.base_page import BasePage
 
 
 class PetsPage(BasePage):
-    """Page Object for the Swagger Petstore UI pets section."""
+    """Page Object for the Petstore UI pets section (local instance)."""
 
     URL = "/"
 
