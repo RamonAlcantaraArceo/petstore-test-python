@@ -17,7 +17,7 @@ from r3a_logger.logger import (
 )
 
 # Call r3a_logger's initialize_logging with new signature
-log_dir = Path("/Users/ramonalcantaraarceo/github/logs")
+log_dir = Path("./.logs")
 initialize_logging(
     log_dir=log_dir,
     log_level="DEBUG",
