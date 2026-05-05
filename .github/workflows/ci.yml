@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PETSTORE_API_BASE_URL: "http://localhost:8000"
+  PETSTORE_API_BASE_URL: "http://localhost:8000/api/v1"
   PETSTORE_UI_BASE_URL: "https://the-internet.herokuapp.com"
   PETSTORE_API_KEY: ${{ secrets.PETSTORE_API_KEY }}
   # UI tests are opt-in; set to "1" in a separate workflow or matrix leg
