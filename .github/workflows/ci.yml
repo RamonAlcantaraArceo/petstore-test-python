@@ -341,7 +341,7 @@ jobs:
     name: Publish Allure Report
     runs-on: ubuntu-latest
     needs: [api-tests, integration-tests, e2e-tests, ui-tests]
-    if: always() && (github.ref == 'refs/heads/main')
+    if: always() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix-allure-report')
     permissions:
       contents: write
       pages: write
@@ -378,7 +378,10 @@ jobs:
           node-version: "20"
 
       - name: Install Allure CLI
-        run: npm install -g allure-commandline
+        run: |
+          npm install -g allure
+          allure --version
+
 
       - name: Generate Allure report
         run: allure generate --clean allure-results -o allure-report
