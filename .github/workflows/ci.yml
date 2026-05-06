@@ -397,11 +397,20 @@ jobs:
           npm install -g allure
           allure --version
 
+      - name: Create Allure 3 config
+        run: |
+          cat > allurerc.yml <<EOF
+          name: "Petstore Test Report"
+          output: "./allure-report"
+          historyPath: "./.allure/allure-history.jsonl"
+          appendHistory: true
+          EOF
+
       - name: Generate Allure report
         run: |
           allure generate allure-results \
             --output allure-report \
-            --history-path .allure/allure-history.jsonl \
+            --config allurerc.yml \
             --history-limit 20
 
       - name: Persist Allure 3 history file in published site
