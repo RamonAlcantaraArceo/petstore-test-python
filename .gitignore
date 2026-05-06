@@ -1,0 +1,62 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# === Virtual environments ===
+.venv/
+venv/
+env/
+.env
+.env.test
+
+# === UV ===
+.uv/
+
+# === Coverage ===
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# === pytest ===
+.pytest_cache/
+pytest_cache/
+
+# === Allure ===
+allure-results/
+allure-report/
+
+# === mypy ===
+.mypy_cache/
+
+# === ruff ===
+.ruff_cache/
+
+# === IDE ===
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# === Secrets / local env ===
+.env.local
+.env.*.local
+secrets.toml
+
+# === Docs (build artefacts) ===
+site/
+
+# === Benchmark results ===
+.benchmarks/
+
+# === Logs ===
+.logs/

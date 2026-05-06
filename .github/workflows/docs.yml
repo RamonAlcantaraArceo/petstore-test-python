@@ -1,0 +1,42 @@
+name: Docs
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "framework/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy-docs:
+    name: Build & deploy MkDocs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history for git-revision-date plugin
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Install dependencies (including MkDocs)
+        run: uv sync --all-extras
+
+      - name: Build and deploy docs
+        run: uv run mkdocs gh-deploy --force --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

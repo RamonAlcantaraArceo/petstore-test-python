@@ -1,0 +1,68 @@
+site_name: petstore-test-python
+site_description: Python test repository for petstore API and UI testing
+site_url: https://ramonalcantaraarceo.github.io/petstore-test-python/
+repo_url: https://github.com/RamonAlcantaraArceo/petstore-test-python
+repo_name: petstore-test-python
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.]
+          options:
+            show_source: true
+            docstring_style: numpy
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Test Types:
+      - API Tests: api-tests.md
+      - UI Tests: ui-tests.md
+      - Integration Tests: integration-tests.md
+      - E2E Tests: e2e-tests.md
+      - Performance Tests: performance-tests.md
+  - Framework Reference: framework-reference.md
+  - CI/CD: cicd.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - tables
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/RamonAlcantaraArceo/petstore-test-python
