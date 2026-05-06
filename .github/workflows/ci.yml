@@ -378,10 +378,13 @@ jobs:
           node-version: "20"
 
       - name: Install Allure CLI
-        run: npm install -g allure-commandline
+        run: |
+          npm install -g allure
+          allure --version
+
 
       - name: Generate Allure report
-        run: allure generate --clean allure-results -o allure-report
+        run: allure generate -o allure-report
 
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
