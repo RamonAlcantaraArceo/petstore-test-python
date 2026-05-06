@@ -64,9 +64,17 @@ uv run pytest tests/performance/ --benchmark-only
 ### With Allure Reports
 
 ```bash
+# 1. Run tests and collect Allure results
 uv run pytest tests/api/ --alluredir=allure-results
-allure serve allure-results
+
+# 2. Generate the HTML report using Allure 3 CLI (requires Node.js)
+npx allure-commandline generate --clean allure-results -o allure-report
+
+# 3. Open the report in a browser
+npx allure-commandline open allure-report
 ```
+
+> **Note:** Install Allure CLI globally for convenience: `npm install -g allure-commandline`
 
 ## Directory Structure
 

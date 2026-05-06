@@ -38,9 +38,35 @@ tagged with flags (`api`, `integration`, `e2e`).
 
 ## Allure Reports
 
-Allure results are uploaded as artifacts and published to GitHub Pages
-after every successful run on `main`. The report is available at:
+Allure results are collected per suite job using `--alluredir` and uploaded as
+artifacts. After all suites complete (on `main` only) the `allure-report` job:
+
+1. Downloads and merges all `allure-results-*` artifacts.
+2. Restores historical trend data from the `gh-pages` branch
+   (`gh-pages/history/` → `allure-results/history/`).
+3. Runs **Allure 3 CLI** (`allure-commandline` npm package) to generate a
+   static HTML report:
+   ```bash
+   allure generate --clean allure-results -o allure-report
+   ```
+4. Publishes the generated `allure-report/` directory to the `gh-pages` branch
+   via `peaceiris/actions-gh-pages`.
+
+The published report is available at:
 
 ```
 https://<user>.github.io/petstore-test-python/
+```
+
+### Local Allure 3 report generation
+
+```bash
+# Run any suite to collect results
+uv run pytest tests/api/ --alluredir=allure-results
+
+# Generate report (requires Node.js)
+npx allure-commandline generate --clean allure-results -o allure-report
+
+# Open report
+npx allure-commandline open allure-report
 ```

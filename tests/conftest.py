@@ -7,10 +7,12 @@ from __future__ import annotations
 
 import logging
 import os
+import platform
 from collections.abc import Generator
 from pathlib import Path
 from typing import Any
 
+import allure
 import pytest
 from r3a_logger.logger import (
     initialize_logging,
@@ -41,6 +43,48 @@ def pytest_configure(config: pytest.Config) -> None:
     """Register custom markers and apply global settings."""
     # Markers are declared in pyproject.toml; this hook runs early.
     pass
+
+
+def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
+    """Write environment metadata to the Allure results directory."""
+    allure_dir = getattr(session.config.option, "allure_report_dir", None)
+    if allure_dir:
+        env_file = Path(allure_dir) / "environment.properties"
+        env_file.parent.mkdir(parents=True, exist_ok=True)
+        with env_file.open("w") as f:
+            f.write(f"Python.Version={platform.python_version()}\n")
+            f.write(
+                "API.Base.URL="
+                + os.getenv("PETSTORE_API_BASE_URL", "http://localhost:8000/api/v1")
+                + "\n"
+            )
+            f.write(
+                "UI.Base.URL="
+                + os.getenv(
+                    "PETSTORE_UI_BASE_URL", "https://the-internet.herokuapp.com"
+                )
+                + "\n"
+            )
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(
+    item: pytest.Item, call: pytest.CallInfo  # type: ignore[type-arg]
+) -> Generator[None, None, None]:
+    """Attach a screenshot to the Allure report when a UI test fails."""
+    outcome = yield
+    report = outcome.get_result()
+    if report.when == "call" and report.failed and "browser" in item.fixturenames:
+        try:
+            driver = item.funcargs.get("browser")
+            if driver is not None:
+                allure.attach(
+                    driver.get_screenshot_as_png(),
+                    name="screenshot_on_failure",
+                    attachment_type=allure.attachment_type.PNG,
+                )
+        except Exception:
+            pass
 
 
 # ---------------------------------------------------------------------------
