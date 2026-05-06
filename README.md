@@ -68,13 +68,13 @@ uv run pytest tests/performance/ --benchmark-only
 uv run pytest tests/api/ --alluredir=allure-results
 
 # 2. Generate the HTML report using Allure 3 CLI (requires Node.js)
-npx allure-commandline generate --clean allure-results -o allure-report
+npx allure generate -o allure-report
 
 # 3. Open the report in a browser
-npx allure-commandline open allure-report
+npx allure open allure-report
 ```
 
-> **Note:** Install Allure CLI globally for convenience: `npm install -g allure-commandline`
+> **Note:** Install Allure CLI globally for convenience: `npm install -g allure`
 
 ## Directory Structure
 
@@ -134,12 +134,12 @@ assert_response(response).is_ok().json_has_key("id")
 
 ## Environment Variables
 
-| Variable | Default | Description |
-|---|---|---|
-| `PETSTORE_API_BASE_URL` | `http://localhost:8000` | Petstore API root |
-| `PETSTORE_UI_BASE_URL` | `https://the-internet.herokuapp.com` | Web UI root |
-| `RUN_UI_TESTS` | `0` | Set to `1` to enable UI tests |
-| `HEADLESS` | `true` | Set to `false` for visible browser |
+| Variable                | Default                              | Description                        |
+|-------------------------|--------------------------------------|------------------------------------|
+| `PETSTORE_API_BASE_URL` | `http://localhost:8000`              | Petstore API root                  |
+| `PETSTORE_UI_BASE_URL`  | `https://the-internet.herokuapp.com` | Web UI root                        |
+| `RUN_UI_TESTS`          | `0`                                  | Set to `1` to enable UI tests      |
+| `HEADLESS`              | `true`                               | Set to `false` for visible browser |
 
 ## Local Secrets with 1Password CLI
 
