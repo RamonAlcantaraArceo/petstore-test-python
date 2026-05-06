@@ -148,6 +148,24 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras
 
+      - name: Start Petstore API container
+        run: |
+          docker run -d --rm \
+            --name petstore-api-test \
+            -p 8000:8000 \
+            ghcr.io/ramonalcantaraarceo/petstore-api:latest
+      - name: Wait for Petstore API to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:8000/health | grep 'memory'; then
+              echo "Petstore API is up!"
+              exit 0
+            fi
+            echo "Waiting for Petstore API to be healthy... ($i/30)"
+            sleep 2
+          done
+          echo "Petstore API did not become healthy in time." && exit 1
+
       - name: Run integration tests with coverage
         run: |
           uv run pytest tests/integration/ \
@@ -157,6 +175,10 @@ jobs:
             --cov-report=term-missing \
             --alluredir=allure-results/integration \
             -v
+
+      - name: Stop Petstore API container
+        if: always()
+        run: docker stop petstore-api-test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -197,6 +219,24 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras
 
+      - name: Start Petstore API container
+        run: |
+          docker run -d --rm \
+            --name petstore-api-test \
+            -p 8000:8000 \
+            ghcr.io/ramonalcantaraarceo/petstore-api:latest
+      - name: Wait for Petstore API to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:8000/health | grep 'memory'; then
+              echo "Petstore API is up!"
+              exit 0
+            fi
+            echo "Waiting for Petstore API to be healthy... ($i/30)"
+            sleep 2
+          done
+          echo "Petstore API did not become healthy in time." && exit 1
+
       - name: Run E2E tests with coverage
         run: |
           uv run pytest tests/e2e/ \
@@ -206,6 +246,10 @@ jobs:
             --cov-report=term-missing \
             --alluredir=allure-results/e2e \
             -v
+
+      - name: Stop Petstore API container
+        if: always()
+        run: docker stop petstore-api-test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -251,6 +295,24 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
 
+      - name: Start Petstore API container
+        run: |
+          docker run -d --rm \
+            --name petstore-api-test \
+            -p 8000:8000 \
+            ghcr.io/ramonalcantaraarceo/petstore-api:latest
+      - name: Wait for Petstore API to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:8000/health | grep 'memory'; then
+              echo "Petstore API is up!"
+              exit 0
+            fi
+            echo "Waiting for Petstore API to be healthy... ($i/30)"
+            sleep 2
+          done
+          echo "Petstore API did not become healthy in time." && exit 1
+
       - name: Run UI tests
         run: |
           uv run pytest tests/ui/ \
@@ -259,6 +321,10 @@ jobs:
             -v
         env:
           HEADLESS: "true"
+
+      - name: Stop Petstore API container
+        if: always()
+        run: docker stop petstore-api-test
 
       - name: Upload Allure results
         uses: actions/upload-artifact@v4
