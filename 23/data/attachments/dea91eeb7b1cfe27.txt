@@ -1,0 +1,213 @@
+17:05:10 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f441cd2e020> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+17:05:10 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f441cd2e0c0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+17:05:10 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f441da18e30>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+17:05:10 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f441da18e30>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+17:05:10 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f441cd2e160> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+17:05:10 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f441cd2e200> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+17:05:10 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f441de15c10>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+17:05:10 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "jonathan015862",
+      "password": "(*p64QEiLreQ",
+      "email": "jonathan015862@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+17:05:10 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+17:05:10 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 138
+17:05:10 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 17:05:10 GMT",
+      "server": "uvicorn",
+      "content-length": "138",
+      "content-type": "application/json",
+      "x-correlation-id": "20a9c266-c6b0-4b0e-9618-9f0a191a643b"
+    },
+    "body": {
+      "username": "jonathan015862",
+      "first_name": null,
+      "last_name": null,
+      "email": "jonathan015862@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+17:05:10 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=jonathan015862&password=%28%2Ap64QEiLreQ
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "jonathan015862",
+      "password": "(*p64QEiLreQ"
+    },
+    "json": null,
+    "data": null
+  }
+17:05:10 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=jonathan015862&password=%28%2Ap64QEiLreQ HTTP/1.1" 200 32
+17:05:10 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=jonathan015862&password=%28%2Ap64QEiLreQ [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 17:05:10 GMT",
+      "server": "uvicorn",
+      "content-length": "32",
+      "content-type": "application/json",
+      "x-correlation-id": "9d5a0ef5-205f-4ac7-aae5-6bbababf3224"
+    },
+    "body": {
+      "token": "token-jonathan015862"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=jonathan015862&password=%28%2Ap64QEiLreQ"
+  }
+17:05:10 | INFO     | login | Logged in as jonathan015862
+17:05:10 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/jonathan015862
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/jonathan015862",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+17:05:10 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/jonathan015862 HTTP/1.1" 200 138
+17:05:10 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/jonathan015862 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 17:05:10 GMT",
+      "server": "uvicorn",
+      "content-length": "138",
+      "content-type": "application/json",
+      "x-correlation-id": "74ed18e3-0807-407f-acff-b0116bf33ea9"
+    },
+    "body": {
+      "username": "jonathan015862",
+      "first_name": null,
+      "last_name": null,
+      "email": "jonathan015862@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user/jonathan015862"
+  }
+17:05:10 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+17:05:10 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+17:05:10 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 17:05:10 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "5e35e3ba-217c-444f-aa05-f83747edab6f"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+17:05:10 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/jonathan015862
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/jonathan015862",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+17:05:10 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/jonathan015862 HTTP/1.1" 200 26
+17:05:10 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/jonathan015862 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 17:05:10 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "a6dd88da-5855-440f-aa32-984f5344e2bc"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/jonathan015862"
+  }
+17:05:10 | DEBUG    | close | Session closed
