@@ -356,18 +356,36 @@ jobs:
           path: allure-results/
           merge-multiple: true
 
-      - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@v1.13
+      - name: Restore Allure history from gh-pages
+        uses: actions/checkout@v4
         with:
-          allure_results: allure-results
-          allure_report: allure-report
-          gh_pages: gh-pages
-          allure_history: allure-history
-          keep_reports: 20
+          ref: gh-pages
+          path: gh-pages-history
+        continue-on-error: true
 
-      - name: Deploy to GitHub Pages
+      - name: Copy history into results for trend data
+        run: |
+          if [ -d "gh-pages-history/history" ]; then
+            cp -r gh-pages-history/history allure-results/
+            echo "History restored from gh-pages."
+          else
+            echo "No previous history found, starting fresh."
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline
+
+      - name: Generate Allure report
+        run: allure generate --clean allure-results -o allure-report
+
+      - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history
+          publish_dir: allure-report

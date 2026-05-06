@@ -818,7 +818,7 @@ requires-dist = [{ name = "r3a-minikit", url = "https://github.com/RamonAlcantar
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "allure-pytest", specifier = ">=2.13.5" },
+    { name = "allure-pytest", specifier = ">=2.13.5,<3" },
     { name = "black", specifier = ">=24.0.0" },
     { name = "factory-boy", specifier = ">=3.3.0" },
     { name = "faker", specifier = ">=24.0.0" },
