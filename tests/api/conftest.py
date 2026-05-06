@@ -26,17 +26,3 @@ def new_pet(api_client: PetstoreApiClient) -> Generator:
     except Exception:
         pass
 
-
-@pytest.fixture
-def new_user(api_client: PetstoreApiClient) -> Generator:
-    """Create a user via the API and yield it; delete it after the test."""
-    data = UserFactory.build(username="user1", password="password1")
-    created = api_client.create_user(
-        username=data["username"], password=data["password"]
-    )
-    yield created
-    # Cleanup – ignore 404 in case the test itself deleted the user
-    try:
-        api_client.delete_user(created["id"])
-    except Exception:
-        pass

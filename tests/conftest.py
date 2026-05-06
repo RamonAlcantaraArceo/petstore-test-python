@@ -16,6 +16,8 @@ from r3a_logger.logger import (
     initialize_logging,
 )
 
+from framework.factories import UserFactory
+
 # Call r3a_logger's initialize_logging with new signature
 log_dir = Path("./.logs")
 initialize_logging(
@@ -79,11 +81,27 @@ def api_client(
 
 
 @pytest.fixture
+def new_user(api_client: PetstoreApiClient) -> Generator:
+    """Create a user via the API and yield it; delete it after the test."""
+    data = UserFactory.build(username="user1", password="password1")
+    created = api_client.create_user(
+        username=data["username"], password=data["password"]
+    )
+    yield data, created
+    # Cleanup – ignore 404 in case the test itself deleted the user
+    try:
+        api_client.delete_user(created["id"])
+    except Exception:
+        pass
+
+@pytest.fixture
 def authenticated_api_client(
     api_client: PetstoreApiClient,
+    new_user: tuple,
 ) -> Generator[PetstoreApiClient, None, None]:
     """Provide an already-logged-in API client (uses the public demo credentials)."""
-    api_client.login("user1", "password1")
+    data, _ = new_user
+    api_client.login(data["username"], data["password"])
     yield api_client
 
 
