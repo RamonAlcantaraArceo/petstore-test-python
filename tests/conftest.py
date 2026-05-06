@@ -94,6 +94,7 @@ def new_user(api_client: PetstoreApiClient) -> Generator:
     except Exception:
         pass
 
+
 @pytest.fixture
 def authenticated_api_client(
     api_client: PetstoreApiClient,

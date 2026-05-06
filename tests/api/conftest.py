@@ -7,7 +7,7 @@ from collections.abc import Generator
 import pytest
 
 from framework.api_client import PetstoreApiClient
-from framework.factories import PetFactory, UserFactory
+from framework.factories import PetFactory
 
 
 @pytest.fixture
@@ -25,4 +25,3 @@ def new_pet(api_client: PetstoreApiClient) -> Generator:
         api_client.delete_pet(created["id"])
     except Exception:
         pass
-
