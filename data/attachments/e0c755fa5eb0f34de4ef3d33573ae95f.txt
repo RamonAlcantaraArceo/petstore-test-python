@@ -1,0 +1,135 @@
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fdd6e70d620> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7fdd6e627230>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fdd6e70d9e0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fdd6e70de40> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fdd6e70dee0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "Bianca",
+      "status": "available",
+      "photoUrls": [
+        "https://dummyimage.com/910x1020"
+      ]
+    },
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 121
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 22:18:39 GMT",
+      "server": "uvicorn",
+      "content-length": "121",
+      "content-type": "application/json",
+      "x-correlation-id": "76083292-28aa-41c4-867c-3d6fce518ef7"
+    },
+    "body": {
+      "name": "Bianca",
+      "photoUrls": [
+        "https://dummyimage.com/910x1020"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 3
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 GET /api/v1/pet/3
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/3",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/pet/3 HTTP/1.1" 200 121
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 GET /api/v1/pet/3 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 22:18:39 GMT",
+      "server": "uvicorn",
+      "content-length": "121",
+      "content-type": "application/json",
+      "x-correlation-id": "2c1cf279-b269-4917-b1bb-27d3215acdaf"
+    },
+    "body": {
+      "name": "Bianca",
+      "photoUrls": [
+        "https://dummyimage.com/910x1020"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 3
+    },
+    "url": "http://localhost:8000/api/v1/pet/3"
+  }
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 DELETE /api/v1/pet/3
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/3",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "DELETE /api/v1/pet/3 HTTP/1.1" 200 25
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 DELETE /api/v1/pet/3 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 22:18:39 GMT",
+      "server": "uvicorn",
+      "content-length": "25",
+      "content-type": "application/json",
+      "x-correlation-id": "4f627cf8-0ee5-49f9-b1a7-11be6e9381ef"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/3"
+  }
+DEBUG    framework.api_client:api_client.py:296 Session closed

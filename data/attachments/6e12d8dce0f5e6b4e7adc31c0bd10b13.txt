@@ -1,0 +1,213 @@
+22:18:54 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f253f7420c0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+22:18:54 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f253f742160> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+22:18:54 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f253f906510>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+22:18:54 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f253f906510>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+22:18:54 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f253f742200> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+22:18:54 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f253f7422a0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+22:18:54 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f25408b13d0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+22:18:54 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "parkeradam3464",
+      "password": "un+fRmy8Wu_8",
+      "email": "parkeradam3464@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+22:18:54 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+22:18:54 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 138
+22:18:54 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 22:18:54 GMT",
+      "server": "uvicorn",
+      "content-length": "138",
+      "content-type": "application/json",
+      "x-correlation-id": "76e000a9-9496-4b90-a808-97b129e19781"
+    },
+    "body": {
+      "username": "parkeradam3464",
+      "first_name": null,
+      "last_name": null,
+      "email": "parkeradam3464@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+22:18:54 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=parkeradam3464&password=un%2BfRmy8Wu_8
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "parkeradam3464",
+      "password": "un+fRmy8Wu_8"
+    },
+    "json": null,
+    "data": null
+  }
+22:18:54 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=parkeradam3464&password=un%2BfRmy8Wu_8 HTTP/1.1" 200 32
+22:18:54 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=parkeradam3464&password=un%2BfRmy8Wu_8 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 22:18:54 GMT",
+      "server": "uvicorn",
+      "content-length": "32",
+      "content-type": "application/json",
+      "x-correlation-id": "df9b1958-dcf5-42b8-8aa8-f0424a256e9c"
+    },
+    "body": {
+      "token": "token-parkeradam3464"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=parkeradam3464&password=un%2BfRmy8Wu_8"
+  }
+22:18:54 | INFO     | login | Logged in as parkeradam3464
+22:18:54 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/parkeradam3464
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/parkeradam3464",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+22:18:54 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/parkeradam3464 HTTP/1.1" 200 138
+22:18:54 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/parkeradam3464 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 22:18:54 GMT",
+      "server": "uvicorn",
+      "content-length": "138",
+      "content-type": "application/json",
+      "x-correlation-id": "65754681-6be5-4dfc-bacf-7a9abc4b3f2c"
+    },
+    "body": {
+      "username": "parkeradam3464",
+      "first_name": null,
+      "last_name": null,
+      "email": "parkeradam3464@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user/parkeradam3464"
+  }
+22:18:54 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+22:18:54 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+22:18:54 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 22:18:54 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "29968869-32db-4e50-ad10-6367bbd87a24"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+22:18:54 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/parkeradam3464
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/parkeradam3464",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+22:18:54 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/parkeradam3464 HTTP/1.1" 200 26
+22:18:54 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/parkeradam3464 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 06 May 2026 22:18:54 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "1bff8d6a-4b2d-4c12-a8fa-d1c070a1625e"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/parkeradam3464"
+  }
+22:18:54 | DEBUG    | close | Session closed
