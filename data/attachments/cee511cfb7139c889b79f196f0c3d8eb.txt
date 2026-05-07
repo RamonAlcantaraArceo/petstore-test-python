@@ -1,0 +1,100 @@
+03:50:37 | INFO     | log | ====== WebDriver manager ======
+03:50:37 | INFO     | log | Get LATEST chromedriver version for google-chrome
+03:50:37 | DEBUG    | _new_conn | Starting new HTTPS connection (1): googlechromelabs.github.io:443
+03:50:37 | DEBUG    | _make_request | https://googlechromelabs.github.io:443 "GET /chrome-for-testing/latest-patch-versions-per-build.json HTTP/1.1" 200 16534
+03:50:37 | INFO     | log | Get LATEST chromedriver version for google-chrome
+03:50:37 | DEBUG    | _new_conn | Starting new HTTPS connection (1): googlechromelabs.github.io:443
+03:50:38 | DEBUG    | _make_request | https://googlechromelabs.github.io:443 "GET /chrome-for-testing/latest-patch-versions-per-build.json HTTP/1.1" 200 16534
+03:50:38 | INFO     | log | Driver [/home/runner/.wdm/drivers/chromedriver/linux64/147.0.7727.117/chromedriver-linux64/chromedriver] found in cache
+03:50:38 | DEBUG    | _binary_paths | Skipping Selenium Manager; path to chrome driver specified in Service class: /home/runner/.wdm/drivers/chromedriver/linux64/147.0.7727.117/chromedriver-linux64/chromedriver
+03:50:38 | DEBUG    | _start_process | Started executable: `/home/runner/.wdm/drivers/chromedriver/linux64/147.0.7727.117/chromedriver-linux64/chromedriver` in a child process with pid: 2775 using 0 to output -3
+03:50:38 | DEBUG    | execute | POST http://localhost:43757/session {'capabilities': {'firstMatch': [{}], 'alwaysMatch': {'browserName': 'chrome', 'pageLoadStrategy': <PageLoadStrategy.normal: 'normal'>, 'goog:chromeOptions': {'extensions': [], 'args': ['--headless=new', '--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--window-size=1920,1080', '--disable-extensions']}}}}
+03:50:38 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:43757
+03:50:38 | DEBUG    | _make_request | http://localhost:43757 "POST /session HTTP/1.1" 200 0
+03:50:38 | DEBUG    | _request | Remote response: status=200 | data={"value":{"capabilities":{"acceptInsecureCerts":false,"browserName":"chrome","browserVersion":"147.0.7727.55","chrome":{"chromedriverVersion":"147.0.7727.117 (474cc805edd6b22006509896c910f6b6da2427ad-refs/branch-heads/7727_111@{#4})","userDataDir":"/tmp/org.chromium.Chromium.scoped_dir.qolqGP"},"fedcm:accounts":true,"goog:chromeOptions":{"debuggerAddress":"localhost:43723"},"goog:processID":2781,"networkConnectionEnabled":false,"pageLoadStrategy":"normal","platformName":"linux","proxy":{},"setWindowRect":true,"strictFileInteractability":false,"timeouts":{"implicit":0,"pageLoad":300000,"script":30000},"unhandledPromptBehavior":"dismiss and notify","webauthn:extension:credBlob":true,"webauthn:extension:largeBlob":true,"webauthn:extension:minPinLength":true,"webauthn:extension:prf":true,"webauthn:virtualAuthenticators":true},"sessionId":"4ea7e1d983d496a64a06abef96e02f23"}} | headers=HTTPHeaderDict({'Content-Length': '882', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:38 | DEBUG    | _request | Finished Request
+03:50:38 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/timeouts {'implicit': 0}
+03:50:38 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/timeouts HTTP/1.1" 200 0
+03:50:38 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:38 | DEBUG    | _request | Finished Request
+03:50:38 | DEBUG    | open | Navigating to https://the-internet.herokuapp.com/login
+03:50:38 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/url {'url': 'https://the-internet.herokuapp.com/login'}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/url HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element {'using': 'css selector', 'value': '[id="username"]'}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.4"}} | headers=HTTPHeaderDict({'Content-Length': '125', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/execute/sync {'script': '/* isDisplayed */return (function(){return (function(){/*\n\n Copyright The Closure Library Authors.\n ...', 'args': [{'element-6066-11e4-a52e-4f735466cecf': 'f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.4'}]}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/execute/sync HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":true} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.4/clear {}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.4/clear HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.4/value {'text': 'wrong_user', 'value': ['w', 'r', 'o', 'n', 'g', '_', 'u', 's', 'e', 'r']}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.4/value HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element {'using': 'css selector', 'value': '[id="password"]'}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.5"}} | headers=HTTPHeaderDict({'Content-Length': '125', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/execute/sync {'script': '/* isDisplayed */return (function(){return (function(){/*\n\n Copyright The Closure Library Authors.\n ...', 'args': [{'element-6066-11e4-a52e-4f735466cecf': 'f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.5'}]}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/execute/sync HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":true} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.5/clear {}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.5/clear HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.5/value {'text': 'wrong_pass', 'value': ['w', 'r', 'o', 'n', 'g', '_', 'p', 'a', 's', 's']}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.5/value HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element {'using': 'css selector', 'value': "button[type='submit']"}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.6"}} | headers=HTTPHeaderDict({'Content-Length': '125', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/execute/sync {'script': '/* isDisplayed */return (function(){return (function(){/*\n\n Copyright The Closure Library Authors.\n ...', 'args': [{'element-6066-11e4-a52e-4f735466cecf': 'f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.6'}]}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/execute/sync HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":true} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | GET http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.6/enabled {}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "GET /session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.6/enabled HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":true} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.6/click {}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.806762834C4DB14BED8EE3DC0E776BC7.e.6/click HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element {'using': 'css selector', 'value': '[id="flash"]'}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C44069F14B44D53EB7CA774562D2D9C5.d.8756C7CB114B0E408ADCB82365EECB56.e.18"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/execute/sync {'script': '/* isDisplayed */return (function(){return (function(){/*\n\n Copyright The Closure Library Authors.\n ...', 'args': [{'element-6066-11e4-a52e-4f735466cecf': 'f.C44069F14B44D53EB7CA774562D2D9C5.d.8756C7CB114B0E408ADCB82365EECB56.e.18'}]}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/execute/sync HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":true} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | GET http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.8756C7CB114B0E408ADCB82365EECB56.e.18/text {}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "GET /session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.8756C7CB114B0E408ADCB82365EECB56.e.18/text HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":"Your username is invalid!\n×"} | headers=HTTPHeaderDict({'Content-Length': '41', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element {'using': 'css selector', 'value': '[id="flash"]'}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/element HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C44069F14B44D53EB7CA774562D2D9C5.d.8756C7CB114B0E408ADCB82365EECB56.e.18"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | POST http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/execute/sync {'script': '/* isDisplayed */return (function(){return (function(){/*\n\n Copyright The Closure Library Authors.\n ...', 'args': [{'element-6066-11e4-a52e-4f735466cecf': 'f.C44069F14B44D53EB7CA774562D2D9C5.d.8756C7CB114B0E408ADCB82365EECB56.e.18'}]}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "POST /session/4ea7e1d983d496a64a06abef96e02f23/execute/sync HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":true} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | GET http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.8756C7CB114B0E408ADCB82365EECB56.e.18/text {}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "GET /session/4ea7e1d983d496a64a06abef96e02f23/element/f.C44069F14B44D53EB7CA774562D2D9C5.d.8756C7CB114B0E408ADCB82365EECB56.e.18/text HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":"Your username is invalid!\n×"} | headers=HTTPHeaderDict({'Content-Length': '41', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request
+03:50:39 | DEBUG    | execute | DELETE http://localhost:43757/session/4ea7e1d983d496a64a06abef96e02f23 {}
+03:50:39 | DEBUG    | _make_request | http://localhost:43757 "DELETE /session/4ea7e1d983d496a64a06abef96e02f23 HTTP/1.1" 200 0
+03:50:39 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+03:50:39 | DEBUG    | _request | Finished Request

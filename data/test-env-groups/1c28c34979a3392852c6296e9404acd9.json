@@ -1,1 +1,1 @@
-{"id":"1c28c34979a3392852c6296e9404acd9","fullName":"tests.api.test_login.TestLogin#test_login_with_valid_credentials_returns_200","name":"Valid credentials return HTTP 200 with session token","status":"passed","testResultsByEnv":{"default":"656b8383feff3238a61781d249b7b811"}}
+{"id":"1c28c34979a3392852c6296e9404acd9","fullName":"tests.api.test_login.TestLogin#test_login_with_valid_credentials_returns_200","name":"Valid credentials return HTTP 200 with session token","status":"passed","testResultsByEnv":{"default":"1ef54022e2d3ea600d05615dfccef311"}}
