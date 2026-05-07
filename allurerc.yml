@@ -1,0 +1,4 @@
+name: "Petstore Test Report"
+output: "./allure-report"
+historyPath: "./.allure/allure-history.jsonl"
+appendHistory: true

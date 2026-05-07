@@ -363,14 +363,29 @@ jobs:
           path: gh-pages-history
         continue-on-error: true
 
-      - name: Copy history into results for trend data
+      - name: Restore Allure 3 history file
         run: |
-          if [ -d "gh-pages-history/history" ]; then
-            cp -r gh-pages-history/history allure-results/
-            echo "History restored from gh-pages."
+          if [ -f "gh-pages-history/.allure/allure-history.jsonl" ]; then
+            mkdir -p .allure
+            cp gh-pages-history/.allure/allure-history.jsonl .allure/allure-history.jsonl
+            echo "Allure 3 history restored from gh-pages."
           else
-            echo "No previous history found, starting fresh."
+            echo "No previous Allure 3 history file found, starting fresh."
           fi
+
+      - name: Add executor metadata for trend continuity
+        run: |
+          cat > allure-results/executor.json <<EOF
+          {
+            "name": "GitHub Actions",
+            "type": "github",
+            "buildOrder": ${GITHUB_RUN_NUMBER},
+            "buildName": "${GITHUB_WORKFLOW} #${GITHUB_RUN_NUMBER}",
+            "buildUrl": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}",
+            "reportName": "Petstore Test Report",
+            "reportUrl": "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
+          }
+          EOF
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -382,9 +397,29 @@ jobs:
           npm install -g allure
           allure --version
 
+      - name: Create Allure 3 config
+        run: |
+          cat > allurerc.yml <<EOF
+          name: "Petstore Test Report"
+          output: "./allure-report"
+          historyPath: "./.allure/allure-history.jsonl"
+          appendHistory: true
+          EOF
 
       - name: Generate Allure report
-        run: allure generate -o allure-report
+        run: |
+          allure generate allure-results \
+            --output allure-report \
+            --config allurerc.yml \
+            --history-limit 20
+
+      - name: Persist Allure 3 history file in published site
+        run: |
+          if [ -f ".allure/allure-history.jsonl" ]; then
+            mkdir -p allure-report/.allure
+            cp .allure/allure-history.jsonl allure-report/.allure/allure-history.jsonl
+            echo "Allure 3 history file persisted for next run."
+          fi
 
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
