@@ -182,9 +182,9 @@ async def test_all_returned_pets_match_requested_status(
     
 ) -> None:
     """Every pet returned for 'available' should have status == 'available'."""
-    from openapi_client import Configuration, ApiClient
-    from openapi_client.api.pet_api import PetApi
-    from openapi_client.models.pet_status import PetStatus
+    from petstore_openapi_client import Configuration, ApiClient
+    from petstore_openapi_client.api.pet_api import PetApi
+    from petstore_openapi_client.models.pet_status import PetStatus
     api_key = os.getenv("API_KEY", "dev-api-key")
     configuration = Configuration(
         # host=_get_default_host(),
@@ -193,7 +193,7 @@ async def test_all_returned_pets_match_requested_status(
     client = ApiClient(configuration)
     pet_api = PetApi(client)
 
-    pets = await pet_api.find_pets_by_status_api_v1_pet_find_by_status_get(status=PetStatus.AVAILABLE)
+    pets = await pet_api.find_pets_by_status(status=PetStatus.AVAILABLE)
     assert_that(pets).is_not_empty()
     for pet in pets:
         assert_that(pet.status).equals(PetStatus.AVAILABLE)
