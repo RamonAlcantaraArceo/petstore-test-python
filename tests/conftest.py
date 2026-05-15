@@ -8,12 +8,16 @@ from __future__ import annotations
 import logging
 import os
 import platform
-from collections.abc import Generator
+from collections.abc import AsyncGenerator, Generator
 from pathlib import Path
 from typing import Any
 
 import allure
 import pytest
+import pytest_asyncio
+from petstore_openapi_client import ApiClient, Configuration
+from petstore_openapi_client.api.pet_api import PetApi
+from petstore_openapi_client.api.user_api import UserApi
 from r3a_logger.logger import (
     initialize_logging,
 )
@@ -125,7 +129,9 @@ def api_client(
 
 
 @pytest.fixture
-def new_user(api_client: PetstoreApiClient) -> Generator:
+def new_user(
+    api_client: PetstoreApiClient,
+) -> Generator[tuple[dict[str, Any], dict[str, Any]], None, None]:
     """Create a user via the API and yield it; delete it after the test."""
     data = UserFactory.build(username="user1", password="password1")
     created = api_client.create_user(
@@ -142,12 +148,46 @@ def new_user(api_client: PetstoreApiClient) -> Generator:
 @pytest.fixture
 def authenticated_api_client(
     api_client: PetstoreApiClient,
-    new_user: tuple,
+    new_user: tuple[dict[str, Any], dict[str, Any]],
 ) -> Generator[PetstoreApiClient, None, None]:
     """Provide an already-logged-in API client (uses the public demo credentials)."""
     data, _ = new_user
     api_client.login(data["username"], data["password"])
     yield api_client
+
+
+# ---------------------------------------------------------------------------
+# API generated client fixtures
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture
+def gen_client_configuration(api_key: str) -> Configuration:
+    """Provide generated client configuration for integration tests."""
+    return Configuration(api_key={"APIKeyHeader": api_key})
+
+
+@pytest_asyncio.fixture
+async def gen_api_client(
+    gen_client_configuration: Configuration,
+) -> AsyncGenerator[ApiClient, None]:
+    """Provide an async generated API client instance."""
+    async with ApiClient(configuration=gen_client_configuration) as client:
+        yield client
+
+
+@pytest_asyncio.fixture
+async def gen_pet_api_client(gen_api_client: ApiClient) -> AsyncGenerator[PetApi, None]:
+    """Provide PetApi backed by the generated API client."""
+    yield PetApi(api_client=gen_api_client)
+
+
+@pytest_asyncio.fixture
+async def gen_user_api_client(
+    gen_api_client: ApiClient,
+) -> AsyncGenerator[UserApi, None]:
+    """Provide UserApi backed by the generated API client."""
+    yield UserApi(api_client=gen_api_client)
 
 
 # ---------------------------------------------------------------------------
