@@ -4,6 +4,7 @@ Covers the core Petstore pet endpoints using fluent assertions.
 """
 
 from __future__ import annotations
+
 import sys
 
 import allure
@@ -172,4 +173,3 @@ class TestFindByStatus:
             for pet in pets:
                 assert_that(pet.get("status")).equals("available")
             # assert_that(len(pets)).equals(1)
-

@@ -7,7 +7,7 @@ requires-python = ">=3.12, <4.0"
 license = { text = "MIT" }
 authors = [{ name = "petstore-test-python contributors" }]
 dependencies = [
-    "openapi-client",
+    # "petstore-openapi-client",
     "r3a-minikit @ https://github.com/RamonAlcantaraArceo/r3a-minikit/releases/download/v0.0.2/r3a_minikit-0.0.2-py3-none-any.whl",
 ]
 
@@ -48,7 +48,6 @@ dev = [
 [tool.pytest.ini_options]
 addopts = [
     "--strict-markers",
-    "-v",
     "--tb=short",
 ]
 markers = [
@@ -84,7 +83,11 @@ exclude = ["tests/performance"]
 
 [[tool.mypy.overrides]]
 module = "framework.factories"
-ignore_errors = true  # factory_boy has no type stubs
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
 
 # ---------------------------------------------------------------------------
 # ruff
@@ -123,5 +126,5 @@ known-first-party = ["framework"]
 line-length = 88
 target-version = ["py312"]
 
-[tool.uv.sources]
-openapi-client = { path = "../petstore-openapi-client-pydantic" }
+# [tool.uv.sources]
+# petstore-openapi-client = { path = "../petstore-openapi-client-pydantic" }

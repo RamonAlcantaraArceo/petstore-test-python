@@ -25,7 +25,7 @@ class PetFactory(factory.DictFactory):
 
     id = factory.LazyFunction(lambda: fake.random_int(min=1_000_000, max=9_999_999))
     name = factory.LazyFunction(fake.first_name)
-    photoUrls: list[str] = factory.LazyFunction(lambda: [fake.image_url()])
+    photoUrls = factory.LazyFunction(lambda: [fake.image_url()])
     status = factory.Iterator(["available", "pending", "sold"])
     category = factory.LazyFunction(
         lambda: {"id": fake.random_int(1, 10), "name": fake.word()}
