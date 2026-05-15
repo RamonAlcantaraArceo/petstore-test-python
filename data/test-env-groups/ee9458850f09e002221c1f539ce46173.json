@@ -1,0 +1,1 @@
+{"id":"ee9458850f09e002221c1f539ce46173","fullName":"tests.integration.test_pets.TestPetLifecycleIntegration#test_multiple_pets_findable_by_status","name":"Multiple pets with the same status all appear in findByStatus","status":"passed","testResultsByEnv":{"default":"6e235ddbd86f4029844e449c042877ee"}}

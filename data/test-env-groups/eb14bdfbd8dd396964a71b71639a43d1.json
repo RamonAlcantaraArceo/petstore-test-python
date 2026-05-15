@@ -1,0 +1,1 @@
+{"id":"eb14bdfbd8dd396964a71b71639a43d1","fullName":"tests.integration.test_pets.TestUserPetIntegration#test_authenticated_user_can_add_and_retrieve_pet","name":"Authenticated user can add and retrieve a pet","status":"passed","testResultsByEnv":{"default":"23d7b8997fdfbcbd84bd85aafcaae854"}}

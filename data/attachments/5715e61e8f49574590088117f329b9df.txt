@@ -1,0 +1,213 @@
+20:59:52 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7fcbe2928180> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+20:59:52 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7fcbe2928220> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+20:59:52 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7fcbe321d340>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+20:59:52 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7fcbe321d340>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+20:59:52 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7fcbe29282c0> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+20:59:52 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7fcbe2928360> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+20:59:52 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7fcbe320fa70>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+20:59:52 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "hendersongina2633",
+      "password": "YAsOVElT#*c3",
+      "email": "hendersongina2633@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+20:59:52 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+20:59:52 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 144
+20:59:52 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Fri, 15 May 2026 20:59:52 GMT",
+      "server": "uvicorn",
+      "content-length": "144",
+      "content-type": "application/json",
+      "x-correlation-id": "3cd349a2-0624-4417-af58-337b54fd72e2"
+    },
+    "body": {
+      "username": "hendersongina2633",
+      "first_name": null,
+      "last_name": null,
+      "email": "hendersongina2633@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+20:59:52 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=hendersongina2633&password=YAsOVElT%23%2Ac3
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "hendersongina2633",
+      "password": "YAsOVElT#*c3"
+    },
+    "json": null,
+    "data": null
+  }
+20:59:52 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=hendersongina2633&password=YAsOVElT%23%2Ac3 HTTP/1.1" 200 35
+20:59:52 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=hendersongina2633&password=YAsOVElT%23%2Ac3 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Fri, 15 May 2026 20:59:52 GMT",
+      "server": "uvicorn",
+      "content-length": "35",
+      "content-type": "application/json",
+      "x-correlation-id": "4947b51e-7a47-4986-9d7c-0d037b34d256"
+    },
+    "body": {
+      "token": "token-hendersongina2633"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=hendersongina2633&password=YAsOVElT%23%2Ac3"
+  }
+20:59:52 | INFO     | login | Logged in as hendersongina2633
+20:59:52 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/hendersongina2633
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/hendersongina2633",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+20:59:52 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/hendersongina2633 HTTP/1.1" 200 144
+20:59:52 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/hendersongina2633 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Fri, 15 May 2026 20:59:52 GMT",
+      "server": "uvicorn",
+      "content-length": "144",
+      "content-type": "application/json",
+      "x-correlation-id": "1d4ccaee-c1ba-484c-bef5-82a7a616a916"
+    },
+    "body": {
+      "username": "hendersongina2633",
+      "first_name": null,
+      "last_name": null,
+      "email": "hendersongina2633@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user/hendersongina2633"
+  }
+20:59:52 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+20:59:52 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+20:59:52 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Fri, 15 May 2026 20:59:52 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "af719a0f-b9b8-45ad-9096-f283a896e7e7"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+20:59:52 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/hendersongina2633
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/hendersongina2633",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+20:59:52 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/hendersongina2633 HTTP/1.1" 200 26
+20:59:52 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/hendersongina2633 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Fri, 15 May 2026 20:59:52 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "2fcb9f37-22c4-40aa-900a-2a0c5107c037"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/hendersongina2633"
+  }
+20:59:52 | DEBUG    | close | Session closed
