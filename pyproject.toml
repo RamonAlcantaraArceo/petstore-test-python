@@ -7,7 +7,7 @@ requires-python = ">=3.12, <4.0"
 license = { text = "MIT" }
 authors = [{ name = "petstore-test-python contributors" }]
 dependencies = [
-    # "petstore-openapi-client",
+    "petstore-openapi-client-pydantic",
     "r3a-minikit @ https://github.com/RamonAlcantaraArceo/r3a-minikit/releases/download/v0.0.2/r3a_minikit-0.0.2-py3-none-any.whl",
 ]
 
@@ -126,5 +126,5 @@ known-first-party = ["framework"]
 line-length = 88
 target-version = ["py312"]
 
-# [tool.uv.sources]
-# petstore-openapi-client = { path = "../petstore-openapi-client-pydantic" }
+[tool.uv.sources]
+petstore-openapi-client-pydantic = { git = "ssh://git@github.com/RamonAlcantaraArceo/petstore-openapi-client-pydantic.git", rev = "v0.0.0" }
