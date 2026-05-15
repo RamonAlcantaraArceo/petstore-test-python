@@ -127,4 +127,4 @@ line-length = 88
 target-version = ["py312"]
 
 [tool.uv.sources]
-petstore-openapi-client-pydantic = { git = "ssh://git@github.com/RamonAlcantaraArceo/petstore-openapi-client-pydantic.git", rev = "v0.0.0" }
+petstore-openapi-client-pydantic = { git = "https://github.com/RamonAlcantaraArceo/petstore-openapi-client-pydantic.git", rev = "v0.0.0" }

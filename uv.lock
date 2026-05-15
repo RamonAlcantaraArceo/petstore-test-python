@@ -1098,7 +1098,7 @@ wheels = [
 [[package]]
 name = "petstore-openapi-client-pydantic"
 version = "0.0.0"
-source = { git = "ssh://git@github.com/RamonAlcantaraArceo/petstore-openapi-client-pydantic.git?rev=v0.0.0#5fd043c094e27ce972b57c2a741d249e35a4876a" }
+source = { git = "https://github.com/RamonAlcantaraArceo/petstore-openapi-client-pydantic.git?rev=v0.0.0#5fd043c094e27ce972b57c2a741d249e35a4876a" }
 dependencies = [
     { name = "aenum" },
     { name = "aiohttp" },
@@ -1140,7 +1140,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "petstore-openapi-client-pydantic", git = "ssh://git@github.com/RamonAlcantaraArceo/petstore-openapi-client-pydantic.git?rev=v0.0.0" },
+    { name = "petstore-openapi-client-pydantic", git = "https://github.com/RamonAlcantaraArceo/petstore-openapi-client-pydantic.git?rev=v0.0.0" },
     { name = "r3a-minikit", url = "https://github.com/RamonAlcantaraArceo/r3a-minikit/releases/download/v0.0.2/r3a_minikit-0.0.2-py3-none-any.whl" },
 ]
 
