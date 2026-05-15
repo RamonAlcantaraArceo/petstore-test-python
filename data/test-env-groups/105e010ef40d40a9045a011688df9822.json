@@ -1,1 +1,0 @@
-{"id":"105e010ef40d40a9045a011688df9822","fullName":"tests.api.test_pets.TestDeletePet#test_delete_pet_removes_it","name":"Deleted pet can no longer be found","status":"passed","testResultsByEnv":{"default":"8c2ae63add706658a5201c8d1db1dfd0"}}

@@ -1,1 +1,0 @@
-{"id":"b32933ff7fa79776ec8e71d529f0af40","fullName":"tests.api.test_login.TestLogin#test_login_sets_authenticated_state","name":"Login sets authenticated state on client","status":"passed","testResultsByEnv":{"default":"8de30ef7fb43aa95b02ff0b494c78b12"}}
