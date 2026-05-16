@@ -1,0 +1,38 @@
+05:58:04 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=pending
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "status": "pending"
+    },
+    "json": null,
+    "data": null
+  }
+05:58:04 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+05:58:04 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/pet/findByStatus?status=pending HTTP/1.1" 200 2
+05:58:04 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=pending [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:58:04 GMT",
+      "server": "uvicorn",
+      "content-length": "2",
+      "content-type": "application/json",
+      "x-correlation-id": "3d5c98ee-6879-419a-b4b1-3d491ae9123a"
+    },
+    "body": [],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=pending"
+  }
+05:58:04 | DEBUG    | close | Session closed

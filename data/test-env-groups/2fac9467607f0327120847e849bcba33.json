@@ -1,1 +1,1 @@
-{"id":"2fac9467607f0327120847e849bcba33","fullName":"tests.api.test_pets.TestGetPet#test_get_existing_pet","name":"Fetching an existing pet by id returns the correct record","status":"passed","testResultsByEnv":{"default":"910ecc9b553b9f62860f0cd109c0102d"}}
+{"id":"2fac9467607f0327120847e849bcba33","fullName":"tests.api.test_pets.TestGetPet#test_get_existing_pet","name":"Fetching an existing pet by id returns the correct record","status":"passed","testResultsByEnv":{"default":"58ccf0354a838d0569001e023719f311"}}

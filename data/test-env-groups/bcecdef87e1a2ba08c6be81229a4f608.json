@@ -1,1 +1,1 @@
-{"id":"bcecdef87e1a2ba08c6be81229a4f608","fullName":"tests.api.test_login.TestLogin#test_login_then_logout_clears_session","name":"Logout after login clears the session","status":"passed","testResultsByEnv":{"default":"ec5a59cc1896a6abf6b0a654951caaf4"}}
+{"id":"bcecdef87e1a2ba08c6be81229a4f608","fullName":"tests.api.test_login.TestLogin#test_login_then_logout_clears_session","name":"Logout after login clears the session","status":"passed","testResultsByEnv":{"default":"146b6016fb69046e3a0597a532eb6623"}}
