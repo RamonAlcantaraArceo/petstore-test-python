@@ -1,0 +1,38 @@
+05:42:40 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/pet/99999
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/99999",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+05:42:40 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+05:42:40 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/pet/99999 HTTP/1.1" 404 26
+05:42:40 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/pet/99999 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:42:40 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "1353362b-6274-4818-910e-46dd8309bc7f"
+    },
+    "body": {
+      "detail": "Pet not found"
+    },
+    "url": "http://localhost:8000/api/v1/pet/99999"
+  }
+05:42:40 | DEBUG    | close | Session closed
