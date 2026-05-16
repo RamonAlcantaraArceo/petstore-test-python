@@ -1,0 +1,38 @@
+06:41:52 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=sold
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "status": "sold"
+    },
+    "json": null,
+    "data": null
+  }
+06:41:52 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+06:41:52 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/pet/findByStatus?status=sold HTTP/1.1" 200 2
+06:41:52 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=sold [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 06:41:52 GMT",
+      "server": "uvicorn",
+      "content-length": "2",
+      "content-type": "application/json",
+      "x-correlation-id": "2ed7371e-cf95-4ca9-8a61-f1bda97cc3f3"
+    },
+    "body": [],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=sold"
+  }
+06:41:52 | DEBUG    | close | Session closed
