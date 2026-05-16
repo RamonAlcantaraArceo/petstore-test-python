@@ -33,7 +33,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 git clone https://github.com/RamonAlcantaraArceo/petstore-test-python.git
 cd petstore-test-python
 uv venv --seed
-uv sync
+uv sync --all-extras --all-groups
 ```
 
 ### Running Tests
