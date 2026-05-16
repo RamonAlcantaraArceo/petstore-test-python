@@ -115,6 +115,7 @@ jobs:
       - name: Run API tests with coverage
         run: |
           uv run pytest \
+            --junitxml=junit-api.xml -o junit_family=legacy \
             tests/api/ \
             tests/api_client/ \
             -m "api" \
@@ -128,8 +129,17 @@ jobs:
         if: always()
         run: docker stop petstore-api-test
 
+      - name: Upload test results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
+          files: junit-api.xml
+          flags: api
+          fail_ci_if_error: false
+
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage-api.xml
@@ -137,7 +147,7 @@ jobs:
           fail_ci_if_error: false
 
       - name: Upload Allure results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: allure-results-api
@@ -193,6 +203,7 @@ jobs:
       - name: Run integration tests with coverage
         run: |
           uv run pytest \
+            --junitxml=junit-integration.xml -o junit_family=legacy \
             tests/integration/ \
             tests/integration_client/ \
             -m "integration" \
@@ -206,8 +217,17 @@ jobs:
         if: always()
         run: docker stop petstore-api-test
 
+      - name: Upload test results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
+          files: junit-integration.xml
+          flags: integration
+          fail_ci_if_error: false
+
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage-integration.xml
@@ -215,7 +235,7 @@ jobs:
           fail_ci_if_error: false
 
       - name: Upload Allure results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: allure-results-integration
@@ -271,6 +291,7 @@ jobs:
       - name: Run E2E tests with coverage
         run: |
           uv run pytest \
+            --junitxml=junit-e2e.xml -o junit_family=legacy \
             tests/e2e/ \
             tests/e2e_client/ \
             -m "e2e" \
@@ -284,8 +305,17 @@ jobs:
         if: always()
         run: docker stop petstore-api-test
 
+      - name: Upload test results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
+          files: junit-e2e.xml
+          flags: e2e
+          fail_ci_if_error: false
+
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage-e2e.xml
@@ -293,7 +323,7 @@ jobs:
           fail_ci_if_error: false
 
       - name: Upload Allure results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: allure-results-e2e
@@ -353,7 +383,9 @@ jobs:
 
       - name: Run UI tests
         run: |
-          uv run pytest tests/ui/ \
+          uv run pytest \
+            tests/ui/ \
+            --junitxml=junit-ui.xml -o junit_family=legacy \
             -m "ui" \
             --alluredir=allure-results/ui \
             -v
@@ -365,7 +397,7 @@ jobs:
         run: docker stop petstore-api-test
 
       - name: Upload Allure results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: allure-results-ui
