@@ -21,6 +21,7 @@ env:
   # UI tests are opt-in; set to "1" in a separate workflow or matrix leg
   RUN_UI_TESTS: "0"
   PYTHONUNBUFFERED: "1"
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
   # --------------------------------------------------------------------------
