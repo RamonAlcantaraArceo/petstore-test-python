@@ -1,1 +1,1 @@
-{"id":"c12cdae8b9ca6310e45c943a0290247b","fullName":"tests.ui.test_login.TestLoginUi#test_login_then_logout_returns_to_login_page","name":"Logout after login returns to the login page","status":"failed","testResultsByEnv":{"default":"8510e33ffddfed712771946a6ec5e7aa"}}
+{"id":"c12cdae8b9ca6310e45c943a0290247b","fullName":"tests.ui.test_login.TestLoginUi#test_login_then_logout_returns_to_login_page","name":"Logout after login returns to the login page","status":"failed","testResultsByEnv":{"default":"6c0403a7019135f3798b1c5f1d8bb030"}}
