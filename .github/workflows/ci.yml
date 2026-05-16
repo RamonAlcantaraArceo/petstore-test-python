@@ -351,8 +351,18 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install Allure CLI
+        run: |
+          npm install -g allure
+          allure --version
+
       - name: Download all Allure results
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: allure-results-*
           path: allure-results/
@@ -389,16 +399,6 @@ jobs:
           }
           EOF
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Install Allure CLI
-        run: |
-          npm install -g allure
-          allure --version
-
       - name: Generate Allure report
         run: |
           allure generate allure-results \
@@ -422,7 +422,7 @@ jobs:
 
       - name: Deploy report to GitHub Pages
         # if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
