@@ -115,6 +115,7 @@ jobs:
       - name: Run API tests with coverage
         run: |
           uv run pytest \
+            --junitxml=junit-api.xml -o junit_family=legacy \
             tests/api/ \
             tests/api_client/ \
             -m "api" \
@@ -127,6 +128,14 @@ jobs:
       - name: Stop Petstore API container
         if: always()
         run: docker stop petstore-api-test
+
+      - name: Upload test results to Codecov
+        uses: codecov/test-results-action@v1.2.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: junit-api.xml
+          flags: api
+          fail_ci_if_error: false
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -193,6 +202,7 @@ jobs:
       - name: Run integration tests with coverage
         run: |
           uv run pytest \
+            --junitxml=junit-integration.xml -o junit_family=legacy \
             tests/integration/ \
             tests/integration_client/ \
             -m "integration" \
@@ -205,6 +215,14 @@ jobs:
       - name: Stop Petstore API container
         if: always()
         run: docker stop petstore-api-test
+
+      - name: Upload test results to Codecov
+        uses: codecov/test-results-action@v1.2.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: junit-integration.xml
+          flags: integration
+          fail_ci_if_error: false
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -271,6 +289,7 @@ jobs:
       - name: Run E2E tests with coverage
         run: |
           uv run pytest \
+            --junitxml=junit-e2e.xml -o junit_family=legacy \
             tests/e2e/ \
             tests/e2e_client/ \
             -m "e2e" \
@@ -283,6 +302,14 @@ jobs:
       - name: Stop Petstore API container
         if: always()
         run: docker stop petstore-api-test
+
+      - name: Upload test results to Codecov
+        uses: codecov/test-results-action@v1.2.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: junit-e2e.xml
+          flags: e2e
+          fail_ci_if_error: false
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -353,7 +380,9 @@ jobs:
 
       - name: Run UI tests
         run: |
-          uv run pytest tests/ui/ \
+          uv run pytest \
+            tests/ui/ \
+            --junitxml=junit-ui.xml -o junit_family=legacy \
             -m "ui" \
             --alluredir=allure-results/ui \
             -v
