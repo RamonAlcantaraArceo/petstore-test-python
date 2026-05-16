@@ -1,1 +1,1 @@
-{"id":"bce6b587a3597f58b8b673ce87f224b7","fullName":"tests.ui.test_login.TestLoginUi#test_login_form_has_username_and_password_fields","name":"Login page has username and password input fields","status":"passed","testResultsByEnv":{"default":"18781e7a3061e4b1fb442fb2abd7393e"}}
+{"id":"bce6b587a3597f58b8b673ce87f224b7","fullName":"tests.ui.test_login.TestLoginUi#test_login_form_has_username_and_password_fields","name":"Login page has username and password input fields","status":"passed","testResultsByEnv":{"default":"e0743d0ed1110a858103bb7813884706"}}

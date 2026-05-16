@@ -1,1 +1,1 @@
-{"id":"a9eb0eb40ceba961ae073537f1292864","fullName":"tests.api.test_pets.TestFindByStatus#test_find_by_status_returns_list","name":"findByStatus returns a list for status 'available'","status":"passed","testResultsByEnv":{"default":"d8a817b062d69ed9627f9887bacc64ac"}}
+{"id":"a9eb0eb40ceba961ae073537f1292864","fullName":"tests.api.test_pets.TestFindByStatus#test_find_by_status_returns_list","name":"findByStatus returns a list for status 'sold'","status":"passed","testResultsByEnv":{"default":"a019d5c645c48d783f812538a1e15e48"}}

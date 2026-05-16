@@ -1,0 +1,119 @@
+07:59:43 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "ToDelete",
+      "status": "available",
+      "photoUrls": []
+    },
+    "data": null
+  }
+07:59:43 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+07:59:43 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 90
+07:59:43 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:59:43 GMT",
+      "server": "uvicorn",
+      "content-length": "90",
+      "content-type": "application/json",
+      "x-correlation-id": "ba555625-190b-452d-873f-d928f42c1b95"
+    },
+    "body": {
+      "name": "ToDelete",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 6
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+07:59:43 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/pet/6
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/6",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:59:43 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/pet/6 HTTP/1.1" 200 25
+07:59:43 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/pet/6 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:59:43 GMT",
+      "server": "uvicorn",
+      "content-length": "25",
+      "content-type": "application/json",
+      "x-correlation-id": "8ea4d386-1414-4336-bc83-0fe977cb6e49"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/6"
+  }
+07:59:43 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/pet/6
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/6",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:59:43 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/pet/6 HTTP/1.1" 404 26
+07:59:43 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/pet/6 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:59:43 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "6c42fe46-28a0-4388-8943-fe21d7cb7154"
+    },
+    "body": {
+      "detail": "Pet not found"
+    },
+    "url": "http://localhost:8000/api/v1/pet/6"
+  }
+07:59:43 | DEBUG    | close | Session closed

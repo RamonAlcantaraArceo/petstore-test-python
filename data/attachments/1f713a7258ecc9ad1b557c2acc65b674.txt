@@ -1,0 +1,242 @@
+07:59:46 | DEBUG    | __init__ | Using selector: EpollSelector
+07:59:46 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f1d125185e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:59:46 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f1d12518680> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:59:46 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f1d133c12e0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:59:46 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f1d133c12e0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:59:46 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f1d12518720> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+07:59:46 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f1d125187c0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:59:46 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f1d12eb4b60>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:59:46 | DEBUG    | request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***"
+    },
+    "body": {
+      "username": "blackconnie1387",
+      "email": "blackconnie1387@example.com",
+      "password": "LzM6M$yz+jKW"
+    }
+  }
+07:59:46 | DEBUG    | request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 07:59:46 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "142",
+      "Content-Type": "application/json",
+      "x-correlation-id": "8edc2668-104c-4e65-afc7-ef7f30728e21"
+    },
+    "body": {
+      "username": "blackconnie1387",
+      "first_name": null,
+      "last_name": null,
+      "email": "blackconnie1387@example.com",
+      "phone": null,
+      "user_status": null,
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+07:59:46 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/user/login?username=blackconnie1387&password=LzM6M%24yz%2BjKW
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login?username=blackconnie1387&password=LzM6M%24yz%2BjKW",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+07:59:46 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/user/login?username=blackconnie1387&password=LzM6M%24yz%2BjKW [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 07:59:46 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "33",
+      "Content-Type": "application/json",
+      "x-correlation-id": "767b0191-0570-4ad2-8f85-73fcb466d410"
+    },
+    "body": {
+      "token": "token-blackconnie1387"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=blackconnie1387&password=LzM6M%24yz%2BjKW"
+  }
+07:59:46 | DEBUG    | request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***"
+    },
+    "body": {
+      "name": "AuthenticatedPet",
+      "photoUrls": [],
+      "status": "available"
+    }
+  }
+07:59:46 | DEBUG    | request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 07:59:46 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "99",
+      "Content-Type": "application/json",
+      "x-correlation-id": "3d34ddd9-19ad-4259-9677-925e7f48831d"
+    },
+    "body": {
+      "name": "AuthenticatedPet",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 10
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+07:59:46 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/pet/10
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/10",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+07:59:46 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/pet/10 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 07:59:46 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "99",
+      "Content-Type": "application/json",
+      "x-correlation-id": "845f94c2-5d94-4193-a82e-ba2ba9ec5537"
+    },
+    "body": {
+      "name": "AuthenticatedPet",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 10
+    },
+    "url": "http://localhost:8000/api/v1/pet/10"
+  }
+07:59:46 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+07:59:46 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 07:59:46 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "29",
+      "Content-Type": "application/json",
+      "x-correlation-id": "a6c60157-d95c-402f-9621-7833e24fb292"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+07:59:46 | DEBUG    | request | Request: http://localhost:8000 DELETE /api/v1/pet/10
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/10",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+07:59:46 | DEBUG    | request | Response: http://localhost:8000 DELETE /api/v1/pet/10 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 07:59:46 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "25",
+      "Content-Type": "application/json",
+      "x-correlation-id": "c858cbc6-c985-404b-ac30-d2de178f2a97"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/10"
+  }
+07:59:46 | DEBUG    | request | Request: http://localhost:8000 DELETE /api/v1/user/blackconnie1387
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/blackconnie1387",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+07:59:46 | DEBUG    | request | Response: http://localhost:8000 DELETE /api/v1/user/blackconnie1387 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 07:59:46 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "26",
+      "Content-Type": "application/json",
+      "x-correlation-id": "32c9b7c0-375d-4a57-9ccd-fcedaee63ce2"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/blackconnie1387"
+  }

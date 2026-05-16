@@ -1,0 +1,213 @@
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f78b4f145e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f78b4f14680> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f78b5801670>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f78b5801670>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:118 LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f78b4f14720> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f78b4f147c0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f78b57da6c0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "jacob157911",
+      "password": "w24XFoOi(+6G",
+      "email": "jacob157911@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 132
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:59:51 GMT",
+      "server": "uvicorn",
+      "content-length": "132",
+      "content-type": "application/json",
+      "x-correlation-id": "42966cf3-5ed9-4ef5-8d22-0fe40b764114"
+    },
+    "body": {
+      "username": "jacob157911",
+      "first_name": null,
+      "last_name": null,
+      "email": "jacob157911@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 GET /api/v1/user/login?username=jacob157911&password=w24XFoOi%28%2B6G
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "jacob157911",
+      "password": "w24XFoOi(+6G"
+    },
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/user/login?username=jacob157911&password=w24XFoOi%28%2B6G HTTP/1.1" 200 29
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 GET /api/v1/user/login?username=jacob157911&password=w24XFoOi%28%2B6G [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:59:51 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "e0d1cb89-6897-461c-b6a0-80bed18c243a"
+    },
+    "body": {
+      "token": "token-jacob157911"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=jacob157911&password=w24XFoOi%28%2B6G"
+  }
+INFO     framework.api_client:api_client.py:173 Logged in as jacob157911
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 GET /api/v1/user/jacob157911
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/jacob157911",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/user/jacob157911 HTTP/1.1" 200 132
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 GET /api/v1/user/jacob157911 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:59:51 GMT",
+      "server": "uvicorn",
+      "content-length": "132",
+      "content-type": "application/json",
+      "x-correlation-id": "90a06277-9283-4b35-b505-8225de67a00b"
+    },
+    "body": {
+      "username": "jacob157911",
+      "first_name": null,
+      "last_name": null,
+      "email": "jacob157911@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user/jacob157911"
+  }
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:59:51 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "6589ed0c-ffb7-46f1-a5fa-3be27a425721"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 DELETE /api/v1/user/jacob157911
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/jacob157911",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "DELETE /api/v1/user/jacob157911 HTTP/1.1" 200 26
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 DELETE /api/v1/user/jacob157911 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:59:51 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "97a47f5a-83f9-40db-b1a2-9487934c426d"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/jacob157911"
+  }
+DEBUG    framework.api_client:api_client.py:296 Session closed
