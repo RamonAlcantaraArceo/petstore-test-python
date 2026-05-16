@@ -1,1 +1,1 @@
-{"id":"9d91cbf63b276680374fe1623fbf5565","fullName":"tests.ui.test_login.TestLoginUi#test_page_title_is_correct","name":"Login page title is 'The Internet'","status":"passed","testResultsByEnv":{"default":"c04d8491179230647a3debcb763fb6e4"}}
+{"id":"9d91cbf63b276680374fe1623fbf5565","fullName":"tests.ui.test_login.TestLoginUi#test_page_title_is_correct","name":"Login page title is 'The Internet'","status":"passed","testResultsByEnv":{"default":"2f7949784726d7c10a1869fa4fdc4527"}}
