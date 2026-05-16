@@ -347,6 +347,7 @@ jobs:
       pages: write
       id-token: write
       pull-requests: write
+      checks: write
     steps:
       - uses: actions/checkout@v6
 
@@ -422,44 +423,11 @@ jobs:
             echo "Allure 3 history file persisted for next run."
           fi
 
-      - name: Write Allure summary to job summary
-        if: always()
-        run: |
-          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          echo "## Allure Test Report" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "> **Report published:** [$REPORT_URL]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "> Full report will be published to [GitHub Pages]($REPORT_URL) after merge to \`main\`." >> $GITHUB_STEP_SUMMARY
-          fi
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Suite | Artifacts |" >> $GITHUB_STEP_SUMMARY
-          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
-          echo "| API | [allure-results-api]($RUN_URL) |" >> $GITHUB_STEP_SUMMARY
-          echo "| Integration | [allure-results-integration]($RUN_URL) |" >> $GITHUB_STEP_SUMMARY
-          echo "| E2E | [allure-results-e2e]($RUN_URL) |" >> $GITHUB_STEP_SUMMARY
-          echo "| UI | [allure-results-ui]($RUN_URL) |" >> $GITHUB_STEP_SUMMARY
-
-      - name: Post Allure report comment on PR
-        if: github.event_name == 'pull_request'
-        uses: marocchino/sticky-pull-request-comment@v2
+      - name: Post Allure summary to PR and job summary
+        uses: allure-framework/allure-action@v0
         with:
-          header: allure-report
-          message: |
-            ## Allure Test Report
-
-            Allure results have been generated for this PR. Artifacts are available in the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
-
-            | Suite | Artifacts |
-            |---|---|
-            | API | [allure-results-api](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
-            | Integration | [allure-results-integration](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
-            | E2E | [allure-results-e2e](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
-            | UI | [allure-results-ui](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
-
-            > The full rendered report will be published to [GitHub Pages](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/) after merge to `main`.
+          report-directory: "./allure-report"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy report to GitHub Pages
         if: github.ref == 'refs/heads/main'
