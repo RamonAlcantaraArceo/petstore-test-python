@@ -1,0 +1,213 @@
+06:19:58 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f3552198540> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+06:19:58 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f35521985e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+06:19:58 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f3552fc40e0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+06:19:58 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f3552fc40e0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+06:19:58 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f3552198680> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+06:19:58 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f3552198720> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+06:19:58 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f35531da270>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+06:19:58 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "amberdavies4816",
+      "password": "&mYpc5Mc92mZ",
+      "email": "amberdavies4816@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+06:19:58 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+06:19:58 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 140
+06:19:58 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 06:19:57 GMT",
+      "server": "uvicorn",
+      "content-length": "140",
+      "content-type": "application/json",
+      "x-correlation-id": "8ed5f72f-a268-4d22-b8c0-2be1dc63ca39"
+    },
+    "body": {
+      "username": "amberdavies4816",
+      "first_name": null,
+      "last_name": null,
+      "email": "amberdavies4816@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+06:19:58 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=amberdavies4816&password=%26mYpc5Mc92mZ
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "amberdavies4816",
+      "password": "&mYpc5Mc92mZ"
+    },
+    "json": null,
+    "data": null
+  }
+06:19:58 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=amberdavies4816&password=%26mYpc5Mc92mZ HTTP/1.1" 200 33
+06:19:58 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=amberdavies4816&password=%26mYpc5Mc92mZ [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 06:19:57 GMT",
+      "server": "uvicorn",
+      "content-length": "33",
+      "content-type": "application/json",
+      "x-correlation-id": "e4f5902e-7fd7-4c53-9d69-6f8a6334b02f"
+    },
+    "body": {
+      "token": "token-amberdavies4816"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=amberdavies4816&password=%26mYpc5Mc92mZ"
+  }
+06:19:58 | INFO     | login | Logged in as amberdavies4816
+06:19:58 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/amberdavies4816
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/amberdavies4816",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+06:19:58 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/amberdavies4816 HTTP/1.1" 200 140
+06:19:58 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/amberdavies4816 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 06:19:57 GMT",
+      "server": "uvicorn",
+      "content-length": "140",
+      "content-type": "application/json",
+      "x-correlation-id": "cd792671-568d-46f9-955b-59d7f3f6b981"
+    },
+    "body": {
+      "username": "amberdavies4816",
+      "first_name": null,
+      "last_name": null,
+      "email": "amberdavies4816@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user/amberdavies4816"
+  }
+06:19:58 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+06:19:58 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+06:19:58 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 06:19:57 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "8a873a69-19ba-40ea-9c95-1dc4b3f4afe9"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+06:19:58 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/amberdavies4816
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/amberdavies4816",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+06:19:58 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/amberdavies4816 HTTP/1.1" 200 26
+06:19:58 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/amberdavies4816 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 06:19:57 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "cef55b46-9bee-4766-bfb2-39d41838f2a8"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/amberdavies4816"
+  }
+06:19:58 | DEBUG    | close | Session closed
