@@ -1,1 +1,1 @@
-{"id":"a698ac59296d86bc0c0726819c75719c","fullName":"tests.api.test_login.TestLogin#test_login_returns_session_token","name":"Login response JSON contains a session token","status":"passed","testResultsByEnv":{"default":"e78157a4d80c6d82968931ba3893b148"}}
+{"id":"a698ac59296d86bc0c0726819c75719c","fullName":"tests.api.test_login.TestLogin#test_login_returns_session_token","name":"Login response JSON contains a session token","status":"passed","testResultsByEnv":{"default":"76464c60e270698cc4a0d0cdad6e8d68"}}
