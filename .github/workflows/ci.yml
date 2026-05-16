@@ -89,7 +89,7 @@ jobs:
           echo "Petstore API did not become healthy in time." && exit 1
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v8.1.0
         with:
           enable-cache: true
 
@@ -98,7 +98,9 @@ jobs:
 
       - name: Run API tests with coverage
         run: |
-          uv run pytest tests/api/ \
+          uv run pytest \
+            tests/api/ \
+            tests/api_client/ \
             -m "api" \
             --cov=framework \
             --cov-report=xml:coverage-api.xml \
@@ -169,7 +171,9 @@ jobs:
 
       - name: Run integration tests with coverage
         run: |
-          uv run pytest tests/integration/ \
+          uv run pytest \
+            tests/integration/ \
+            tests/integration_client/ \
             -m "integration" \
             --cov=framework \
             --cov-report=xml:coverage-integration.xml \
@@ -240,7 +244,9 @@ jobs:
 
       - name: Run E2E tests with coverage
         run: |
-          uv run pytest tests/e2e/ \
+          uv run pytest \
+            tests/e2e/ \
+            tests/e2e_client/ \
             -m "e2e" \
             --cov=framework \
             --cov-report=xml:coverage-e2e.xml \
