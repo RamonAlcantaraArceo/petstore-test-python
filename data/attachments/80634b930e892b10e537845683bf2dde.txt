@@ -1,0 +1,213 @@
+07:43:02 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f925a1c85e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:43:02 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f925a1c8680> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:43:02 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f925aacf530>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:43:02 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f925aacf530>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:43:02 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f925a1c8720> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+07:43:02 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f925a1c87c0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:43:02 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f925b08e900>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:43:02 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "littlemary7723",
+      "password": "#8V+kh8N#oTt",
+      "email": "littlemary7723@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+07:43:02 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+07:43:02 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 138
+07:43:02 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:43:02 GMT",
+      "server": "uvicorn",
+      "content-length": "138",
+      "content-type": "application/json",
+      "x-correlation-id": "c5137a21-2c01-46cd-aa7a-1765bcf8af51"
+    },
+    "body": {
+      "username": "littlemary7723",
+      "first_name": null,
+      "last_name": null,
+      "email": "littlemary7723@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+07:43:02 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=littlemary7723&password=%238V%2Bkh8N%23oTt
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "littlemary7723",
+      "password": "#8V+kh8N#oTt"
+    },
+    "json": null,
+    "data": null
+  }
+07:43:02 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=littlemary7723&password=%238V%2Bkh8N%23oTt HTTP/1.1" 200 32
+07:43:02 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=littlemary7723&password=%238V%2Bkh8N%23oTt [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:43:02 GMT",
+      "server": "uvicorn",
+      "content-length": "32",
+      "content-type": "application/json",
+      "x-correlation-id": "6a2c5c18-1ae5-4b87-beb9-6f790dc30776"
+    },
+    "body": {
+      "token": "token-littlemary7723"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=littlemary7723&password=%238V%2Bkh8N%23oTt"
+  }
+07:43:02 | INFO     | login | Logged in as littlemary7723
+07:43:02 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/littlemary7723
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/littlemary7723",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:43:02 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/littlemary7723 HTTP/1.1" 200 138
+07:43:02 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/littlemary7723 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:43:02 GMT",
+      "server": "uvicorn",
+      "content-length": "138",
+      "content-type": "application/json",
+      "x-correlation-id": "6b188eb8-b37b-4212-92e0-b356a7bda636"
+    },
+    "body": {
+      "username": "littlemary7723",
+      "first_name": null,
+      "last_name": null,
+      "email": "littlemary7723@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user/littlemary7723"
+  }
+07:43:02 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:43:02 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+07:43:02 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:43:02 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "91cc4114-612a-4e15-905c-9db9606eaae5"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+07:43:02 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/littlemary7723
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/littlemary7723",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:43:02 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/littlemary7723 HTTP/1.1" 200 26
+07:43:02 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/littlemary7723 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:43:02 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "9383ad41-dc6d-4373-899f-427e0c06cba3"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/littlemary7723"
+  }
+07:43:02 | DEBUG    | close | Session closed
