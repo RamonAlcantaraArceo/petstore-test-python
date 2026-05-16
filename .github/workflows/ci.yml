@@ -434,3 +434,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-report
+
+      - name: Notice Allure Report
+        run: |
+          echo "::notice title=Allure Report::https://ramonalcantaraarceo.github.io/petstore-test-python"
+          echo "### 🚀 Allure Report Deployed" >> $GITHUB_STEP_SUMMARY
+          echo "[🔗 View Report](https://ramonalcantaraarceo.github.io/petstore-test-python)" >> $GITHUB_STEP_SUMMARY
