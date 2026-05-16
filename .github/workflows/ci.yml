@@ -130,15 +130,16 @@ jobs:
         run: docker stop petstore-api-test
 
       - name: Upload test results to Codecov
-        uses: codecov/test-results-action@v1.2.1
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
           files: junit-api.xml
           flags: api
           fail_ci_if_error: false
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage-api.xml
@@ -217,15 +218,16 @@ jobs:
         run: docker stop petstore-api-test
 
       - name: Upload test results to Codecov
-        uses: codecov/test-results-action@v1.2.1
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
           files: junit-integration.xml
           flags: integration
           fail_ci_if_error: false
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage-integration.xml
@@ -304,15 +306,16 @@ jobs:
         run: docker stop petstore-api-test
 
       - name: Upload test results to Codecov
-        uses: codecov/test-results-action@v1.2.1
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
           files: junit-e2e.xml
           flags: e2e
           fail_ci_if_error: false
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage-e2e.xml
