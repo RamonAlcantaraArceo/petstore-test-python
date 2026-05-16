@@ -451,6 +451,7 @@ jobs:
         with:
           report-directory: "./allure-report"
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          remote-href: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
 
       - name: Deploy report to GitHub Pages
         # if: github.ref == 'refs/heads/main'
