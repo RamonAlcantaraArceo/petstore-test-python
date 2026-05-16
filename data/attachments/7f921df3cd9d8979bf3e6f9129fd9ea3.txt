@@ -1,0 +1,119 @@
+06:34:54 | DEBUG    | __init__ | Using selector: EpollSelector
+06:34:54 | DEBUG    | __init__ | Using selector: EpollSelector
+06:34:54 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f765c24ba60> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:54 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f765cba1130>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:54 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f765c24be20> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:54 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f765c3142c0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:54 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f765c314360> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:54 | DEBUG    | request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***"
+    },
+    "body": {
+      "name": "Christine",
+      "photoUrls": [
+        "https://dummyimage.com/435x869"
+      ],
+      "status": "available"
+    }
+  }
+06:34:54 | DEBUG    | request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 06:34:54 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "123",
+      "Content-Type": "application/json",
+      "x-correlation-id": "42a28722-41c2-4b4d-9629-09e8707d7ee5"
+    },
+    "body": {
+      "name": "Christine",
+      "photoUrls": [
+        "https://dummyimage.com/435x869"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 8
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+06:34:54 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=available",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+06:34:54 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 06:34:54 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "125",
+      "Content-Type": "application/json",
+      "x-correlation-id": "1ae737ec-5cb8-4fef-b8f6-b0b4bf187bb2"
+    },
+    "body": [
+      {
+        "name": "Christine",
+        "photoUrls": [
+          "https://dummyimage.com/435x869"
+        ],
+        "category": null,
+        "tags": null,
+        "status": "available",
+        "id": 8
+      }
+    ],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=available"
+  }
+06:34:54 | DEBUG    | request | Request: http://localhost:8000 DELETE /api/v1/pet/8
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/8",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+06:34:54 | DEBUG    | request | Response: http://localhost:8000 DELETE /api/v1/pet/8 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 06:34:54 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "25",
+      "Content-Type": "application/json",
+      "x-correlation-id": "d22bea57-ac57-4d2e-8c0b-e6ff81e384e9"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/8"
+  }

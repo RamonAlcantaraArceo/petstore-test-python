@@ -1,0 +1,182 @@
+06:34:55 | DEBUG    | __init__ | Using selector: EpollSelector
+06:34:55 | DEBUG    | __init__ | Using selector: EpollSelector
+06:34:55 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f0c96acfa60> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:55 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f0c97ab49e0>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:55 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f0c96acfe20> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:55 | DEBUG    | evaluate | Iterator: Fetching next value from <factory.utils.ResetableIterator object at 0x7f0c971f9c10>
+06:34:55 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f0c96b902c0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:55 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f0c96b90360> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+06:34:55 | DEBUG    | request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***"
+    },
+    "body": {
+      "name": "Steven",
+      "photoUrls": [],
+      "status": "available"
+    }
+  }
+06:34:55 | DEBUG    | request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 06:34:55 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "88",
+      "Content-Type": "application/json",
+      "x-correlation-id": "c9560781-a479-4c74-a5a0-3eaae841a65f"
+    },
+    "body": {
+      "name": "Steven",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+06:34:55 | DEBUG    | request | Request: http://localhost:8000 PUT /api/v1/pet
+  {
+    "event": "request",
+    "method": "PUT",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***"
+    },
+    "body": {
+      "name": "Steven",
+      "photoUrls": [],
+      "status": "sold",
+      "id": 2
+    }
+  }
+06:34:55 | DEBUG    | request | Response: http://localhost:8000 PUT /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 06:34:55 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "83",
+      "Content-Type": "application/json",
+      "x-correlation-id": "6224c00d-5fd4-41c5-a6e2-59f57a8bbbfe"
+    },
+    "body": {
+      "name": "Steven",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "sold",
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+06:34:55 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=available",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+06:34:55 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 06:34:55 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "2",
+      "Content-Type": "application/json",
+      "x-correlation-id": "22ae4379-fc3f-4681-ab49-4d955a28d262"
+    },
+    "body": [],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=available"
+  }
+06:34:55 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=sold
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=sold",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+06:34:55 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=sold [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 06:34:55 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "85",
+      "Content-Type": "application/json",
+      "x-correlation-id": "b22c4c26-120e-4581-af39-b1912aa089ee"
+    },
+    "body": [
+      {
+        "name": "Steven",
+        "photoUrls": [],
+        "category": null,
+        "tags": null,
+        "status": "sold",
+        "id": 2
+      }
+    ],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=sold"
+  }
+06:34:55 | DEBUG    | request | Request: http://localhost:8000 DELETE /api/v1/pet/2
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/2",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+06:34:55 | DEBUG    | request | Response: http://localhost:8000 DELETE /api/v1/pet/2 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sat, 16 May 2026 06:34:55 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "25",
+      "Content-Type": "application/json",
+      "x-correlation-id": "95eb146e-8d76-4e8c-a725-25d979fffd51"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/2"
+  }

@@ -1,1 +1,1 @@
-{"id":"ab7603adf2eac0b2b74a0027ac6a5d58","fullName":"tests.ui.test_login.TestLoginUi#test_successful_login_shows_secure_area","name":"Valid credentials show the secure area message","status":"passed","testResultsByEnv":{"default":"e865dfafbae8e77f8838de2522c40502"}}
+{"id":"ab7603adf2eac0b2b74a0027ac6a5d58","fullName":"tests.ui.test_login.TestLoginUi#test_successful_login_shows_secure_area","name":"Valid credentials show the secure area message","status":"passed","testResultsByEnv":{"default":"e40057892d0880c5b20c19df5ef30cfe"}}
