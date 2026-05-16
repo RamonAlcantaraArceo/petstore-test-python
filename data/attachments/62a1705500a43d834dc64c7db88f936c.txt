@@ -1,0 +1,32 @@
+06:27:54 | INFO     | log | ====== WebDriver manager ======
+06:27:54 | INFO     | log | Get LATEST chromedriver version for google-chrome
+06:27:54 | DEBUG    | _new_conn | Starting new HTTPS connection (1): googlechromelabs.github.io:443
+06:27:54 | DEBUG    | _make_request | https://googlechromelabs.github.io:443 "GET /chrome-for-testing/latest-patch-versions-per-build.json HTTP/1.1" 200 16662
+06:27:54 | INFO     | log | Get LATEST chromedriver version for google-chrome
+06:27:54 | DEBUG    | _new_conn | Starting new HTTPS connection (1): googlechromelabs.github.io:443
+06:27:54 | DEBUG    | _make_request | https://googlechromelabs.github.io:443 "GET /chrome-for-testing/latest-patch-versions-per-build.json HTTP/1.1" 200 16662
+06:27:54 | INFO     | log | Driver [/home/runner/.wdm/drivers/chromedriver/linux64/148.0.7778.167/chromedriver-linux64/chromedriver] found in cache
+06:27:54 | DEBUG    | _binary_paths | Skipping Selenium Manager; path to chrome driver specified in Service class: /home/runner/.wdm/drivers/chromedriver/linux64/148.0.7778.167/chromedriver-linux64/chromedriver
+06:27:54 | DEBUG    | _start_process | Started executable: `/home/runner/.wdm/drivers/chromedriver/linux64/148.0.7778.167/chromedriver-linux64/chromedriver` in a child process with pid: 3026 using 0 to output -3
+06:27:55 | DEBUG    | execute | POST http://localhost:41337/session {'capabilities': {'firstMatch': [{}], 'alwaysMatch': {'browserName': 'chrome', 'pageLoadStrategy': <PageLoadStrategy.normal: 'normal'>, 'goog:chromeOptions': {'extensions': [], 'args': ['--headless=new', '--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--window-size=1920,1080', '--disable-extensions']}}}}
+06:27:55 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:41337
+06:27:55 | DEBUG    | _make_request | http://localhost:41337 "POST /session HTTP/1.1" 200 0
+06:27:55 | DEBUG    | _request | Remote response: status=200 | data={"value":{"capabilities":{"acceptInsecureCerts":false,"browserName":"chrome","browserVersion":"148.0.7778.167","chrome":{"chromedriverVersion":"148.0.7778.167 (65db666ac2cf205fcc36db8bb5b9cd87f94808ac-refs/branch-heads/7778@{#2783})","userDataDir":"/tmp/org.chromium.Chromium.scoped_dir.ARpBZz"},"fedcm:accounts":true,"goog:chromeOptions":{"debuggerAddress":"localhost:45857"},"goog:processID":3032,"networkConnectionEnabled":false,"pageLoadStrategy":"normal","platformName":"linux","proxy":{},"setWindowRect":true,"strictFileInteractability":false,"timeouts":{"implicit":0,"pageLoad":300000,"script":30000},"unhandledPromptBehavior":"dismiss and notify","webauthn:extension:credBlob":true,"webauthn:extension:largeBlob":true,"webauthn:extension:minPinLength":true,"webauthn:extension:prf":true,"webauthn:virtualAuthenticators":true},"sessionId":"4a3aa787fef9433a5846bf717f0fb389"}} | headers=HTTPHeaderDict({'Content-Length': '882', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+06:27:55 | DEBUG    | _request | Finished Request
+06:27:55 | DEBUG    | execute | POST http://localhost:41337/session/4a3aa787fef9433a5846bf717f0fb389/timeouts {'implicit': 0}
+06:27:55 | DEBUG    | _make_request | http://localhost:41337 "POST /session/4a3aa787fef9433a5846bf717f0fb389/timeouts HTTP/1.1" 200 0
+06:27:55 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+06:27:55 | DEBUG    | _request | Finished Request
+06:27:55 | DEBUG    | open | Navigating to https://the-internet.herokuapp.com/login
+06:27:55 | DEBUG    | execute | POST http://localhost:41337/session/4a3aa787fef9433a5846bf717f0fb389/url {'url': 'https://the-internet.herokuapp.com/login'}
+06:27:55 | DEBUG    | _make_request | http://localhost:41337 "POST /session/4a3aa787fef9433a5846bf717f0fb389/url HTTP/1.1" 200 0
+06:27:55 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+06:27:55 | DEBUG    | _request | Finished Request
+06:27:55 | DEBUG    | execute | GET http://localhost:41337/session/4a3aa787fef9433a5846bf717f0fb389/title {}
+06:27:55 | DEBUG    | _make_request | http://localhost:41337 "GET /session/4a3aa787fef9433a5846bf717f0fb389/title HTTP/1.1" 200 0
+06:27:55 | DEBUG    | _request | Remote response: status=200 | data={"value":"The Internet"} | headers=HTTPHeaderDict({'Content-Length': '24', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+06:27:55 | DEBUG    | _request | Finished Request
+06:27:55 | DEBUG    | execute | DELETE http://localhost:41337/session/4a3aa787fef9433a5846bf717f0fb389 {}
+06:27:55 | DEBUG    | _make_request | http://localhost:41337 "DELETE /session/4a3aa787fef9433a5846bf717f0fb389 HTTP/1.1" 200 0
+06:27:55 | DEBUG    | _request | Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+06:27:55 | DEBUG    | _request | Finished Request
