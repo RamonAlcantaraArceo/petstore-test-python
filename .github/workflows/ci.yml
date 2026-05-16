@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      publish_report:
+        description: "Publish Allure report to GitHub Pages"
+        required: true
+        default: true
+        type: boolean
 
 permissions:
   contents: read
@@ -454,7 +460,7 @@ jobs:
           remote-href: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
 
       - name: Deploy report to GitHub Pages
-        # if: github.ref == 'refs/heads/main'
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
         uses: peaceiris/actions-gh-pages@v4.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -462,6 +468,7 @@ jobs:
           publish_dir: allure-report
 
       - name: Notice Allure Report
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
         run: |
           echo "::notice title=Allure Report::https://ramonalcantaraarceo.github.io/petstore-test-python"
           echo "### 🚀 Allure Report Deployed" >> $GITHUB_STEP_SUMMARY
