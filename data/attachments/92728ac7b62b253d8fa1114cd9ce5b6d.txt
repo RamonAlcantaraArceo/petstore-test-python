@@ -1,0 +1,132 @@
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f9c6ff185e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f9c70637740>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f9c70637740>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:118 LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f9c6ff18720> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f9c708ae9f0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "user1",
+      "password": "password1",
+      "email": "user1@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 120
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:37:30 GMT",
+      "server": "uvicorn",
+      "content-length": "120",
+      "content-type": "application/json",
+      "x-correlation-id": "62fb6a45-031b-4651-9a8e-553e3024524f"
+    },
+    "body": {
+      "username": "user1",
+      "first_name": null,
+      "last_name": null,
+      "email": "user1@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 GET /api/v1/user/login?username=user1&password=password1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "user1",
+      "password": "password1"
+    },
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/user/login?username=user1&password=password1 HTTP/1.1" 200 23
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 GET /api/v1/user/login?username=user1&password=password1 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:37:30 GMT",
+      "server": "uvicorn",
+      "content-length": "23",
+      "content-type": "application/json",
+      "x-correlation-id": "d980aba7-ac98-41b5-8223-073e18c7791d"
+    },
+    "body": {
+      "token": "token-user1"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=user1&password=password1"
+  }
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 DELETE /api/v1/user/1
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "DELETE /api/v1/user/1 HTTP/1.1" 404 27
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 DELETE /api/v1/user/1 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:37:30 GMT",
+      "server": "uvicorn",
+      "content-length": "27",
+      "content-type": "application/json",
+      "x-correlation-id": "ea8e9c22-9602-4b37-a561-a79b30c8e3d1"
+    },
+    "body": {
+      "detail": "User not found"
+    },
+    "url": "http://localhost:8000/api/v1/user/1"
+  }
+DEBUG    framework.api_client:api_client.py:296 Session closed

@@ -1,0 +1,38 @@
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 GET /api/v1/pet/99999
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/99999",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/pet/99999 HTTP/1.1" 404 26
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 GET /api/v1/pet/99999 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:37:30 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "1fe3345c-79fa-4e34-948a-739d66379b01"
+    },
+    "body": {
+      "detail": "Pet not found"
+    },
+    "url": "http://localhost:8000/api/v1/pet/99999"
+  }
+DEBUG    framework.api_client:api_client.py:296 Session closed
