@@ -1,0 +1,213 @@
+05:28:51 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f04f3e5c540> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:51 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f04f3e5c5e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:51 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f04f4716e40>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:51 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f04f4716e40>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:51 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f04f3e5c680> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+05:28:51 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f04f3e5c720> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:51 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f04f4755ca0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:51 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "ohanson2417",
+      "password": "1QFnX6bs$T!C",
+      "email": "ohanson2417@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+05:28:51 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+05:28:51 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 132
+05:28:51 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:51 GMT",
+      "server": "uvicorn",
+      "content-length": "132",
+      "content-type": "application/json",
+      "x-correlation-id": "d93bd89f-d316-4f75-820e-1c38627ce1b1"
+    },
+    "body": {
+      "username": "ohanson2417",
+      "first_name": null,
+      "last_name": null,
+      "email": "ohanson2417@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+05:28:51 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=ohanson2417&password=1QFnX6bs%24T%21C
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "ohanson2417",
+      "password": "1QFnX6bs$T!C"
+    },
+    "json": null,
+    "data": null
+  }
+05:28:51 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=ohanson2417&password=1QFnX6bs%24T%21C HTTP/1.1" 200 29
+05:28:51 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=ohanson2417&password=1QFnX6bs%24T%21C [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:51 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "ce85f873-a59e-4fff-98c3-4d1562ace3e3"
+    },
+    "body": {
+      "token": "token-ohanson2417"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=ohanson2417&password=1QFnX6bs%24T%21C"
+  }
+05:28:51 | INFO     | login | Logged in as ohanson2417
+05:28:51 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/ohanson2417
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/ohanson2417",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+05:28:51 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/ohanson2417 HTTP/1.1" 200 132
+05:28:51 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/ohanson2417 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:51 GMT",
+      "server": "uvicorn",
+      "content-length": "132",
+      "content-type": "application/json",
+      "x-correlation-id": "1b7519d0-ea19-4d38-9164-f4c4c3e3d008"
+    },
+    "body": {
+      "username": "ohanson2417",
+      "first_name": null,
+      "last_name": null,
+      "email": "ohanson2417@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user/ohanson2417"
+  }
+05:28:51 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+05:28:51 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+05:28:51 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:51 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "920947b4-26c3-4776-8ab8-0c3a54a05a9c"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+05:28:51 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/ohanson2417
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/ohanson2417",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+05:28:51 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/ohanson2417 HTTP/1.1" 200 26
+05:28:51 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/ohanson2417 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:51 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "9574cd9e-02ad-4fb0-b10b-4851cc85f88f"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/ohanson2417"
+  }
+05:28:51 | DEBUG    | close | Session closed

@@ -1,0 +1,255 @@
+05:28:53 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f0b37de4540> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:53 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f0b38f41970>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:53 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f0b38f41970>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:53 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f0b37de4680> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+05:28:53 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f0b38f77530>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+05:28:53 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "user1",
+      "password": "password1",
+      "email": "user1@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+05:28:53 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+05:28:53 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 120
+05:28:53 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:53 GMT",
+      "server": "uvicorn",
+      "content-length": "120",
+      "content-type": "application/json",
+      "x-correlation-id": "b740fa86-43c4-416b-becd-ed2ba2abcae4"
+    },
+    "body": {
+      "username": "user1",
+      "first_name": null,
+      "last_name": null,
+      "email": "user1@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+05:28:53 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=user1&password=password1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "user1",
+      "password": "password1"
+    },
+    "json": null,
+    "data": null
+  }
+05:28:53 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=user1&password=password1 HTTP/1.1" 200 23
+05:28:53 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=user1&password=password1 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:53 GMT",
+      "server": "uvicorn",
+      "content-length": "23",
+      "content-type": "application/json",
+      "x-correlation-id": "5567935f-2c15-4d23-8e3d-b32a82e463f2"
+    },
+    "body": {
+      "token": "token-user1"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=user1&password=password1"
+  }
+05:28:53 | INFO     | login | Logged in as user1
+05:28:53 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "AuthenticatedPet",
+      "status": "available",
+      "photoUrls": []
+    },
+    "data": null
+  }
+05:28:53 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 98
+05:28:53 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:53 GMT",
+      "server": "uvicorn",
+      "content-length": "98",
+      "content-type": "application/json",
+      "x-correlation-id": "28912aa7-df01-4612-917f-602bfc24d466"
+    },
+    "body": {
+      "name": "AuthenticatedPet",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 5
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+05:28:53 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/pet/5
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/5",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+05:28:53 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/pet/5 HTTP/1.1" 200 98
+05:28:53 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/pet/5 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:53 GMT",
+      "server": "uvicorn",
+      "content-length": "98",
+      "content-type": "application/json",
+      "x-correlation-id": "182cf519-6042-4ddb-a42c-869e63d97a6f"
+    },
+    "body": {
+      "name": "AuthenticatedPet",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 5
+    },
+    "url": "http://localhost:8000/api/v1/pet/5"
+  }
+05:28:53 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/pet/5
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/5",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+05:28:53 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/pet/5 HTTP/1.1" 200 25
+05:28:53 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/pet/5 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:53 GMT",
+      "server": "uvicorn",
+      "content-length": "25",
+      "content-type": "application/json",
+      "x-correlation-id": "c26b16d6-0820-44cd-acbc-a1ba4a7c65a8"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/5"
+  }
+05:28:53 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/1
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+05:28:53 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/1 HTTP/1.1" 404 27
+05:28:53 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/1 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:53 GMT",
+      "server": "uvicorn",
+      "content-length": "27",
+      "content-type": "application/json",
+      "x-correlation-id": "1aa4a63a-e62f-4544-849d-9871b67355e6"
+    },
+    "body": {
+      "detail": "User not found"
+    },
+    "url": "http://localhost:8000/api/v1/user/1"
+  }
+05:28:53 | DEBUG    | close | Session closed

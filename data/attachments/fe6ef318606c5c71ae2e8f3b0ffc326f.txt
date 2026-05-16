@@ -1,0 +1,83 @@
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "DeprecatedDog",
+      "status": "sold",
+      "photoUrls": []
+    },
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 90
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:48 GMT",
+      "server": "uvicorn",
+      "content-length": "90",
+      "content-type": "application/json",
+      "x-correlation-id": "7be69884-1939-4437-add6-5ac4e37b66ec"
+    },
+    "body": {
+      "name": "DeprecatedDog",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "sold",
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+DEBUG    framework.api_client:api_client.py:108 Request: http://localhost:8000 DELETE /api/v1/pet/2
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/2",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "DELETE /api/v1/pet/2 HTTP/1.1" 200 25
+DEBUG    framework.api_client:api_client.py:148 Response: http://localhost:8000 DELETE /api/v1/pet/2 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 05:28:48 GMT",
+      "server": "uvicorn",
+      "content-length": "25",
+      "content-type": "application/json",
+      "x-correlation-id": "7aa9952e-39a6-41d4-a0dd-833ac9ee533f"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/2"
+  }
+DEBUG    framework.api_client:api_client.py:296 Session closed
