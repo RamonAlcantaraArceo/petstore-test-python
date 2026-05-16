@@ -1,1 +1,1 @@
-{"id":"89ec78ee3cf6f361a51e387af02b172b","fullName":"tests.api.test_pets.TestAddPet#test_add_pet_with_sold_status","name":"Add pet with 'sold' status persists the status","status":"passed","testResultsByEnv":{"default":"4b27a3943494e87651b42b33618eb774"}}
+{"id":"89ec78ee3cf6f361a51e387af02b172b","fullName":"tests.api.test_pets.TestAddPet#test_add_pet_with_sold_status","name":"Add pet with 'sold' status persists the status","status":"passed","testResultsByEnv":{"default":"eebfc331dfb44d01212436e3c4016ab0"}}

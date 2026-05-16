@@ -1,0 +1,213 @@
+07:07:31 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7efdf1d14540> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:07:31 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7efdf1d145e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:07:31 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7efdf2436c60>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:07:31 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7efdf2436c60>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:07:31 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7efdf1d14680> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+07:07:31 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7efdf1d14720> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:07:31 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7efdf26a19a0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+07:07:31 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "gwood6015",
+      "password": "2HDZ@VNx(7pY",
+      "email": "gwood6015@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+07:07:31 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+07:07:31 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 128
+07:07:31 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:07:30 GMT",
+      "server": "uvicorn",
+      "content-length": "128",
+      "content-type": "application/json",
+      "x-correlation-id": "60031268-a0e4-4e8a-bdc6-cf23abc8e399"
+    },
+    "body": {
+      "username": "gwood6015",
+      "first_name": null,
+      "last_name": null,
+      "email": "gwood6015@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+07:07:31 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=gwood6015&password=2HDZ%40VNx%287pY
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "gwood6015",
+      "password": "2HDZ@VNx(7pY"
+    },
+    "json": null,
+    "data": null
+  }
+07:07:31 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=gwood6015&password=2HDZ%40VNx%287pY HTTP/1.1" 200 27
+07:07:31 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=gwood6015&password=2HDZ%40VNx%287pY [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:07:30 GMT",
+      "server": "uvicorn",
+      "content-length": "27",
+      "content-type": "application/json",
+      "x-correlation-id": "f9435e31-50c0-430f-ba9a-ef6b543ab557"
+    },
+    "body": {
+      "token": "token-gwood6015"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=gwood6015&password=2HDZ%40VNx%287pY"
+  }
+07:07:31 | INFO     | login | Logged in as gwood6015
+07:07:31 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/gwood6015
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/gwood6015",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:07:31 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/gwood6015 HTTP/1.1" 200 128
+07:07:31 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/gwood6015 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:07:30 GMT",
+      "server": "uvicorn",
+      "content-length": "128",
+      "content-type": "application/json",
+      "x-correlation-id": "cd553818-7301-4a20-b623-a1d8ca9a492d"
+    },
+    "body": {
+      "username": "gwood6015",
+      "first_name": null,
+      "last_name": null,
+      "email": "gwood6015@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/user/gwood6015"
+  }
+07:07:31 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:07:31 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+07:07:31 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:07:30 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "eaccd705-4f20-4c9d-8bd4-be2e0661bb4d"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+07:07:31 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/gwood6015
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/gwood6015",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:07:31 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/gwood6015 HTTP/1.1" 200 26
+07:07:31 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/gwood6015 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sat, 16 May 2026 07:07:30 GMT",
+      "server": "uvicorn",
+      "content-length": "26",
+      "content-type": "application/json",
+      "x-correlation-id": "aead9585-410c-4f9e-9d72-75e052847fad"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/gwood6015"
+  }
+07:07:31 | DEBUG    | close | Session closed
