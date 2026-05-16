@@ -5,6 +5,7 @@ Covers the core Petstore pet endpoints using fluent assertions.
 
 from __future__ import annotations
 
+import allure
 import pytest
 from petstore_openapi_client.api.pet_api import PetApi
 from petstore_openapi_client.models.pet_status import PetStatus
@@ -12,6 +13,9 @@ from petstore_openapi_client.models.pet_status import PetStatus
 from framework.assertions import assert_that
 
 
+@allure.feature("Pets")
+@allure.story("Find pets by status")
+@pytest.mark.api
 @pytest.mark.usefixtures("new_pet")
 @pytest.mark.asyncio
 # @allure.title("All pets returned for 'available' have status 'available'")
