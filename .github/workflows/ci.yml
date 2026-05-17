@@ -86,18 +86,15 @@ jobs:
             --alluredir=allure-results/api \
             -v
 
-  upload-api-results:
-    name: Upload API test results and coverage
-    needs: api-tests
-    uses: ./.github/workflows/upload-results.yml
-    secrets:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-    with:
-      junit-file: junit-api.xml
-      coverage-file: coverage-api.xml
-      flags: api
-      allure-path: allure-results/api/
-      allure-name: allure-results-api
+      - name: Upload API test results and coverage
+        uses: ./.github/actions/upload-results
+        with:
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          junit-file: junit-api.xml
+          coverage-file: coverage-api.xml
+          flags: api
+          allure-path: allure-results/api/
+          allure-name: allure-results-api
 
   # --------------------------------------------------------------------------
   # Integration tests
@@ -133,18 +130,15 @@ jobs:
             --alluredir=allure-results/integration \
             -v
 
-  upload-integration-results:
-    name: Upload Integration test results and coverage
-    needs: integration-tests
-    uses: ./.github/workflows/upload-results.yml
-    secrets:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-    with:
-      junit-file: junit-integration.xml
-      coverage-file: coverage-integration.xml
-      flags: integration
-      allure-path: allure-results/integration/
-      allure-name: allure-results-integration
+      - name: Upload integration test results and coverage
+        uses: ./.github/actions/upload-results
+        with:
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          junit-file: junit-integration.xml
+          coverage-file: coverage-integration.xml
+          flags: integration
+          allure-path: allure-results/integration/
+          allure-name: allure-results-integration
 
   # --------------------------------------------------------------------------
   # E2E tests
@@ -180,18 +174,15 @@ jobs:
             --alluredir=allure-results/e2e \
             -v
 
-  upload-e2e-results:
-    name: Upload E2E test results and coverage
-    needs: e2e-tests
-    uses: ./.github/workflows/upload-results.yml
-    secrets:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-    with:
-      junit-file: junit-e2e.xml
-      coverage-file: coverage-e2e.xml
-      flags: e2e
-      allure-path: allure-results/e2e/
-      allure-name: allure-results-e2e
+      - name: Upload E2E test results and coverage
+        uses: ./.github/actions/upload-results
+        with:
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          junit-file: junit-e2e.xml
+          coverage-file: coverage-e2e.xml
+          flags: e2e
+          allure-path: allure-results/e2e/
+          allure-name: allure-results-e2e
 
   # --------------------------------------------------------------------------
   # UI tests (Selenium – runs headless with Chrome)
@@ -229,25 +220,23 @@ jobs:
         env:
           HEADLESS: "true"
 
-  upload-ui-results:
-    name: Upload UI test results and coverage
-    needs: ui-tests
-    uses: ./.github/workflows/upload-results.yml
-    secrets:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-    with:
-      junit-file: junit-ui.xml
-      coverage-file: coverage-ui.xml
-      flags: ui
-      allure-path: allure-results/ui/
-      allure-name: allure-results-ui
+      - name: Upload UI test results and coverage
+        uses: ./.github/actions/upload-results
+        with:
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          junit-file: junit-ui.xml
+          coverage-file: coverage-ui.xml
+          flags: ui
+          allure-path: allure-results/ui/
+          allure-name: allure-results-ui
+
   # --------------------------------------------------------------------------
   # Publish Allure Report (on main only)
   # --------------------------------------------------------------------------
   allure-report:
     name: Publish Allure Report
     runs-on: ubuntu-latest
-    needs: [upload-api-results, upload-integration-results, upload-e2e-results, upload-ui-results]
+    needs: [api-tests, integration-tests, e2e-tests, ui-tests]
     if: always()
     permissions:
       contents: write
