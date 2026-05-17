@@ -37,6 +37,9 @@ jobs:
     name: Lint & type-check
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
       - name: Setup environment
         uses: ./.github/actions/setup-env
 
@@ -69,6 +72,9 @@ jobs:
           --health-retries=20
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
       - name: Setup environment
         uses: ./.github/actions/setup-env
 
@@ -118,6 +124,9 @@ jobs:
           --health-retries=20
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
       - name: Setup environment
         uses: ./.github/actions/setup-env
 
@@ -167,6 +176,9 @@ jobs:
           --health-retries=20
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
       - name: Setup environment
         uses: ./.github/actions/setup-env
 
@@ -218,6 +230,9 @@ jobs:
           --health-retries=20
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
       - name: Setup environment
         uses: ./.github/actions/setup-env
         with:
@@ -261,6 +276,9 @@ jobs:
       pull-requests: write
       checks: write
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
       - name: Setup environment
         uses: ./.github/actions/setup-env
         with:
@@ -275,6 +293,7 @@ jobs:
 
       - name: Restore Allure history from gh-pages
         uses: actions/checkout@v6
+
         with:
           ref: gh-pages
           path: gh-pages-history

@@ -26,6 +26,9 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
       - name: Upload test results to Codecov
         uses: codecov/codecov-action@v5
         with:
