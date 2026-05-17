@@ -243,7 +243,7 @@ jobs:
       id-token: write
       pull-requests: write
       checks: write
-    uses: RamonAlcantaraArceo/petstore-test-python/.github/workflows/allure-report.yml@main
+    uses: RamonAlcantaraArceo/petstore-test-python/.github/workflows/allure-report.yml@reuse-actions
     with:
       allure-report-name: "Petstore Test Report"
       publish-report: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
