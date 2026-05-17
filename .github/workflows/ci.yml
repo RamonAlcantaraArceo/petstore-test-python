@@ -37,25 +37,8 @@ jobs:
     name: Lint & type-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Run ruff (lint)
         run: uv run ruff check .
@@ -73,44 +56,21 @@ jobs:
     name: API tests
     runs-on: ubuntu-latest
     needs: lint
+
+    services:
+      petstore:
+        image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
+        ports:
+          - 8000:8000
+        options: >-
+          --health-cmd="curl -f http://localhost:8000/health || exit 1"
+          --health-interval=5s
+          --health-timeout=2s
+          --health-retries=20
+
     steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Start Petstore API container
-        run: |
-          docker run -d --rm \
-            --name petstore-api-test \
-            -p 8000:8000 \
-            ghcr.io/ramonalcantaraarceo/petstore-api:latest
-      - name: Wait for Petstore API to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep 'memory'; then
-              echo "Petstore API is up!"
-              exit 0
-            fi
-            echo "Waiting for Petstore API to be healthy... ($i/30)"
-            sleep 2
-          done
-          echo "Petstore API did not become healthy in time." && exit 1
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Run API tests with coverage
         run: |
@@ -125,34 +85,18 @@ jobs:
             --alluredir=allure-results/api \
             -v
 
-      - name: Stop Petstore API container
-        if: always()
-        run: docker stop petstore-api-test
-
-      - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          report_type: test_results
-          files: junit-api.xml
-          flags: api
-          fail_ci_if_error: false
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage-api.xml
-          flags: api
-          fail_ci_if_error: false
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: allure-results-api
-          path: allure-results/api/
-          retention-days: 7
+  upload-api-results:
+    name: Upload API test results and coverage
+    needs: api-tests
+    uses: ./.github/workflows/upload-results.yml
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      junit-file: junit-api.xml
+      coverage-file: coverage-api.xml
+      flags: api
+      allure-path: allure-results/api/
+      allure-name: allure-results-api
 
   # --------------------------------------------------------------------------
   # Integration tests
@@ -161,44 +105,21 @@ jobs:
     name: Integration tests
     runs-on: ubuntu-latest
     needs: lint
+
+    services:
+      petstore:
+        image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
+        ports:
+          - 8000:8000
+        options: >-
+          --health-cmd="curl -f http://localhost:8000/health || exit 1"
+          --health-interval=5s
+          --health-timeout=2s
+          --health-retries=20
+
     steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras --all-groups
-
-      - name: Start Petstore API container
-        run: |
-          docker run -d --rm \
-            --name petstore-api-test \
-            -p 8000:8000 \
-            ghcr.io/ramonalcantaraarceo/petstore-api:latest
-      - name: Wait for Petstore API to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep 'memory'; then
-              echo "Petstore API is up!"
-              exit 0
-            fi
-            echo "Waiting for Petstore API to be healthy... ($i/30)"
-            sleep 2
-          done
-          echo "Petstore API did not become healthy in time." && exit 1
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Run integration tests with coverage
         run: |
@@ -213,34 +134,18 @@ jobs:
             --alluredir=allure-results/integration \
             -v
 
-      - name: Stop Petstore API container
-        if: always()
-        run: docker stop petstore-api-test
-
-      - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          report_type: test_results
-          files: junit-integration.xml
-          flags: integration
-          fail_ci_if_error: false
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage-integration.xml
-          flags: integration
-          fail_ci_if_error: false
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: allure-results-integration
-          path: allure-results/integration/
-          retention-days: 7
+  upload-integration-results:
+    name: Upload Integration test results and coverage
+    needs: integration-tests
+    uses: ./.github/workflows/upload-results.yml
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      junit-file: junit-integration.xml
+      coverage-file: coverage-integration.xml
+      flags: integration
+      allure-path: allure-results/integration/
+      allure-name: allure-results-integration
 
   # --------------------------------------------------------------------------
   # E2E tests
@@ -249,44 +154,21 @@ jobs:
     name: E2E tests
     runs-on: ubuntu-latest
     needs: lint
+
+    services:
+      petstore:
+        image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
+        ports:
+          - 8000:8000
+        options: >-
+          --health-cmd="curl -f http://localhost:8000/health || exit 1"
+          --health-interval=5s
+          --health-timeout=2s
+          --health-retries=20
+
     steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras --all-groups
-
-      - name: Start Petstore API container
-        run: |
-          docker run -d --rm \
-            --name petstore-api-test \
-            -p 8000:8000 \
-            ghcr.io/ramonalcantaraarceo/petstore-api:latest
-      - name: Wait for Petstore API to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep 'memory'; then
-              echo "Petstore API is up!"
-              exit 0
-            fi
-            echo "Waiting for Petstore API to be healthy... ($i/30)"
-            sleep 2
-          done
-          echo "Petstore API did not become healthy in time." && exit 1
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Run E2E tests with coverage
         run: |
@@ -301,34 +183,18 @@ jobs:
             --alluredir=allure-results/e2e \
             -v
 
-      - name: Stop Petstore API container
-        if: always()
-        run: docker stop petstore-api-test
-
-      - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          report_type: test_results
-          files: junit-e2e.xml
-          flags: e2e
-          fail_ci_if_error: false
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage-e2e.xml
-          flags: e2e
-          fail_ci_if_error: false
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: allure-results-e2e
-          path: allure-results/e2e/
-          retention-days: 7
+  upload-e2e-results:
+    name: Upload E2E test results and coverage
+    needs: e2e-tests
+    uses: ./.github/workflows/upload-results.yml
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      junit-file: junit-e2e.xml
+      coverage-file: coverage-e2e.xml
+      flags: e2e
+      allure-path: allure-results/e2e/
+      allure-name: allure-results-e2e
 
   # --------------------------------------------------------------------------
   # UI tests (Selenium – runs headless with Chrome)
@@ -339,47 +205,23 @@ jobs:
     needs: lint
     env:
       RUN_UI_TESTS: "1"
+
+    services:
+      petstore:
+        image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
+        ports:
+          - 8000:8000
+        options: >-
+          --health-cmd="curl -f http://localhost:8000/health || exit 1"
+          --health-interval=5s
+          --health-timeout=2s
+          --health-retries=20
+
     steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
         with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras --all-groups
-
-      - name: Install Chrome
-        uses: browser-actions/setup-chrome@v1
-
-      - name: Start Petstore API container
-        run: |
-          docker run -d --rm \
-            --name petstore-api-test \
-            -p 8000:8000 \
-            ghcr.io/ramonalcantaraarceo/petstore-api:latest
-      - name: Wait for Petstore API to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep 'memory'; then
-              echo "Petstore API is up!"
-              exit 0
-            fi
-            echo "Waiting for Petstore API to be healthy... ($i/30)"
-            sleep 2
-          done
-          echo "Petstore API did not become healthy in time." && exit 1
+          install-chrome: true
 
       - name: Run UI tests
         run: |
@@ -392,25 +234,25 @@ jobs:
         env:
           HEADLESS: "true"
 
-      - name: Stop Petstore API container
-        if: always()
-        run: docker stop petstore-api-test
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: allure-results-ui
-          path: allure-results/ui/
-          retention-days: 7
-
+  upload-ui-results:
+    name: Upload UI test results and coverage
+    needs: ui-tests
+    uses: ./.github/workflows/upload-results.yml
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      junit-file: junit-ui.xml
+      coverage-file: coverage-ui.xml
+      flags: ui
+      allure-path: allure-results/ui/
+      allure-name: allure-results-ui
   # --------------------------------------------------------------------------
   # Publish Allure Report (on main only)
   # --------------------------------------------------------------------------
   allure-report:
     name: Publish Allure Report
     runs-on: ubuntu-latest
-    needs: [api-tests, integration-tests, e2e-tests, ui-tests]
+    needs: [upload-api-results, upload-integration-results, upload-e2e-results, upload-ui-results]
     if: always()
     permissions:
       contents: write
@@ -419,17 +261,10 @@ jobs:
       pull-requests: write
       checks: write
     steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
         with:
-          node-version: 24
-
-      - name: Install Allure CLI
-        run: |
-          npm install -g allure
-          allure --version
+          install-allure: true
 
       - name: Download all Allure results
         uses: actions/download-artifact@v8

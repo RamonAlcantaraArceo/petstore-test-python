@@ -1,0 +1,52 @@
+name: Upload Results
+
+on:
+  workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: true
+    inputs:
+      junit-file:
+        type: string
+        required: true
+      coverage-file:
+        type: string
+        required: true
+      flags:
+        type: string
+        required: true
+      allure-path:
+        type: string
+        required: true
+      allure-name:
+        type: string
+        required: true
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload test results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
+          files: ${{ inputs.junit-file }}
+          flags: ${{ inputs.flags }}
+          fail_ci_if_error: false
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ${{ inputs.coverage-file }}
+          flags: ${{ inputs.flags }}
+          fail_ci_if_error: false
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ inputs.allure-name }}
+          path: ${{ inputs.allure-path }}
+          retention-days: 7

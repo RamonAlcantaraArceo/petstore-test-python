@@ -1,0 +1,55 @@
+name: "Upload test results, coverage, and Allure artifacts"
+description: "Reusable action for Codecov uploads and Allure artifact publishing"
+
+inputs:
+  codecov-token:
+    description: "Codecov token"
+    required: true
+
+  junit-file:
+    description: "JUnit XML file to upload as test results"
+    required: true
+
+  coverage-file:
+    description: "Coverage XML file to upload"
+    required: true
+
+  codecov-flags:
+    description: "Codecov flags (e.g., api, ui, unit)"
+    required: true
+
+  allure-results-path:
+    description: "Path to Allure results directory"
+    required: true
+
+  allure-artifact-name:
+    description: "Name of the uploaded Allure artifact"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Upload test results to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ inputs.codecov-token }}
+        report_type: test_results
+        files: ${{ inputs.junit-file }}
+        flags: ${{ inputs.codecov-flags }}
+        fail_ci_if_error: false
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ inputs.codecov-token }}
+        files: ${{ inputs.coverage-file }}
+        flags: ${{ inputs.codecov-flags }}
+        fail_ci_if_error: false
+
+    - name: Upload Allure results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.allure-artifact-name }}
+        path: ${{ inputs.allure-results-path }}
+        retention-days: 7
