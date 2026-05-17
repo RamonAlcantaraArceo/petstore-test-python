@@ -92,9 +92,9 @@ jobs:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           junit-file: junit-api.xml
           coverage-file: coverage-api.xml
-          flags: api
-          allure-path: allure-results/api/
-          allure-name: allure-results-api
+          codecov-flags: api
+          allure-results-path: allure-results/api/
+          allure-artifact-name: allure-results-api
 
   # --------------------------------------------------------------------------
   # Integration tests
@@ -136,9 +136,9 @@ jobs:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           junit-file: junit-integration.xml
           coverage-file: coverage-integration.xml
-          flags: integration
-          allure-path: allure-results/integration/
-          allure-name: allure-results-integration
+          codecov-flags: integration
+          allure-results-path: allure-results/integration/
+          allure-artifact-name: allure-results-integration
 
   # --------------------------------------------------------------------------
   # E2E tests
@@ -180,9 +180,9 @@ jobs:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           junit-file: junit-e2e.xml
           coverage-file: coverage-e2e.xml
-          flags: e2e
-          allure-path: allure-results/e2e/
-          allure-name: allure-results-e2e
+          codecov-flags: e2e
+          allure-results-path: allure-results/e2e/
+          allure-artifact-name: allure-results-e2e
 
   # --------------------------------------------------------------------------
   # UI tests (Selenium – runs headless with Chrome)
@@ -226,9 +226,9 @@ jobs:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           junit-file: junit-ui.xml
           coverage-file: coverage-ui.xml
-          flags: ui
-          allure-path: allure-results/ui/
-          allure-name: allure-results-ui
+          codecov-flags: ui
+          allure-results-path: allure-results/ui/
+          allure-artifact-name: allure-results-ui
 
   # --------------------------------------------------------------------------
   # Publish Allure Report (on main only)
