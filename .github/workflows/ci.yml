@@ -37,25 +37,11 @@ jobs:
     name: Lint & type-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Run ruff (lint)
         run: uv run ruff check .
@@ -73,44 +59,19 @@ jobs:
     name: API tests
     runs-on: ubuntu-latest
     needs: lint
+
+    services:
+      petstore:
+        image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
+        ports:
+          - 8000:8000
+
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Start Petstore API container
-        run: |
-          docker run -d --rm \
-            --name petstore-api-test \
-            -p 8000:8000 \
-            ghcr.io/ramonalcantaraarceo/petstore-api:latest
-      - name: Wait for Petstore API to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep 'memory'; then
-              echo "Petstore API is up!"
-              exit 0
-            fi
-            echo "Waiting for Petstore API to be healthy... ($i/30)"
-            sleep 2
-          done
-          echo "Petstore API did not become healthy in time." && exit 1
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Run API tests with coverage
         run: |
@@ -125,34 +86,15 @@ jobs:
             --alluredir=allure-results/api \
             -v
 
-      - name: Stop Petstore API container
-        if: always()
-        run: docker stop petstore-api-test
-
-      - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5
+      - name: Upload API test results and coverage
+        uses: ./.github/actions/upload-results
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          report_type: test_results
-          files: junit-api.xml
-          flags: api
-          fail_ci_if_error: false
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage-api.xml
-          flags: api
-          fail_ci_if_error: false
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: allure-results-api
-          path: allure-results/api/
-          retention-days: 7
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          junit-file: junit-api.xml
+          coverage-file: coverage-api.xml
+          codecov-flags: api
+          allure-results-path: allure-results/api/
+          allure-artifact-name: allure-results-api
 
   # --------------------------------------------------------------------------
   # Integration tests
@@ -161,44 +103,19 @@ jobs:
     name: Integration tests
     runs-on: ubuntu-latest
     needs: lint
+
+    services:
+      petstore:
+        image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
+        ports:
+          - 8000:8000
+
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras --all-groups
-
-      - name: Start Petstore API container
-        run: |
-          docker run -d --rm \
-            --name petstore-api-test \
-            -p 8000:8000 \
-            ghcr.io/ramonalcantaraarceo/petstore-api:latest
-      - name: Wait for Petstore API to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep 'memory'; then
-              echo "Petstore API is up!"
-              exit 0
-            fi
-            echo "Waiting for Petstore API to be healthy... ($i/30)"
-            sleep 2
-          done
-          echo "Petstore API did not become healthy in time." && exit 1
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Run integration tests with coverage
         run: |
@@ -213,34 +130,15 @@ jobs:
             --alluredir=allure-results/integration \
             -v
 
-      - name: Stop Petstore API container
-        if: always()
-        run: docker stop petstore-api-test
-
-      - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5
+      - name: Upload integration test results and coverage
+        uses: ./.github/actions/upload-results
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          report_type: test_results
-          files: junit-integration.xml
-          flags: integration
-          fail_ci_if_error: false
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage-integration.xml
-          flags: integration
-          fail_ci_if_error: false
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: allure-results-integration
-          path: allure-results/integration/
-          retention-days: 7
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          junit-file: junit-integration.xml
+          coverage-file: coverage-integration.xml
+          codecov-flags: integration
+          allure-results-path: allure-results/integration/
+          allure-artifact-name: allure-results-integration
 
   # --------------------------------------------------------------------------
   # E2E tests
@@ -249,44 +147,19 @@ jobs:
     name: E2E tests
     runs-on: ubuntu-latest
     needs: lint
+
+    services:
+      petstore:
+        image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
+        ports:
+          - 8000:8000
+
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras --all-groups
-
-      - name: Start Petstore API container
-        run: |
-          docker run -d --rm \
-            --name petstore-api-test \
-            -p 8000:8000 \
-            ghcr.io/ramonalcantaraarceo/petstore-api:latest
-      - name: Wait for Petstore API to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep 'memory'; then
-              echo "Petstore API is up!"
-              exit 0
-            fi
-            echo "Waiting for Petstore API to be healthy... ($i/30)"
-            sleep 2
-          done
-          echo "Petstore API did not become healthy in time." && exit 1
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Run E2E tests with coverage
         run: |
@@ -301,34 +174,15 @@ jobs:
             --alluredir=allure-results/e2e \
             -v
 
-      - name: Stop Petstore API container
-        if: always()
-        run: docker stop petstore-api-test
-
-      - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5
+      - name: Upload E2E test results and coverage
+        uses: ./.github/actions/upload-results
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          report_type: test_results
-          files: junit-e2e.xml
-          flags: e2e
-          fail_ci_if_error: false
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage-e2e.xml
-          flags: e2e
-          fail_ci_if_error: false
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: allure-results-e2e
-          path: allure-results/e2e/
-          retention-days: 7
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          junit-file: junit-e2e.xml
+          coverage-file: coverage-e2e.xml
+          codecov-flags: e2e
+          allure-results-path: allure-results/e2e/
+          allure-artifact-name: allure-results-e2e
 
   # --------------------------------------------------------------------------
   # UI tests (Selenium – runs headless with Chrome)
@@ -339,47 +193,21 @@ jobs:
     needs: lint
     env:
       RUN_UI_TESTS: "1"
+
+    services:
+      petstore:
+        image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
+        ports:
+          - 8000:8000
+
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
         with:
-          node-version: 24
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-extras --all-groups
-
-      - name: Install Chrome
-        uses: browser-actions/setup-chrome@v1
-
-      - name: Start Petstore API container
-        run: |
-          docker run -d --rm \
-            --name petstore-api-test \
-            -p 8000:8000 \
-            ghcr.io/ramonalcantaraarceo/petstore-api:latest
-      - name: Wait for Petstore API to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep 'memory'; then
-              echo "Petstore API is up!"
-              exit 0
-            fi
-            echo "Waiting for Petstore API to be healthy... ($i/30)"
-            sleep 2
-          done
-          echo "Petstore API did not become healthy in time." && exit 1
+          install-chrome: true
 
       - name: Run UI tests
         run: |
@@ -392,24 +220,21 @@ jobs:
         env:
           HEADLESS: "true"
 
-      - name: Stop Petstore API container
-        if: always()
-        run: docker stop petstore-api-test
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v7
-        if: always()
+      - name: Upload UI test results and coverage
+        uses: ./.github/actions/upload-results
         with:
-          name: allure-results-ui
-          path: allure-results/ui/
-          retention-days: 7
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          junit-file: junit-ui.xml
+          coverage-file: coverage-ui.xml
+          codecov-flags: ui
+          allure-results-path: allure-results/ui/
+          allure-artifact-name: allure-results-ui
 
   # --------------------------------------------------------------------------
-  # Publish Allure Report (on main only)
+  # Publish Allure Report
   # --------------------------------------------------------------------------
   allure-report:
     name: Publish Allure Report
-    runs-on: ubuntu-latest
     needs: [api-tests, integration-tests, e2e-tests, ui-tests]
     if: always()
     permissions:
@@ -418,90 +243,9 @@ jobs:
       id-token: write
       pull-requests: write
       checks: write
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Install Allure CLI
-        run: |
-          npm install -g allure
-          allure --version
-
-      - name: Download all Allure results
-        uses: actions/download-artifact@v8
-        with:
-          pattern: allure-results-*
-          path: allure-results/
-          merge-multiple: true
-
-      - name: Restore Allure history from gh-pages
-        uses: actions/checkout@v6
-        with:
-          ref: gh-pages
-          path: gh-pages-history
-        continue-on-error: true
-
-      - name: Restore Allure 3 history file
-        run: |
-          if [ -f "gh-pages-history/.allure/allure-history.jsonl" ]; then
-            mkdir -p .allure
-            cp gh-pages-history/.allure/allure-history.jsonl .allure/allure-history.jsonl
-            echo "Allure 3 history restored from gh-pages."
-          else
-            echo "No previous Allure 3 history file found, starting fresh."
-          fi
-
-      - name: Add executor metadata for trend continuity
-        run: |
-          cat > allure-results/executor.json <<EOF
-          {
-            "name": "GitHub Actions",
-            "type": "github",
-            "buildOrder": ${GITHUB_RUN_NUMBER},
-            "buildName": "${GITHUB_WORKFLOW} #${GITHUB_RUN_NUMBER}",
-            "buildUrl": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}",
-            "reportName": "Petstore Test Report",
-            "reportUrl": "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
-          }
-          EOF
-
-      - name: Generate Allure report
-        run: |
-          allure generate allure-results \
-            --output allure-report \
-            --config allurerc.yml \
-            --history-limit 20
-
-      - name: Persist Allure 3 history file in published site
-        run: |
-          if [ -f ".allure/allure-history.jsonl" ]; then
-            mkdir -p allure-report/.allure
-            cp .allure/allure-history.jsonl allure-report/.allure/allure-history.jsonl
-            echo "Allure 3 history file persisted for next run."
-          fi
-
-      - name: Post Allure summary to PR and job summary
-        uses: allure-framework/allure-action@v0
-        with:
-          report-directory: "./allure-report"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          remote-href: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-
-      - name: Deploy report to GitHub Pages
-        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
-        uses: peaceiris/actions-gh-pages@v4.1.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-report
-
-      - name: Notice Allure Report
-        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
-        run: |
-          echo "::notice title=Allure Report::https://ramonalcantaraarceo.github.io/petstore-test-python"
-          echo "### 🚀 Allure Report Deployed" >> $GITHUB_STEP_SUMMARY
-          echo "[🔗 View Report](https://ramonalcantaraarceo.github.io/petstore-test-python)" >> $GITHUB_STEP_SUMMARY
+    uses: RamonAlcantaraArceo/petstore-test-python/.github/workflows/allure-report.yml@reuse-actions
+    with:
+      allure-report-name: "Petstore Test Report"
+      publish-report: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
+    secrets:
+      GH_PAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,167 @@
+name: Publish Allure Report
+
+# Reusable workflow – call from any repo that uploads allure-results-* artifacts.
+#
+# Usage example (in your CI workflow):
+#
+#   allure-report:
+#     name: Publish Allure Report
+#     needs: [api-tests, integration-tests, ...]
+#     if: always()
+#     permissions:
+#       contents: write
+#       pages: write
+#       id-token: write
+#       pull-requests: write
+#       checks: write
+#     uses: RamonAlcantaraArceo/petstore-test-python/.github/workflows/allure-report.yml@main
+#     with:
+#       publish-report: true
+#     secrets: inherit
+
+on:
+  workflow_call:
+    inputs:
+      allure-report-name:
+        description: "Name of the generated Allure report (used in report metadata and PR comment)."
+        required: true
+        default: "Allure Report"
+        type: string
+
+      artifact-pattern:
+        description: >
+          Glob pattern matching the Allure result artifacts to download.
+          Must match the artifact names uploaded by test jobs.
+        required: false
+        default: "allure-results-*"
+        type: string
+
+      allure-config:
+        description: >
+          Path (relative to repo root) to an allurerc.yml config file.
+          Skipped automatically if the file does not exist in the calling repo.
+        required: false
+        default: "allurerc.yml"
+        type: string
+
+      history-limit:
+        description: "Number of past builds to keep in the trend chart."
+        required: false
+        default: 20
+        type: number
+
+      publish-report:
+        description: "Deploy the generated report to GitHub Pages."
+        required: false
+        default: true
+        type: boolean
+
+    secrets:
+      GH_PAGES_TOKEN:
+        required: true
+
+
+jobs:
+  publish:
+    name: Publish Allure Report
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      pull-requests: write
+      checks: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+        with:
+          install-allure: true
+
+      - name: Download all Allure results
+        uses: actions/download-artifact@v8
+        with:
+          pattern: ${{ inputs.artifact-pattern }}
+          path: allure-results/
+          merge-multiple: true
+
+      - name: Restore Allure history from gh-pages
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: gh-pages-history
+        continue-on-error: true
+
+      - name: Restore Allure 3 history file
+        run: |
+          if [ -f "gh-pages-history/.allure/allure-history.jsonl" ]; then
+            mkdir -p .allure
+            cp gh-pages-history/.allure/allure-history.jsonl .allure/allure-history.jsonl
+            echo "Allure 3 history restored from gh-pages."
+          else
+            echo "No previous Allure 3 history file found, starting fresh."
+          fi
+
+      - name: Add executor metadata for trend continuity
+        run: |
+          cat > allure-results/executor.json <<EOF
+          {
+            "name": "GitHub Actions",
+            "type": "github",
+            "buildOrder": ${GITHUB_RUN_NUMBER},
+            "buildName": "${GITHUB_WORKFLOW} #${GITHUB_RUN_NUMBER}",
+            "buildUrl": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}",
+            "reportName": "${{ inputs.allure-report-name }}",
+            "reportUrl": "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
+          }
+          EOF
+
+      - name: Generate Allure report
+        run: |
+          # Only pass --config if the file actually exists in the calling repo.
+          CONFIG_ARG=""
+          if [ -f "${{ inputs.allure-config }}" ]; then
+            CONFIG_ARG="--config ${{ inputs.allure-config }}"
+            echo "Using Allure config: ${{ inputs.allure-config }}"
+          else
+            echo "No config file found at '${{ inputs.allure-config }}', running without --config."
+          fi
+
+          allure generate allure-results \
+            --output allure-report \
+            $CONFIG_ARG \
+            --history-limit ${{ inputs.history-limit }}
+
+      - name: Persist Allure 3 history file in published site
+        run: |
+          if [ -f ".allure/allure-history.jsonl" ]; then
+            mkdir -p allure-report/.allure
+            cp .allure/allure-history.jsonl allure-report/.allure/allure-history.jsonl
+            echo "Allure 3 history file persisted for next run."
+          fi
+
+      - name: Post Allure summary to PR and job summary
+        uses: allure-framework/allure-action@v0
+        with:
+          report-directory: "./allure-report"
+          github-token: ${{ secrets.GH_PAGES_TOKEN }}
+          remote-href: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+      - name: Deploy report to GitHub Pages
+        if: inputs.publish-report
+        uses: peaceiris/actions-gh-pages@v4.1.0
+        with:
+          github_token: ${{ secrets.GH_PAGES_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-report
+
+      - name: Notice Allure Report URL
+        if: inputs.publish-report
+        run: |
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+          echo "::notice title=Allure Report::${REPORT_URL}"
+          echo "### 🚀 Allure Report Deployed" >> $GITHUB_STEP_SUMMARY
+          echo "[🔗 View Report](${REPORT_URL})" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,72 @@
+name: "Setup Node + Python + uv (optional Chrome + Allure)"
+description: "Reusable environment setup for JS + Python monorepos"
+
+inputs:
+  node-version:
+    description: "Node.js version"
+    required: false
+    default: "24"
+
+  python-version:
+    description: "Python version"
+    required: false
+    default: "3.12"
+
+  uv-sync-flags:
+    description: "Flags to pass to 'uv sync'"
+    required: false
+    default: "--all-extras"
+
+  install-chrome:
+    description: "Install Chrome browser (true/false)"
+    required: false
+    default: false
+    type: boolean
+
+  install-allure:
+    description: "Install Allure CLI (true/false)"
+    required: false
+    default: false
+    type: boolean
+
+  allure-version:
+    description: "Allure CLI version (npm package version)"
+    required: false
+    default: "latest"
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v8.1.0
+      with:
+        enable-cache: true
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        echo "Running: uv sync ${{ inputs.uv-sync-flags }}"
+        uv sync ${{ inputs.uv-sync-flags }}
+
+    - name: Install Chrome
+      if: ${{ inputs.install-chrome == 'true' }}
+      uses: browser-actions/setup-chrome@v2
+
+    - name: Install Allure CLI
+      if: ${{ inputs.install-allure == 'true' }}
+      shell: bash
+      run: |
+        echo "Installing Allure CLI version: ${{ inputs.allure-version }}"
+        npm install -g allure@${{ inputs.allure-version }}
+        allure --version
