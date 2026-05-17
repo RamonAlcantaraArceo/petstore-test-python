@@ -68,5 +68,5 @@ runs:
       shell: bash
       run: |
         echo "Installing Allure CLI version: ${{ inputs.allure-version }}"
-        npm install -g allure-commandline@${{ inputs.allure-version }}
+        npm install -g allure@${{ inputs.allure-version }}
         allure --version
