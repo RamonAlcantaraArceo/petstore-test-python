@@ -1,0 +1,174 @@
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7ffa9ef0c5e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7ffa9ef0c680> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7ffa9f820a40>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7ffa9f820a40>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:118 LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7ffa9ef0c720> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7ffa9ef0c7c0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7ffa9f7bfb30>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***"
+    },
+    "body": {
+      "username": "jeffery869167",
+      "email": "jeffery869167@example.com",
+      "password": "87$Z%)eP!blM"
+    }
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sun, 17 May 2026 06:26:39 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "138",
+      "Content-Type": "application/json",
+      "x-correlation-id": "7ab4cb9c-66bd-428b-9121-91d0dc298bfa"
+    },
+    "body": {
+      "username": "jeffery869167",
+      "first_name": null,
+      "last_name": null,
+      "email": "jeffery869167@example.com",
+      "phone": null,
+      "user_status": null,
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 GET /api/v1/user/login?username=jeffery869167&password=87%24Z%25%29eP%21blM
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login?username=jeffery869167&password=87%24Z%25%29eP%21blM",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 GET /api/v1/user/login?username=jeffery869167&password=87%24Z%25%29eP%21blM [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sun, 17 May 2026 06:26:39 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "31",
+      "Content-Type": "application/json",
+      "x-correlation-id": "cfa7b7ec-8bf9-4633-a6cf-09a17190c9b5"
+    },
+    "body": {
+      "token": "token-jeffery869167"
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=jeffery869167&password=87%24Z%25%29eP%21blM"
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 GET /api/v1/user/jeffery869167
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/jeffery869167",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 GET /api/v1/user/jeffery869167 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sun, 17 May 2026 06:26:39 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "138",
+      "Content-Type": "application/json",
+      "x-correlation-id": "0261efb7-f64b-42d2-8cb1-ee45e2a20707"
+    },
+    "body": {
+      "username": "jeffery869167",
+      "first_name": null,
+      "last_name": null,
+      "email": "jeffery869167@example.com",
+      "phone": null,
+      "user_status": null,
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/user/jeffery869167"
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sun, 17 May 2026 06:26:39 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "29",
+      "Content-Type": "application/json",
+      "x-correlation-id": "b37f4edb-fd1d-459c-9393-defb59130a16"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 DELETE /api/v1/user/jeffery869167
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/jeffery869167",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "X-API-Key": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 DELETE /api/v1/user/jeffery869167 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Sun, 17 May 2026 06:26:39 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "26",
+      "Content-Type": "application/json",
+      "x-correlation-id": "5971c2b9-6843-4688-9749-d80e9f664488"
+    },
+    "body": {
+      "message": "User deleted"
+    },
+    "url": "http://localhost:8000/api/v1/user/jeffery869167"
+  }
