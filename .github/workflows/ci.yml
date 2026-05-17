@@ -65,11 +65,6 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
-        options: >-
-          --health-cmd="curl -f http://localhost:8000/health || exit 1"
-          --health-interval=5s
-          --health-timeout=2s
-          --health-retries=20
 
     steps:
       - name: Checkout code
@@ -117,11 +112,6 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
-        options: >-
-          --health-cmd="curl -f http://localhost:8000/health || exit 1"
-          --health-interval=5s
-          --health-timeout=2s
-          --health-retries=20
 
     steps:
       - name: Checkout code
@@ -169,11 +159,6 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
-        options: >-
-          --health-cmd="curl -f http://localhost:8000/health || exit 1"
-          --health-interval=5s
-          --health-timeout=2s
-          --health-retries=20
 
     steps:
       - name: Checkout code
@@ -223,11 +208,6 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
-        options: >-
-          --health-cmd="curl -f http://localhost:8000/health || exit 1"
-          --health-interval=5s
-          --health-timeout=2s
-          --health-retries=20
 
     steps:
       - name: Checkout code
