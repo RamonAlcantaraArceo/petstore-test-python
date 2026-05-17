@@ -57,8 +57,7 @@ on:
         type: boolean
 
     secrets:
-      github-token:
-        description: "GITHUB_TOKEN (or PAT) with contents:write and pages:write."
+      CODECOV_TOKEN:
         required: true
 
 jobs:
@@ -147,14 +146,14 @@ jobs:
         uses: allure-framework/allure-action@v0
         with:
           report-directory: "./allure-report"
-          github-token: ${{ secrets.github-token }}
+          github-token: ${{ secrets.CODECOV_TOKEN }}
           remote-href: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
 
       - name: Deploy report to GitHub Pages
         if: inputs.publish-report
         uses: peaceiris/actions-gh-pages@v4.1.0
         with:
-          github_token: ${{ secrets.github-token }}
+          github_token: ${{ secrets.CODECOV_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-report
 
