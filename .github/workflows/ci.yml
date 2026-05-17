@@ -247,4 +247,5 @@ jobs:
     with:
       allure-report-name: "Petstore Test Report"
       publish-report: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
-    secrets: inherit
+    secrets:
+      GH_PAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
