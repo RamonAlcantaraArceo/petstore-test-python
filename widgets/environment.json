@@ -1,0 +1,1 @@
+[{"values":["3.12.13"],"name":"Python.Version"},{"values":["http://localhost:8000/api/v1"],"name":"API.Base.URL"},{"values":["https://the-internet.herokuapp.com"],"name":"UI.Base.URL"}]
