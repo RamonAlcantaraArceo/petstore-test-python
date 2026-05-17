@@ -1,0 +1,324 @@
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c6b3b00> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f5b3d0121b0>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c6b3ec0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | Iterator: Fetching next value from <factory.utils.ResetableIterator object at 0x7f5b3cdfccb0>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c774360> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c774400> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "Catherine",
+      "status": "available",
+      "photoUrls": []
+    },
+    "data": null
+  }
+07:05:06 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+07:05:06 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 91
+07:05:06 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sun, 17 May 2026 07:05:06 GMT",
+      "server": "uvicorn",
+      "content-length": "91",
+      "content-type": "application/json",
+      "x-correlation-id": "6084049b-4c8a-4e2f-aad3-cf7fcd9c044d"
+    },
+    "body": {
+      "name": "Catherine",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c6b3b00> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f5b3d0121b0>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c6b3ec0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | Iterator: Fetching next value from <factory.utils.ResetableIterator object at 0x7f5b3cdfccb0>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c774360> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c774400> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "Evelyn",
+      "status": "available",
+      "photoUrls": []
+    },
+    "data": null
+  }
+07:05:06 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 88
+07:05:06 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sun, 17 May 2026 07:05:06 GMT",
+      "server": "uvicorn",
+      "content-length": "88",
+      "content-type": "application/json",
+      "x-correlation-id": "e14e0cd7-077c-43f7-be5b-2ed581bb59eb"
+    },
+    "body": {
+      "name": "Evelyn",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 3
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c6b3b00> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f5b3d0121b0>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c6b3ec0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | Iterator: Fetching next value from <factory.utils.ResetableIterator object at 0x7f5b3cdfccb0>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c774360> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f5b3c774400> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+07:05:06 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "Suzanne",
+      "status": "available",
+      "photoUrls": []
+    },
+    "data": null
+  }
+07:05:06 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 89
+07:05:06 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sun, 17 May 2026 07:05:06 GMT",
+      "server": "uvicorn",
+      "content-length": "89",
+      "content-type": "application/json",
+      "x-correlation-id": "17fd638c-1cbd-4045-9db1-b1e7c1ab14e3"
+    },
+    "body": {
+      "name": "Suzanne",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 4
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+07:05:06 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": {
+      "status": "available"
+    },
+    "json": null,
+    "data": null
+  }
+07:05:06 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/pet/findByStatus?status=available HTTP/1.1" 200 272
+07:05:06 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sun, 17 May 2026 07:05:06 GMT",
+      "server": "uvicorn",
+      "content-length": "272",
+      "content-type": "application/json",
+      "x-correlation-id": "47a18536-f32a-457f-8dd4-4b14fda4ada7"
+    },
+    "body": [
+      {
+        "name": "Catherine",
+        "photoUrls": [],
+        "category": null,
+        "tags": null,
+        "status": "available",
+        "id": 2
+      },
+      {
+        "name": "Evelyn",
+        "photoUrls": [],
+        "category": null,
+        "tags": null,
+        "status": "available",
+        "id": 3
+      },
+      {
+        "name": "Suzanne",
+        "photoUrls": [],
+        "category": null,
+        "tags": null,
+        "status": "available",
+        "id": 4
+      }
+    ],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=available"
+  }
+07:05:06 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/pet/2
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/2",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:05:06 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/pet/2 HTTP/1.1" 200 25
+07:05:06 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/pet/2 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sun, 17 May 2026 07:05:06 GMT",
+      "server": "uvicorn",
+      "content-length": "25",
+      "content-type": "application/json",
+      "x-correlation-id": "5258338a-4922-4a85-ab21-4e0fcd0526a1"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/2"
+  }
+07:05:06 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/pet/3
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/3",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:05:06 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/pet/3 HTTP/1.1" 200 25
+07:05:06 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/pet/3 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sun, 17 May 2026 07:05:06 GMT",
+      "server": "uvicorn",
+      "content-length": "25",
+      "content-type": "application/json",
+      "x-correlation-id": "1b6e6ff3-ee60-426d-9968-34b3152430de"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/3"
+  }
+07:05:06 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/pet/4
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/4",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "X-API-Key": "dev-api-key"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+07:05:06 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/pet/4 HTTP/1.1" 200 25
+07:05:06 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/pet/4 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Sun, 17 May 2026 07:05:06 GMT",
+      "server": "uvicorn",
+      "content-length": "25",
+      "content-type": "application/json",
+      "x-correlation-id": "cb2ff4b9-9d3c-4b49-adf7-da34d10e675d"
+    },
+    "body": {
+      "message": "Pet deleted"
+    },
+    "url": "http://localhost:8000/api/v1/pet/4"
+  }
+07:05:06 | DEBUG    | close | Session closed
