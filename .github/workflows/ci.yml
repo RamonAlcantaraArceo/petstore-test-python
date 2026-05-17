@@ -231,11 +231,10 @@ jobs:
           allure-artifact-name: allure-results-ui
 
   # --------------------------------------------------------------------------
-  # Publish Allure Report (on main only)
+  # Publish Allure Report
   # --------------------------------------------------------------------------
   allure-report:
     name: Publish Allure Report
-    runs-on: ubuntu-latest
     needs: [api-tests, integration-tests, e2e-tests, ui-tests]
     if: always()
     permissions:
@@ -244,87 +243,8 @@ jobs:
       id-token: write
       pull-requests: write
       checks: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Setup environment
-        uses: ./.github/actions/setup-env
-        with:
-          install-allure: true
-
-      - name: Download all Allure results
-        uses: actions/download-artifact@v8
-        with:
-          pattern: allure-results-*
-          path: allure-results/
-          merge-multiple: true
-
-      - name: Restore Allure history from gh-pages
-        uses: actions/checkout@v6
-
-        with:
-          ref: gh-pages
-          path: gh-pages-history
-        continue-on-error: true
-
-      - name: Restore Allure 3 history file
-        run: |
-          if [ -f "gh-pages-history/.allure/allure-history.jsonl" ]; then
-            mkdir -p .allure
-            cp gh-pages-history/.allure/allure-history.jsonl .allure/allure-history.jsonl
-            echo "Allure 3 history restored from gh-pages."
-          else
-            echo "No previous Allure 3 history file found, starting fresh."
-          fi
-
-      - name: Add executor metadata for trend continuity
-        run: |
-          cat > allure-results/executor.json <<EOF
-          {
-            "name": "GitHub Actions",
-            "type": "github",
-            "buildOrder": ${GITHUB_RUN_NUMBER},
-            "buildName": "${GITHUB_WORKFLOW} #${GITHUB_RUN_NUMBER}",
-            "buildUrl": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}",
-            "reportName": "Petstore Test Report",
-            "reportUrl": "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
-          }
-          EOF
-
-      - name: Generate Allure report
-        run: |
-          allure generate allure-results \
-            --output allure-report \
-            --config allurerc.yml \
-            --history-limit 20
-
-      - name: Persist Allure 3 history file in published site
-        run: |
-          if [ -f ".allure/allure-history.jsonl" ]; then
-            mkdir -p allure-report/.allure
-            cp .allure/allure-history.jsonl allure-report/.allure/allure-history.jsonl
-            echo "Allure 3 history file persisted for next run."
-          fi
-
-      - name: Post Allure summary to PR and job summary
-        uses: allure-framework/allure-action@v0
-        with:
-          report-directory: "./allure-report"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          remote-href: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-
-      - name: Deploy report to GitHub Pages
-        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
-        uses: peaceiris/actions-gh-pages@v4.1.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-report
-
-      - name: Notice Allure Report
-        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
-        run: |
-          echo "::notice title=Allure Report::https://ramonalcantaraarceo.github.io/petstore-test-python"
-          echo "### 🚀 Allure Report Deployed" >> $GITHUB_STEP_SUMMARY
-          echo "[🔗 View Report](https://ramonalcantaraarceo.github.io/petstore-test-python)" >> $GITHUB_STEP_SUMMARY
+    uses: RamonAlcantaraArceo/petstore-test-python/.github/workflows/allure-report.yml@main
+    with:
+      allure-report-name: "Petstore Test Report"
+      publish-report: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.publish_report == 'true' }}
+    secrets: inherit
