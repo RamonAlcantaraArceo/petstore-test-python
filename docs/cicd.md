@@ -58,6 +58,45 @@ The published report is available at:
 https://<user>.github.io/petstore-test-python/
 ```
 
+## Reusable Actions
+
+This repository exposes reusable composite actions that can be consumed from
+other repositories.
+
+### `publish-allure-ci-history`
+
+Use this action when a workflow generates a single Allure result set and you
+want to keep trend history from `gh-pages` without repeating setup steps.
+
+Path:
+
+```text
+RamonAlcantaraArceo/petstore-test-python/.github/actions/publish-allure-ci-history@main
+```
+
+Example usage:
+
+```yaml
+- name: Publish CI Allure report with history
+   if: always()
+   uses: RamonAlcantaraArceo/petstore-test-python/.github/actions/publish-allure-ci-history@main
+   with:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      allure-results-path: allure-results
+      report-subpath: ci
+```
+
+Important inputs:
+
+| Input | Description | Default |
+|---|---|---|
+| `github-token` | Token used to publish and post summary | required |
+| `allure-results-path` | Directory containing Allure result files | `allure-results` |
+| `publish-branch` | Branch used for static report hosting | `gh-pages` |
+| `report-subpath` | Report location under published site | `ci` |
+| `publish-report` | Whether to push report to `gh-pages` | `true` |
+| `post-summary` | Whether to post Allure summary comment/summary | `true` |
+
 ### Local Allure 3 report generation
 
 ```bash
