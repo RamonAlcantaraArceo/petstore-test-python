@@ -1,0 +1,175 @@
+name: "Publish Allure report with CI history"
+description: "Restore gh-pages history, build a CI-scoped Allure report, publish to gh-pages, and post summary"
+
+inputs:
+  github-token:
+    description: "GitHub token used for gh-pages publish and summary posting"
+    required: true
+
+  allure-results-path:
+    description: "Path to Allure results directory"
+    required: false
+    default: "allure-results"
+
+  publish-branch:
+    description: "Branch where static report is published"
+    required: false
+    default: "gh-pages"
+
+  report-subpath:
+    description: "Subdirectory inside published site for this report. Empty means root."
+    required: false
+    default: ""
+
+  history-workspace:
+    description: "Temporary workspace used to reconstruct the published site before deploy"
+    required: false
+    default: "allure-history"
+
+  checkout-path:
+    description: "Temporary checkout path for published branch"
+    required: false
+    default: "gh-pages"
+
+  publish-report:
+    description: "Whether to publish report to gh-pages"
+    required: false
+    default: "true"
+
+  post-summary:
+    description: "Whether to post Allure summary to PR and job summary"
+    required: false
+    default: "true"
+
+  report-url:
+    description: "Optional explicit report URL. If empty, URL is computed from owner/repo/report-subpath"
+    required: false
+    default: ""
+
+  allure-config:
+    description: "Path to allurerc.yml config file. Skipped if the file does not exist."
+    required: false
+    default: ""
+
+  history-limit:
+    description: "Number of past builds to keep in the trend chart."
+    required: false
+    default: "20"
+
+outputs:
+  report-url:
+    description: "Resolved report URL"
+    value: ${{ steps.resolve-report-url.outputs.value }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Resolve report URL
+      id: resolve-report-url
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.report-url }}" ]; then
+          VALUE="${{ inputs.report-url }}"
+        elif [ -n "${{ inputs.report-subpath }}" ]; then
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          VALUE="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPO_NAME}/${{ inputs.report-subpath }}"
+        else
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          VALUE="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPO_NAME}"
+        fi
+
+        echo "value=${VALUE}" >> "$GITHUB_OUTPUT"
+        echo "REPORT_URL=${VALUE}" >> "$GITHUB_ENV"
+
+    - name: Checkout published branch
+      if: ${{ inputs.publish-report == 'true' }}
+      uses: actions/checkout@v6
+      continue-on-error: true
+      with:
+        ref: ${{ inputs.publish-branch }}
+        path: ${{ inputs.checkout-path }}
+
+    - name: Prepare Allure history workspace
+      shell: bash
+      run: |
+        mkdir -p "${{ inputs.history-workspace }}"
+
+        if [ -d "${{ inputs.checkout-path }}" ]; then
+          cp -R "${{ inputs.checkout-path }}/." "${{ inputs.history-workspace }}/"
+        fi
+
+        # Allure 3 cross-build history uses a single JSONL file (historyPath in allurerc.yml).
+        # Restore it from its published location inside the report subpath on gh-pages.
+        SUBPATH="${{ inputs.report-subpath }}"
+        HISTORY_JSONL="${{ inputs.checkout-path }}${SUBPATH:+/${SUBPATH}}/.allure/allure-history.jsonl"
+        if [ -f "${HISTORY_JSONL}" ]; then
+          mkdir -p .allure
+          cp "${HISTORY_JSONL}" .allure/allure-history.jsonl
+          echo "Allure 3 JSONL history restored from ${HISTORY_JSONL} ($(wc -l < .allure/allure-history.jsonl) prior runs)"
+        else
+          echo "No Allure 3 JSONL history found at ${HISTORY_JSONL} — starting fresh"
+        fi
+
+    - name: Build Allure report with history
+      shell: bash
+      run: |
+        rm -rf "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}"
+        mkdir -p "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}"
+
+        CONFIG_ARG=""
+        if [ -n "${{ inputs.allure-config }}" ] && [ -f "${{ inputs.allure-config }}" ]; then
+          CONFIG_ARG="--config ${{ inputs.allure-config }}"
+          echo "Using Allure config: ${{ inputs.allure-config }}"
+        else
+          echo "No allure-config supplied or file not found — relying on auto-discovery (allurerc.yml in CWD)"
+          if [ -f "allurerc.yml" ]; then
+            echo "Auto-discovered allurerc.yml in CWD — historyPath will be applied"
+          else
+            echo "::warning title=Allure History::No allurerc.yml found in CWD and no allure-config input set. History (JSONL) will NOT be written — add allurerc.yml with historyPath to the calling repo."
+          fi
+        fi
+
+        allure generate "${{ inputs.allure-results-path }}" \
+          --output "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}" \
+          $CONFIG_ARG \
+          --history-limit ${{ inputs.history-limit }}
+
+    - name: Persist Allure 3 history file
+      shell: bash
+      run: |
+        # Copy the JSONL written by allure generate into the report subpath so peaceiris publishes it.
+        echo "Checking for .allure/allure-history.jsonl after generate..."
+        if [ -f ".allure/allure-history.jsonl" ]; then
+          LINES=$(wc -l < .allure/allure-history.jsonl)
+          echo "Found .allure/allure-history.jsonl (${LINES} run(s) recorded)"
+          mkdir -p "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure"
+          cp .allure/allure-history.jsonl \
+            "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure/allure-history.jsonl"
+          echo "Allure 3 JSONL persisted to ${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure/allure-history.jsonl"
+        else
+          echo "::error title=Allure History::No .allure/allure-history.jsonl found after generate — history was not written. Ensure the calling repo has allurerc.yml with historyPath set."
+        fi
+
+    - name: Publish report to GitHub Pages
+      if: ${{ inputs.publish-report == 'true' }}
+      uses: peaceiris/actions-gh-pages@v4.1.0
+      with:
+        github_token: ${{ inputs.github-token }}
+        publish_branch: ${{ inputs.publish-branch }}
+        publish_dir: ${{ inputs.history-workspace }}
+
+    - name: Post Allure summary
+      if: ${{ inputs.post-summary == 'true' }}
+      continue-on-error: true
+      uses: allure-framework/allure-action@v0
+      with:
+        report-directory: "./${{ inputs.history-workspace }}/${{ inputs.report-subpath }}"
+        github-token: ${{ inputs.github-token }}
+        remote-href: ${{ env.REPORT_URL }}
+
+    - name: Notice report URL
+      shell: bash
+      run: |
+        echo "::notice title=Allure Report::${REPORT_URL}"
+        echo "### Allure Report" >> "$GITHUB_STEP_SUMMARY"
+        echo "${REPORT_URL}" >> "$GITHUB_STEP_SUMMARY"
