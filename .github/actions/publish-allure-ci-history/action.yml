@@ -98,15 +98,16 @@ runs:
           cp -R "${{ inputs.checkout-path }}/." "${{ inputs.history-workspace }}/"
         fi
 
-        # Allure 3 writes per-test history to data/history/ inside the report output.
-        # Copying it into allure-results/history/ is what allure generate reads on the next run.
-        HISTORY_DIR="${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/data/history"
-        if [ -d "${HISTORY_DIR}" ]; then
-          mkdir -p "${{ inputs.allure-results-path }}/history"
-          cp -R "${HISTORY_DIR}/." "${{ inputs.allure-results-path }}/history/"
-          echo "Allure history restored from ${HISTORY_DIR}"
+        # Allure 3 cross-build history uses a single JSONL file (historyPath in allurerc.yml).
+        # Restore it from its published location inside the report subpath on gh-pages.
+        SUBPATH="${{ inputs.report-subpath }}"
+        HISTORY_JSONL="${{ inputs.checkout-path }}${SUBPATH:+/${SUBPATH}}/.allure/allure-history.jsonl"
+        if [ -f "${HISTORY_JSONL}" ]; then
+          mkdir -p .allure
+          cp "${HISTORY_JSONL}" .allure/allure-history.jsonl
+          echo "Allure 3 JSONL history restored from ${HISTORY_JSONL} ($(wc -l < .allure/allure-history.jsonl) prior runs)"
         else
-          echo "No Allure history found at ${HISTORY_DIR}, starting fresh"
+          echo "No Allure 3 JSONL history found at ${HISTORY_JSONL} — starting fresh"
         fi
 
     - name: Build Allure report with history
@@ -124,6 +125,19 @@ runs:
           --output "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}" \
           $CONFIG_ARG \
           --history-limit ${{ inputs.history-limit }}
+
+    - name: Persist Allure 3 history file
+      shell: bash
+      run: |
+        # Copy the JSONL written by allure generate into the report subpath so peaceiris publishes it.
+        if [ -f ".allure/allure-history.jsonl" ]; then
+          mkdir -p "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure"
+          cp .allure/allure-history.jsonl \
+            "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure/allure-history.jsonl"
+          echo "Allure 3 JSONL persisted ($(wc -l < .allure/allure-history.jsonl) runs recorded)"
+        else
+          echo "No .allure/allure-history.jsonl found after generate — history will not be persisted"
+        fi
 
     - name: Publish report to GitHub Pages
       if: ${{ inputs.publish-report == 'true' }}
