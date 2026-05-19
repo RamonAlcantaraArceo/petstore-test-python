@@ -98,15 +98,15 @@ runs:
           cp -R "${{ inputs.checkout-path }}/." "${{ inputs.history-workspace }}/"
         fi
 
-        # Allure 3: JSONL history file lives inside the report subpath
-        SUBPATH="${{ inputs.report-subpath }}"
-        HISTORY_JSONL="${{ inputs.checkout-path }}${SUBPATH:+/${SUBPATH}}/.allure/allure-history.jsonl"
-        if [ -f "${HISTORY_JSONL}" ]; then
-          mkdir -p .allure
-          cp "${HISTORY_JSONL}" .allure/allure-history.jsonl
-          echo "Allure 3 JSONL history restored from ${HISTORY_JSONL}"
+        # Allure 3 writes per-test history to data/history/ inside the report output.
+        # Copying it into allure-results/history/ is what allure generate reads on the next run.
+        HISTORY_DIR="${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/data/history"
+        if [ -d "${HISTORY_DIR}" ]; then
+          mkdir -p "${{ inputs.allure-results-path }}/history"
+          cp -R "${HISTORY_DIR}/." "${{ inputs.allure-results-path }}/history/"
+          echo "Allure history restored from ${HISTORY_DIR}"
         else
-          echo "No Allure 3 JSONL history found at ${HISTORY_JSONL}, starting fresh"
+          echo "No Allure history found at ${HISTORY_DIR}, starting fresh"
         fi
 
     - name: Build Allure report with history
@@ -124,16 +124,6 @@ runs:
           --output "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}" \
           $CONFIG_ARG \
           --history-limit ${{ inputs.history-limit }}
-
-    - name: Persist Allure 3 history file
-      shell: bash
-      run: |
-        # Allure 3: carry the JSONL file forward so the next run can restore it
-        if [ -f ".allure/allure-history.jsonl" ]; then
-          mkdir -p "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure"
-          cp .allure/allure-history.jsonl \
-            "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure/allure-history.jsonl"
-        fi
 
     - name: Publish report to GitHub Pages
       if: ${{ inputs.publish-report == 'true' }}
