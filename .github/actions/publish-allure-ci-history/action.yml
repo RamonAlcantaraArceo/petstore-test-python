@@ -98,17 +98,7 @@ runs:
           cp -R "${{ inputs.checkout-path }}/." "${{ inputs.history-workspace }}/"
         fi
 
-        # Classic history/: Allure 2 trend data lives inside the report subpath
-        HISTORY_DIR="${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/history"
-        if [ -d "${HISTORY_DIR}" ]; then
-          mkdir -p "${{ inputs.allure-results-path }}/history"
-          cp -R "${HISTORY_DIR}/." "${{ inputs.allure-results-path }}/history/"
-          echo "Classic history restored from ${HISTORY_DIR}"
-        else
-          echo "No classic history found at ${HISTORY_DIR}, starting fresh"
-        fi
-
-        # Allure 3: JSONL history file also lives inside the report subpath
+        # Allure 3: JSONL history file lives inside the report subpath
         SUBPATH="${{ inputs.report-subpath }}"
         HISTORY_JSONL="${{ inputs.checkout-path }}${SUBPATH:+/${SUBPATH}}/.allure/allure-history.jsonl"
         if [ -f "${HISTORY_JSONL}" ]; then
