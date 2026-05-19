@@ -1,1 +1,0 @@
-{"id":"a698ac59296d86bc0c0726819c75719c","fullName":"tests.api.test_login.TestLogin#test_login_returns_session_token","name":"Login response JSON contains a session token","status":"passed","testResultsByEnv":{"default":"b7527988909fb8b4ca3e807d447a49f1"}}
