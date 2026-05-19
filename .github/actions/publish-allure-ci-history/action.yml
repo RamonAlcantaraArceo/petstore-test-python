@@ -17,9 +17,9 @@ inputs:
     default: "gh-pages"
 
   report-subpath:
-    description: "Subdirectory inside published site for this report"
+    description: "Subdirectory inside published site for this report. Empty means root."
     required: false
-    default: "ci"
+    default: ""
 
   history-workspace:
     description: "Temporary workspace used to reconstruct the published site before deploy"
@@ -70,9 +70,12 @@ runs:
       run: |
         if [ -n "${{ inputs.report-url }}" ]; then
           VALUE="${{ inputs.report-url }}"
-        else
+        elif [ -n "${{ inputs.report-subpath }}" ]; then
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           VALUE="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPO_NAME}/${{ inputs.report-subpath }}"
+        else
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          VALUE="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPO_NAME}"
         fi
 
         echo "value=${VALUE}" >> "$GITHUB_OUTPUT"
