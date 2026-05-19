@@ -121,7 +121,6 @@ runs:
         fi
 
         allure generate "${{ inputs.allure-results-path }}" \
-          --clean \
           --output "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}" \
           $CONFIG_ARG \
           --history-limit ${{ inputs.history-limit }}
