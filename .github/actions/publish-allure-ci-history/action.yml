@@ -119,6 +119,14 @@ runs:
         CONFIG_ARG=""
         if [ -n "${{ inputs.allure-config }}" ] && [ -f "${{ inputs.allure-config }}" ]; then
           CONFIG_ARG="--config ${{ inputs.allure-config }}"
+          echo "Using Allure config: ${{ inputs.allure-config }}"
+        else
+          echo "No allure-config supplied or file not found — relying on auto-discovery (allurerc.yml in CWD)"
+          if [ -f "allurerc.yml" ]; then
+            echo "Auto-discovered allurerc.yml in CWD — historyPath will be applied"
+          else
+            echo "::warning title=Allure History::No allurerc.yml found in CWD and no allure-config input set. History (JSONL) will NOT be written — add allurerc.yml with historyPath to the calling repo."
+          fi
         fi
 
         allure generate "${{ inputs.allure-results-path }}" \
@@ -130,13 +138,16 @@ runs:
       shell: bash
       run: |
         # Copy the JSONL written by allure generate into the report subpath so peaceiris publishes it.
+        echo "Checking for .allure/allure-history.jsonl after generate..."
         if [ -f ".allure/allure-history.jsonl" ]; then
+          LINES=$(wc -l < .allure/allure-history.jsonl)
+          echo "Found .allure/allure-history.jsonl (${LINES} run(s) recorded)"
           mkdir -p "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure"
           cp .allure/allure-history.jsonl \
             "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure/allure-history.jsonl"
-          echo "Allure 3 JSONL persisted ($(wc -l < .allure/allure-history.jsonl) runs recorded)"
+          echo "Allure 3 JSONL persisted to ${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/.allure/allure-history.jsonl"
         else
-          echo "No .allure/allure-history.jsonl found after generate — history will not be persisted"
+          echo "::error title=Allure History::No .allure/allure-history.jsonl found after generate — history was not written. Ensure the calling repo has allurerc.yml with historyPath set."
         fi
 
     - name: Publish report to GitHub Pages
