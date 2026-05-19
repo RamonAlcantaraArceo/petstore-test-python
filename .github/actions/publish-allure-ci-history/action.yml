@@ -98,15 +98,25 @@ runs:
           cp -R "${{ inputs.checkout-path }}/." "${{ inputs.history-workspace }}/"
         fi
 
-        if [ -d "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/history" ]; then
+        # Classic history/: Allure 2 trend data lives inside the report subpath
+        HISTORY_DIR="${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/history"
+        if [ -d "${HISTORY_DIR}" ]; then
           mkdir -p "${{ inputs.allure-results-path }}/history"
-          cp -R "${{ inputs.history-workspace }}/${{ inputs.report-subpath }}/history/." "${{ inputs.allure-results-path }}/history/"
+          cp -R "${HISTORY_DIR}/." "${{ inputs.allure-results-path }}/history/"
+          echo "Classic history restored from ${HISTORY_DIR}"
+        else
+          echo "No classic history found at ${HISTORY_DIR}, starting fresh"
         fi
 
-        # Allure 3: restore JSONL history file for trend continuity
-        if [ -f "${{ inputs.checkout-path }}/.allure/allure-history.jsonl" ]; then
+        # Allure 3: JSONL history file also lives inside the report subpath
+        SUBPATH="${{ inputs.report-subpath }}"
+        HISTORY_JSONL="${{ inputs.checkout-path }}${SUBPATH:+/${SUBPATH}}/.allure/allure-history.jsonl"
+        if [ -f "${HISTORY_JSONL}" ]; then
           mkdir -p .allure
-          cp "${{ inputs.checkout-path }}/.allure/allure-history.jsonl" .allure/allure-history.jsonl
+          cp "${HISTORY_JSONL}" .allure/allure-history.jsonl
+          echo "Allure 3 JSONL history restored from ${HISTORY_JSONL}"
+        else
+          echo "No Allure 3 JSONL history found at ${HISTORY_JSONL}, starting fresh"
         fi
 
     - name: Build Allure report with history
