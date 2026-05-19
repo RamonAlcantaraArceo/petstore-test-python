@@ -111,7 +111,7 @@ jobs:
           EOF
 
       - name: Publish Allure report with history
-        uses: ./.github/actions/publish-allure-ci-history
+        uses: RamonAlcantaraArceo/petstore-test-python/.github/actions/publish-allure-ci-history@composite-allure
         with:
           github-token: ${{ secrets.GH_PAGES_TOKEN }}
           allure-results-path: allure-results
