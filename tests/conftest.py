@@ -227,3 +227,35 @@ def ui_client(browser: Any, ui_base_url: str) -> Generator[Any, None, None]:
     client = PetstoreUiClient(base_url=ui_base_url, driver=browser)
     yield client
     client.close()
+
+
+# ---------------------------------------------------------------------------
+# Database client fixtures
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture(scope="session")
+def db_dsn() -> str:
+    """PostgreSQL DSN for direct database access, read from the environment.
+
+    Raises:
+        ValueError: if PETSTORE_DB_DSN is not set.
+    """
+    dsn = os.getenv("PETSTORE_DB_DSN")
+    if not dsn:
+        raise ValueError("PETSTORE_DB_DSN environment variable must be set")
+    return dsn
+
+
+@pytest.fixture(scope="session")
+def db_client(db_dsn: str) -> Generator[Any, None, None]:
+    """Provide a session-scoped :class:`~framework.db_client.PetstoreDbClient`.
+
+    A single database connection is reused across all tests in the session.
+    The connection is closed when the session ends.
+    """
+    from framework.db_client import PetstoreDbClient  # noqa: PLC0415
+
+    client = PetstoreDbClient(dsn=db_dsn)
+    yield client
+    client.close()

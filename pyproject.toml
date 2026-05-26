@@ -33,6 +33,11 @@ dev = [
     # Linting / formatting
     "ruff>=0.4.0",
     "black>=24.0.0",
+    # Database
+    "psycopg[binary]>=3.1.0",
+    "sqlalchemy>=2.0.0",
+    # ETL / data quality
+    "great-expectations>=1.4.0",
     # Pre-commit
     "pre-commit>=3.7.0",
     # Docs
@@ -57,6 +62,8 @@ markers = [
     "e2e: End-to-end tests covering full user journeys",
     "performance: Performance / benchmark tests (manual only, excluded from CI)",
     "slow: Tests that take a long time to run",
+    "db: Database layer tests asserting data directly against PostgreSQL",
+    "etl: ETL data-quality tests using Great Expectations",
 ]
 testpaths = ["tests"]
 asyncio_mode = "auto"

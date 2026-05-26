@@ -317,3 +317,103 @@ def assert_response(response: Any) -> ResponseAssertion:
         assert_response(resp).is_ok().json_has_key("id")
     """
     return ResponseAssertion(response)
+
+
+# ---------------------------------------------------------------------------
+# DB-record assertions
+# ---------------------------------------------------------------------------
+
+
+class DbRecordAssertion:
+    """Fluent assertions for a single database row returned as a dict.
+
+    Instantiate via :func:`assert_db_record` rather than directly.
+
+    Example
+    -------
+    ::
+
+        row = db_client.get_pet(pet_id)
+        assert_db_record(row).exists().field_equals("name", "Fido").field_in("status", ["available", "pending"])
+    """
+
+    def __init__(self, record: dict[str, Any] | None) -> None:
+        self._record = record
+
+    def exists(self) -> DbRecordAssertion:
+        """Assert the record was found in the database (is not ``None``)."""
+        assert self._record is not None, "Expected a DB record to exist, but got None"
+        return self
+
+    def is_deleted(self) -> DbRecordAssertion:
+        """Assert the record was *not* found (has been deleted)."""
+        assert self._record is None, (
+            f"Expected DB record to be deleted, but found: {self._record!r}"
+        )
+        return self
+
+    def field_equals(self, field: str, expected: Any) -> DbRecordAssertion:
+        """Assert ``record[field] == expected``."""
+        self.exists()
+        actual = self._record[field]  # type: ignore[index]
+        assert actual == expected, (
+            f"Expected DB record field {field!r} == {expected!r}, got {actual!r}"
+        )
+        return self
+
+    def field_not_equals(self, field: str, unexpected: Any) -> DbRecordAssertion:
+        """Assert ``record[field] != unexpected``."""
+        self.exists()
+        actual = self._record[field]  # type: ignore[index]
+        assert actual != unexpected, (
+            f"Expected DB record field {field!r} != {unexpected!r}, but it was equal"
+        )
+        return self
+
+    def field_is_not_none(self, field: str) -> DbRecordAssertion:
+        """Assert ``record[field]`` is not ``None``."""
+        self.exists()
+        actual = self._record[field]  # type: ignore[index]
+        assert actual is not None, (
+            f"Expected DB record field {field!r} to be non-None"
+        )
+        return self
+
+    def field_is_none(self, field: str) -> DbRecordAssertion:
+        """Assert ``record[field]`` is ``None``."""
+        self.exists()
+        actual = self._record[field]  # type: ignore[index]
+        assert actual is None, (
+            f"Expected DB record field {field!r} to be None, got {actual!r}"
+        )
+        return self
+
+    def field_in(self, field: str, allowed: list[Any]) -> DbRecordAssertion:
+        """Assert ``record[field]`` is one of the *allowed* values."""
+        self.exists()
+        actual = self._record[field]  # type: ignore[index]
+        assert actual in allowed, (
+            f"Expected DB record field {field!r} to be one of {allowed!r}, got {actual!r}"
+        )
+        return self
+
+    def has_field(self, field: str) -> DbRecordAssertion:
+        """Assert the record dict contains *field* as a key."""
+        self.exists()
+        assert field in self._record, (  # type: ignore[operator]
+            f"Expected DB record to have field {field!r}. Keys: {list(self._record)}"  # type: ignore[arg-type]
+        )
+        return self
+
+
+def assert_db_record(record: dict[str, Any] | None) -> DbRecordAssertion:
+    """Entry point for fluent DB record assertions.
+
+    Example
+    -------
+    ::
+
+        assert_db_record(db_client.get_pet(pet_id)).exists().field_equals("name", "Fido")
+        assert_db_record(db_client.get_pet(deleted_id)).is_deleted()
+    """
+    return DbRecordAssertion(record)
