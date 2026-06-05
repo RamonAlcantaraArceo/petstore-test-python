@@ -64,6 +64,8 @@ markers = [
     "slow: Tests that take a long time to run",
     "db: Database layer tests asserting data directly against PostgreSQL",
     "etl: ETL data-quality tests using Great Expectations",
+    "smoke: tbd",
+    "functional: tbd",
 ]
 testpaths = ["tests"]
 asyncio_mode = "auto"

@@ -250,6 +250,9 @@ class ResponseAssertion:
             400 <= actual < 500
         ), f"Expected HTTP 4xx client error, got {actual}. Body: {self._response.text[:200]}"
         return self
+    
+    def is_bad_request(self) -> ResponseAssertion:
+        return self.has_status(400)
 
     def is_unauthorized(self) -> ResponseAssertion:
         return self.has_status(401)

@@ -18,6 +18,7 @@ import pytest_asyncio
 from petstore_openapi_client import ApiClient, Configuration
 from petstore_openapi_client.api.pet_api import PetApi
 from petstore_openapi_client.api.user_api import UserApi
+from petstore_openapi_client.api.store_api import StoreApi
 from r3a_logger.logger import (
     initialize_logging,
 )
@@ -134,13 +135,17 @@ def new_user(
 ) -> Generator[tuple[dict[str, Any], dict[str, Any]], None, None]:
     """Create a user via the API and yield it; delete it after the test."""
     data = UserFactory.build(username="user1", password="password1")
-    created = api_client.create_user(
-        username=data["username"], password=data["password"]
-    )
+
+    try:
+        created = api_client.get_user(data["username"])
+    except Exception:
+        created = api_client.create_user(
+            username=data["username"], password=data["password"]
+        )
     yield data, created
     # Cleanup – ignore 404 in case the test itself deleted the user
     try:
-        api_client.delete_user(created["id"])
+        api_client.delete_user(created["username"])
     except Exception:
         pass
 
@@ -188,6 +193,13 @@ async def gen_user_api_client(
 ) -> AsyncGenerator[UserApi, None]:
     """Provide UserApi backed by the generated API client."""
     yield UserApi(api_client=gen_api_client)
+
+@pytest_asyncio.fixture
+async def gen_store_api_client(
+    gen_api_client: ApiClient,
+) -> AsyncGenerator[StoreApi, None]:
+    """Provide StoreApi backed by the generated API client."""
+    yield StoreApi(api_client=gen_api_client)
 
 
 # ---------------------------------------------------------------------------
