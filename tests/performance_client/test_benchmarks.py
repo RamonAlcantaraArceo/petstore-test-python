@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Generator
+import os
 
 import pytest
 from petstore_openapi_client import ApiClient, Configuration
@@ -42,7 +43,7 @@ def gen_pet_api_client_sync(
         runner.run(client.close())
         runner.close()
 
-
+@pytest.mark.skipif(os.getenv("CI", None) == "true", reason="Runs only in local environments due to performance test nature.")
 @pytest.mark.performance
 class TestApiPerformance:
     """Benchmark key API operations."""

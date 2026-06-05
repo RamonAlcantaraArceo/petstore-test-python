@@ -15,10 +15,11 @@ from typing import Any
 import allure
 import pytest
 import pytest_asyncio
+import requests
 from petstore_openapi_client import ApiClient, Configuration
 from petstore_openapi_client.api.pet_api import PetApi
-from petstore_openapi_client.api.user_api import UserApi
 from petstore_openapi_client.api.store_api import StoreApi
+from petstore_openapi_client.api.user_api import UserApi
 from r3a_logger.logger import (
     initialize_logging,
 )
@@ -103,28 +104,60 @@ def api_base_url() -> str:
     return os.getenv("PETSTORE_API_BASE_URL", "http://localhost:8000/api/v1")
 
 
-@pytest.fixture(scope="session")
-def api_key() -> str:
-    """API key for authenticated requests, read from the environment.
+def _extract_jwt_from_auth_response(payload: Any) -> str:
+    """Extract a JWT from the auth endpoint response payload."""
+    if isinstance(payload, str) and payload:
+        return payload
+    if isinstance(payload, dict):
+        for key in ("token", "access_token", "jwt"):
+            value = payload.get(key)
+            if isinstance(value, str) and value:
+                return value
+        nested_data = payload.get("data")
+        if isinstance(nested_data, dict):
+            for key in ("token", "access_token", "jwt"):
+                value = nested_data.get(key)
+                if isinstance(value, str) and value:
+                    return value
+    raise ValueError("Auth response does not contain a JWT token")
 
-    Raises:
-        ValueError: if PETSTORE_API_KEY is not set.
-    """
-    api_key = os.getenv("PETSTORE_API_KEY")
-    if not api_key:
-        raise ValueError("PETSTORE_API_KEY environment variable must be set")
-    return api_key
+
+@pytest.fixture(scope="session")
+def bypass_key() -> str | None:
+    """Optional rate-limit bypass key read from environment."""
+    return os.getenv("X_BYPASS_KEY") or os.getenv("X-Bypass-Key")
+
+
+@pytest.fixture(scope="session")
+def authorization_header(api_base_url: str) -> str:
+    """Resolve Authorization header from env or obtain one from /user/auth."""
+    raw_value = os.getenv("AUTHORIZATION") or os.getenv("PETSTORE_AUTHORIZATION")
+    if raw_value:
+        return raw_value if raw_value.startswith("Bearer ") else f"Bearer {raw_value}"
+
+    response = requests.post(
+        f"{api_base_url}/user/auth",
+        json={"username": "devuser"},
+        timeout=10,
+    )
+    response.raise_for_status()
+    token = _extract_jwt_from_auth_response(response.json())
+    return token if token.startswith("Bearer ") else f"Bearer {token}"
 
 
 @pytest.fixture
 def api_client(
-    api_base_url: str, api_key: str | None
+    api_base_url: str, authorization_header: str, bypass_key: str | None
 ) -> Generator[PetstoreApiClient, None, None]:
     """Provide a fresh :class:`PetstoreApiClient` for each test.
 
     The client is automatically closed after the test completes.
     """
-    client = PetstoreApiClient(base_url=api_base_url, api_key=api_key)
+    client = PetstoreApiClient(
+        base_url=api_base_url,
+        authorization=authorization_header,
+        bypass_key=bypass_key,
+    )
     yield client
     client.close()
 
@@ -167,17 +200,27 @@ def authenticated_api_client(
 
 
 @pytest.fixture
-def gen_client_configuration(api_key: str) -> Configuration:
+def gen_client_configuration(
+    authorization_header: str, bypass_key: str | None
+) -> Configuration:
     """Provide generated client configuration for integration tests."""
-    return Configuration(api_key={"APIKeyHeader": api_key})
+    api_keys: dict[str, str] = {"Authorization": authorization_header}
+    if bypass_key:
+        api_keys["X-Bypass-Key"] = bypass_key
+    return Configuration(api_key=api_keys)
 
 
 @pytest_asyncio.fixture
 async def gen_api_client(
     gen_client_configuration: Configuration,
+    authorization_header: str,
+    bypass_key: str | None,
 ) -> AsyncGenerator[ApiClient, None]:
     """Provide an async generated API client instance."""
     async with ApiClient(configuration=gen_client_configuration) as client:
+        if bypass_key:
+            client.set_default_header("X-Bypass-Key", bypass_key)
+        client.set_default_header("Authorization", authorization_header)
         yield client
 
 
@@ -193,6 +236,7 @@ async def gen_user_api_client(
 ) -> AsyncGenerator[UserApi, None]:
     """Provide UserApi backed by the generated API client."""
     yield UserApi(api_client=gen_api_client)
+
 
 @pytest_asyncio.fixture
 async def gen_store_api_client(

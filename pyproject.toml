@@ -8,6 +8,8 @@ license = { text = "MIT" }
 authors = [{ name = "petstore-test-python contributors" }]
 dependencies = [
     "petstore-openapi-client-pydantic",
+    "pytest-dotenv>=0.5.2",
+    "pytest-xdist>=3.8.0",
     "r3a-minikit @ https://github.com/RamonAlcantaraArceo/r3a-minikit/releases/download/v0.0.2/r3a_minikit-0.0.2-py3-none-any.whl",
 ]
 
@@ -69,6 +71,8 @@ markers = [
 ]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+
+env_files = ".env.test"
 
 # ---------------------------------------------------------------------------
 # Coverage

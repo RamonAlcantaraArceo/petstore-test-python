@@ -49,6 +49,8 @@ class PetstoreApiClient:
         base_url: str = DEFAULT_BASE_URL,
         timeout: int = DEFAULT_TIMEOUT,
         api_key: str | None = None,
+        authorization: str | None = None,
+        bypass_key: str | None = None,
     ) -> None:
         self._base_url = base_url.rstrip("/")
         self._timeout = timeout
@@ -56,6 +58,10 @@ class PetstoreApiClient:
         self._session.headers.update({"Content-Type": "application/json"})
         if api_key:
             self._session.headers.update({"X-API-Key": api_key})
+        if authorization:
+            self._session.headers.update({"Authorization": authorization})
+        if bypass_key:
+            self._session.headers.update({"X-Bypass-Key": bypass_key})
         self._logged_in = False
         self._auth_token: str | None = None
 
@@ -273,6 +279,47 @@ class PetstoreApiClient:
         """Delete a user by username."""
         response = self._request("DELETE", f"/user/{username}")
         response.raise_for_status()
+
+    # ------------------------------------------------------------------
+    # Store / Orders
+    # ------------------------------------------------------------------
+
+    def place_order(
+        self,
+        pet_id: int,
+        quantity: int = 1,
+        status: str = "placed",
+        complete: bool = False,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Create a new order for a pet."""
+        payload: dict[str, Any] = {
+            "pet_id": pet_id,
+            "quantity": quantity,
+            "status": status,
+            "complete": complete,
+            **kwargs,
+        }
+        response = self._request("POST", "/store/order", json=payload)
+        response.raise_for_status()
+        return dict(response.json())
+
+    def get_order(self, order_id: int) -> dict[str, Any]:
+        """Retrieve a single order by id."""
+        response = self._request("GET", f"/store/order/{order_id}")
+        response.raise_for_status()
+        return dict(response.json())
+
+    def delete_order(self, order_id: int) -> None:
+        """Delete an order by id."""
+        response = self._request("DELETE", f"/store/order/{order_id}")
+        response.raise_for_status()
+
+    def get_inventory(self) -> dict[str, int]:
+        """Retrieve inventory counts grouped by pet status."""
+        response = self._request("GET", "/store/inventory")
+        response.raise_for_status()
+        return dict(response.json())
 
     # ------------------------------------------------------------------
     # Raw request access (for advanced / negative tests)
