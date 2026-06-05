@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.atoms.input_pom import InputPOM
+from framework.poms.atoms.input_pom import InputPOM
 
 
 @pytest.mark.smoke

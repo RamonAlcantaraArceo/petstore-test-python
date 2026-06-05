@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.atoms.tabs_pom import TabsPOM
+from framework.poms.atoms.tabs_pom import TabsPOM
 
 
 @pytest.mark.smoke

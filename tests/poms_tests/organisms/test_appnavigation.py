@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.organisms.appnavigation_pom import AppnavigationPOM
+from framework.poms.organisms.appnavigation_pom import AppnavigationPOM
 
 
 @pytest.mark.smoke

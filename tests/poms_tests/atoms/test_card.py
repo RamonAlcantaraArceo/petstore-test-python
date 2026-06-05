@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.atoms.card_pom import CardPOM
+from framework.poms.atoms.card_pom import CardPOM
 
 
 @pytest.mark.smoke

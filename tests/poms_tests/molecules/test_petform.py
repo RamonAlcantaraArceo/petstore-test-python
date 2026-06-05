@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.petform_pom import PetformPOM
+from framework.poms.molecules.petform_pom import PetformPOM
 
 
 @pytest.mark.smoke

@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.petcard_pom import PetcardPOM
+from framework.poms.molecules.petcard_pom import PetcardPOM
 
 
 @pytest.mark.smoke

@@ -31,7 +31,7 @@ Usage against the application
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
-from poms.base_selenium import SeleniumBasePOM
+from framework.poms.base_selenium import SeleniumBasePOM
 
 
 class UserformPOM(SeleniumBasePOM):

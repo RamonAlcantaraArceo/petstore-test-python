@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.atoms.button_pom import ButtonPOM
+from framework.poms.atoms.button_pom import ButtonPOM
 
 
 @pytest.mark.smoke

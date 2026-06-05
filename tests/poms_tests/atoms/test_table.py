@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.atoms.table_pom import TablePOM
+from framework.poms.atoms.table_pom import TablePOM
 
 
 @pytest.mark.smoke

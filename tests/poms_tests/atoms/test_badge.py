@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.atoms.badge_pom import BadgePOM
+from framework.poms.atoms.badge_pom import BadgePOM
 
 
 @pytest.mark.smoke

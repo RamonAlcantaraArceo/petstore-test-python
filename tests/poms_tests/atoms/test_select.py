@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.atoms.select_pom import SelectPOM
+from framework.poms.atoms.select_pom import SelectPOM
 
 
 @pytest.mark.smoke

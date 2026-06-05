@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.views.pet_management_pom import PetManagementPOM
+from framework.poms.views.pet_management_pom import PetManagementPOM
 
 
 @pytest.mark.smoke

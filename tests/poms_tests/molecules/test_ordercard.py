@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.ordercard_pom import OrdercardPOM
+from framework.poms.molecules.ordercard_pom import OrdercardPOM
 
 
 @pytest.mark.smoke

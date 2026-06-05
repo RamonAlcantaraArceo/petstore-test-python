@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.loginform_pom import LoginformPOM
+from framework.poms.molecules.loginform_pom import LoginformPOM
 
 
 @pytest.mark.smoke

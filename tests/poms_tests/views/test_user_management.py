@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.views.user_management_pom import UserManagementPOM
+from framework.poms.views.user_management_pom import UserManagementPOM
 
 
 @pytest.mark.smoke

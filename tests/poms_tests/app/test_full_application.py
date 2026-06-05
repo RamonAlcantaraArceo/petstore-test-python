@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.app.full_application_pom import FullApplicationPOM
+from framework.poms.app.full_application_pom import FullApplicationPOM
 
 
 @pytest.mark.smoke

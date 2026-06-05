@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.userform_pom import UserformPOM
+from framework.poms.molecules.userform_pom import UserformPOM
 
 
 @pytest.mark.smoke

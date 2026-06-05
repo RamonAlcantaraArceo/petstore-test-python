@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.atoms.modal_pom import ModalPOM
+from framework.poms.atoms.modal_pom import ModalPOM
 
 
 @pytest.mark.smoke

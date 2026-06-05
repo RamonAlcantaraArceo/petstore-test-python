@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.statusfilter_pom import StatusfilterPOM
+from framework.poms.molecules.statusfilter_pom import StatusfilterPOM
 
 
 @pytest.mark.smoke

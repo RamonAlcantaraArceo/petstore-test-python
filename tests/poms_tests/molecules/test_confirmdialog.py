@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.confirmdialog_pom import ConfirmdialogPOM
+from framework.poms.molecules.confirmdialog_pom import ConfirmdialogPOM
 
 
 @pytest.mark.smoke

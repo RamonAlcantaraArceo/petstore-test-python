@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.usercard_pom import UsercardPOM
+from framework.poms.molecules.usercard_pom import UsercardPOM
 
 
 @pytest.mark.smoke

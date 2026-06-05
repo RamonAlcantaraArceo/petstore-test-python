@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.molecules.orderform_pom import OrderformPOM
+from framework.poms.molecules.orderform_pom import OrderformPOM
 
 
 @pytest.mark.smoke

@@ -1,7 +1,7 @@
 import pytest
 
 
-from poms.views.store_orders_pom import StoreOrdersPOM
+from framework.poms.views.store_orders_pom import StoreOrdersPOM
 
 
 @pytest.mark.smoke
