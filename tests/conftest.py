@@ -267,11 +267,21 @@ def browser(ui_base_url: str) -> Generator[Any, None, None]:
     Skips (does not fail) when the ``--no-ui`` flag is passed.
     """
     pytest.importorskip("selenium", reason="selenium is required for UI tests")
+    from selenium.common.exceptions import WebDriverException  # noqa: PLC0415
 
     from framework.ui_client import _build_chrome_driver  # noqa: PLC0415
 
-    headless = os.getenv("HEADLESS", "true").lower() not in ("0", "false", "no")
-    driver = _build_chrome_driver(headless=headless)
+    # headless = os.getenv("HEADLESS", "true").lower() not in ("0", "false", "no")
+    headless = False
+    try:
+        driver = _build_chrome_driver(headless=headless)
+    except WebDriverException as exc:
+        if "cannot find Chrome binary" in str(exc):
+            pytest.skip(
+                "Chrome browser binary is not available on this host. "
+                "Install Chrome/Chromium to run UI tests."
+            )
+        raise
     driver.implicitly_wait(0)  # rely on explicit waits in page objects
     yield driver
     driver.quit()

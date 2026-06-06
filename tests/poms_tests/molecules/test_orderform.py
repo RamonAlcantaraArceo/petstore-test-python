@@ -12,17 +12,17 @@ def test_orderform_pom_class_imports():
 def test_orderform_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(OrderformPOM, "SELECTOR")
-    assert (
-        OrderformPOM.SELECTOR
-    ), "SELECTOR is empty — run sbpom again with playwright installed"
+    assert OrderformPOM.SELECTOR, (
+        "SELECTOR is empty — run sbpom again with playwright installed"
+    )
 
 
 @pytest.mark.smoke
 def test_orderform_story_id_defined():
     assert hasattr(OrderformPOM, "STORY_ID")
-    assert (
-        OrderformPOM.STORY_ID
-    ), "STORY_ID is empty — no renderable story found for this component"
+    assert OrderformPOM.STORY_ID, (
+        "STORY_ID is empty — no renderable story found for this component"
+    )
 
 
 @pytest.mark.functional

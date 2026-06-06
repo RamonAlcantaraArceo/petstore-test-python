@@ -12,17 +12,17 @@ def test_table_pom_class_imports():
 def test_table_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(TablePOM, "SELECTOR")
-    assert (
-        TablePOM.SELECTOR
-    ), "SELECTOR is empty — run sbpom again with playwright installed"
+    assert TablePOM.SELECTOR, (
+        "SELECTOR is empty — run sbpom again with playwright installed"
+    )
 
 
 @pytest.mark.smoke
 def test_table_story_id_defined():
     assert hasattr(TablePOM, "STORY_ID")
-    assert (
-        TablePOM.STORY_ID
-    ), "STORY_ID is empty — no renderable story found for this component"
+    assert TablePOM.STORY_ID, (
+        "STORY_ID is empty — no renderable story found for this component"
+    )
 
 
 @pytest.mark.functional

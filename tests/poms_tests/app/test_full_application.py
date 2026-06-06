@@ -12,17 +12,17 @@ def test_full_application_pom_class_imports():
 def test_full_application_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(FullApplicationPOM, "SELECTOR")
-    assert (
-        FullApplicationPOM.SELECTOR
-    ), "SELECTOR is empty — run sbpom again with playwright installed"
+    assert FullApplicationPOM.SELECTOR, (
+        "SELECTOR is empty — run sbpom again with playwright installed"
+    )
 
 
 @pytest.mark.smoke
 def test_full_application_story_id_defined():
     assert hasattr(FullApplicationPOM, "STORY_ID")
-    assert (
-        FullApplicationPOM.STORY_ID
-    ), "STORY_ID is empty — no renderable story found for this component"
+    assert FullApplicationPOM.STORY_ID, (
+        "STORY_ID is empty — no renderable story found for this component"
+    )
 
 
 @pytest.mark.functional

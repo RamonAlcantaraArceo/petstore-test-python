@@ -4,9 +4,11 @@ import os
 from importlib import import_module
 from typing import Any
 
+from selenium.webdriver.remote.webelement import WebElement
+
 
 class SeleniumBasePOM:
-    PACKAGE_ROOT = "poms"
+    PACKAGE_ROOT = "framework.poms"
 
     def __init__(
         self,
@@ -25,7 +27,7 @@ class SeleniumBasePOM:
         self.dependencies = dependencies
 
     @staticmethod
-    def _resolve_child_pom_class(component_name: str):
+    def _resolve_child_pom_class(component_name: str) -> type | Any:
         module_stem = "".join(
             ("_" + ch.lower()) if ch.isupper() else ch for ch in component_name
         ).lstrip("_")
@@ -59,7 +61,7 @@ class SeleniumBasePOM:
             f"{self.storybook_url()}/iframe.html?id={story_id or self.STORY_ID}"
         )
 
-    def root(self):
+    def root(self) -> WebElement | list[WebElement]:
         if self._index is None:
             return self.driver.find_element("css selector", self._selector)
         return self.driver.find_elements("css selector", self._selector)[self._index]
@@ -67,7 +69,7 @@ class SeleniumBasePOM:
     def _scoped_selector(self, child_selector: str) -> str:
         return f"{self._selector} {child_selector}"
 
-    def _child_pom(self, component_name: str, child_selector: str):
+    def _child_pom(self, component_name: str, child_selector: str) -> Any:
         child_cls = self._resolve_child_pom_class(component_name)
         scoped = self._scoped_selector(child_selector)
         try:
@@ -77,7 +79,7 @@ class SeleniumBasePOM:
             child.SELECTOR = scoped
             return child
 
-    def _child_poms(self, component_name: str, child_selector: str):
+    def _child_poms(self, component_name: str, child_selector: str) -> list[Any]:
         child_cls = self._resolve_child_pom_class(component_name)
         scoped = self._scoped_selector(child_selector)
         count = len(self.driver.find_elements("css selector", scoped))

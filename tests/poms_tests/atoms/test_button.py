@@ -12,17 +12,17 @@ def test_button_pom_class_imports():
 def test_button_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(ButtonPOM, "SELECTOR")
-    assert (
-        ButtonPOM.SELECTOR
-    ), "SELECTOR is empty — run sbpom again with playwright installed"
+    assert ButtonPOM.SELECTOR, (
+        "SELECTOR is empty — run sbpom again with playwright installed"
+    )
 
 
 @pytest.mark.smoke
 def test_button_story_id_defined():
     assert hasattr(ButtonPOM, "STORY_ID")
-    assert (
-        ButtonPOM.STORY_ID
-    ), "STORY_ID is empty — no renderable story found for this component"
+    assert ButtonPOM.STORY_ID, (
+        "STORY_ID is empty — no renderable story found for this component"
+    )
 
 
 @pytest.mark.functional

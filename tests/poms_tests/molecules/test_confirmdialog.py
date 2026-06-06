@@ -12,17 +12,17 @@ def test_confirmdialog_pom_class_imports():
 def test_confirmdialog_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(ConfirmdialogPOM, "SELECTOR")
-    assert (
-        ConfirmdialogPOM.SELECTOR
-    ), "SELECTOR is empty — run sbpom again with playwright installed"
+    assert ConfirmdialogPOM.SELECTOR, (
+        "SELECTOR is empty — run sbpom again with playwright installed"
+    )
 
 
 @pytest.mark.smoke
 def test_confirmdialog_story_id_defined():
     assert hasattr(ConfirmdialogPOM, "STORY_ID")
-    assert (
-        ConfirmdialogPOM.STORY_ID
-    ), "STORY_ID is empty — no renderable story found for this component"
+    assert ConfirmdialogPOM.STORY_ID, (
+        "STORY_ID is empty — no renderable story found for this component"
+    )
 
 
 @pytest.mark.functional

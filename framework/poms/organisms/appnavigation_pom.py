@@ -53,7 +53,13 @@ class AppnavigationPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def secondary_button(self):
+    def primary_button(self) -> SeleniumBasePOM:
+        """Single Button inside Appnavigation.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='primary']"
+        )
+
+    def secondary_button(self) -> SeleniumBasePOM:
         """Single Button inside Appnavigation.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='secondary']"

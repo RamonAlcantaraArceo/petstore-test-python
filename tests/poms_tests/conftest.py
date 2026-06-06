@@ -42,7 +42,7 @@ def driver():
     from selenium.webdriver.chrome.options import Options
 
     options = Options()
-    options.add_argument("--headless=new")  # modern headless mode
+    # options.add_argument("--headless=new")  # modern headless mode
     options.add_argument("--disable-gpu")  # optional, good for CI
     options.add_argument("--no-sandbox")  # optional, for Docker
 
@@ -138,9 +138,9 @@ def pom_interaction_helper():
         @staticmethod
         def assert_input_value(element, expected_value: str):
             actual_value = element.get_attribute("value")
-            assert (
-                actual_value == expected_value
-            ), f"Expected '{expected_value}' but got '{actual_value}'"
+            assert actual_value == expected_value, (
+                f"Expected '{expected_value}' but got '{actual_value}'"
+            )
             return True
 
     return InteractionHelper()

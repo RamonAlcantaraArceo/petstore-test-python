@@ -12,17 +12,17 @@ def test_statusfilter_pom_class_imports():
 def test_statusfilter_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(StatusfilterPOM, "SELECTOR")
-    assert (
-        StatusfilterPOM.SELECTOR
-    ), "SELECTOR is empty — run sbpom again with playwright installed"
+    assert StatusfilterPOM.SELECTOR, (
+        "SELECTOR is empty — run sbpom again with playwright installed"
+    )
 
 
 @pytest.mark.smoke
 def test_statusfilter_story_id_defined():
     assert hasattr(StatusfilterPOM, "STORY_ID")
-    assert (
-        StatusfilterPOM.STORY_ID
-    ), "STORY_ID is empty — no renderable story found for this component"
+    assert StatusfilterPOM.STORY_ID, (
+        "STORY_ID is empty — no renderable story found for this component"
+    )
 
 
 @pytest.mark.functional
