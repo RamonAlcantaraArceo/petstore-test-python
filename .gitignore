@@ -63,3 +63,5 @@ site/
 .logs/
 logs
 tests/poms_tests/screenshots/
+
+.gx_context/

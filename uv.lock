@@ -1535,6 +1535,7 @@ dev = [
     { name = "factory-boy", specifier = ">=3.3.0" },
     { name = "faker", specifier = ">=24.0.0" },
     { name = "great-expectations", specifier = ">=1.4.0" },
+    { name = "great-expectations", extras = ["cli"] },
     { name = "mkdocs", specifier = ">=1.6.0" },
     { name = "mkdocs-material", specifier = ">=9.5.0" },
     { name = "mkdocstrings", extras = ["python"], specifier = ">=0.25.0" },

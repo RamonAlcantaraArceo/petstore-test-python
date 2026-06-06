@@ -11,6 +11,15 @@ from typing import Any
 import allure
 import great_expectations as gx
 import pytest
+from great_expectations.checkpoint.checkpoint import Checkpoint
+from great_expectations.core.run_identifier import RunIdentifier
+from great_expectations.core.validation_definition import ValidationDefinition
+
+from tests.etl.gx_helpers import (
+    assert_checkpoint_result_steps,
+    get_or_create_batch_definition,
+    get_or_create_query_asset,
+)
 
 
 @allure.feature("ETL – users table")
@@ -19,62 +28,58 @@ import pytest
 class TestGxUsers:
     """Great Expectations validations for the ``users`` table."""
 
-    @allure.title("users table – id column is never null")
-    def test_users_id_not_null(self, gx_context: Any) -> None:
+    @allure.title("users table – schema and domain quality checks")
+    def test_users_table_quality(
+        self, gx_context: Any, ge_run_id: RunIdentifier
+    ) -> None:
         ds = gx_context.data_sources.get("petstore_postgres")
-        asset = ds.add_table_asset(name="users_id_check", table_name="users")
-        batch_def = asset.add_batch_definition_whole_table("whole_users_id")
-        suite = gx_context.suites.add(
-            gx.ExpectationSuite(name="users_id_suite")
+        asset = get_or_create_query_asset(
+            ds,
+            name="users_quality_check",
+            query="SELECT id, username, email FROM users",
         )
+        batch_def = get_or_create_batch_definition(asset, name="whole_users_quality")
+        suite = gx_context.suites.add_or_update(
+            gx.ExpectationSuite(name="users_quality_suite")
+        )
+        suite.expectations = []
         suite.add_expectation(
             gx.expectations.ExpectColumnValuesToNotBeNull(column="id")
         )
-        batch = batch_def.get_batch()
-        result = batch.validate(suite)
-        assert result.success, result.describe()
-
-    @allure.title("users table – username column is never null")
-    def test_users_username_not_null(self, gx_context: Any) -> None:
-        ds = gx_context.data_sources.get("petstore_postgres")
-        asset = ds.add_table_asset(name="users_username_check", table_name="users")
-        batch_def = asset.add_batch_definition_whole_table("whole_users_username")
-        suite = gx_context.suites.add(
-            gx.ExpectationSuite(name="users_username_suite")
-        )
         suite.add_expectation(
-            gx.expectations.ExpectColumnValuesToNotBeNull(column="username")
-        )
-        batch = batch_def.get_batch()
-        result = batch.validate(suite)
-        assert result.success, result.describe()
-
-    @allure.title("users table – email column is never null")
-    def test_users_email_not_null(self, gx_context: Any) -> None:
-        ds = gx_context.data_sources.get("petstore_postgres")
-        asset = ds.add_table_asset(name="users_email_check", table_name="users")
-        batch_def = asset.add_batch_definition_whole_table("whole_users_email")
-        suite = gx_context.suites.add(
-            gx.ExpectationSuite(name="users_email_suite")
+            gx.expectations.core.ExpectColumnValuesToNotBeNull(column="username")
         )
         suite.add_expectation(
             gx.expectations.ExpectColumnValuesToNotBeNull(column="email")
         )
-        batch = batch_def.get_batch()
-        result = batch.validate(suite)
-        assert result.success, result.describe()
-
-    @allure.title("users table – username values are unique")
-    def test_users_username_unique(self, gx_context: Any) -> None:
-        ds = gx_context.data_sources.get("petstore_postgres")
-        asset = ds.add_table_asset(name="users_unique_check", table_name="users")
-        batch_def = asset.add_batch_definition_whole_table("whole_users_unique")
-        suite = gx_context.suites.add(
-            gx.ExpectationSuite(name="users_unique_suite")
+        suite.add_expectation(
+            gx.expectations.ExpectColumnValueLengthsToBeBetween(
+                column="username",
+                min_value=3,
+                max_value=64,
+            )
+        )
+        suite.add_expectation(
+            gx.expectations.ExpectColumnValuesToMatchRegex(
+                column="email",
+                regex=r"^[^@]+@[^@]+\.[^@]+$",
+            )
         )
         suite.add_expectation(
             gx.expectations.ExpectColumnValuesToBeUnique(column="username")
         )
-        batch = batch_def.get_batch()
-        result = batch.validate(suite)
-        assert result.success, result.describe()
+        validation = gx_context.validation_definitions.add_or_update(
+            ValidationDefinition(
+                name="users_quality_validation",
+                data=batch_def,
+                suite=suite,
+            )
+        )
+        checkpoint = gx_context.checkpoints.add_or_update(
+            Checkpoint(
+                name="users_quality_checkpoint",
+                validation_definitions=[validation],
+            )
+        )
+        checkpoint_result = checkpoint.run(run_id=ge_run_id)
+        assert_checkpoint_result_steps(checkpoint_result)

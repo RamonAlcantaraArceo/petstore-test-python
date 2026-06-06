@@ -11,6 +11,15 @@ from typing import Any
 import allure
 import great_expectations as gx
 import pytest
+from great_expectations.checkpoint.checkpoint import Checkpoint
+from great_expectations.core.run_identifier import RunIdentifier
+from great_expectations.core.validation_definition import ValidationDefinition
+
+from tests.etl.gx_helpers import (
+    assert_checkpoint_result_steps,
+    get_or_create_batch_definition,
+    get_or_create_query_asset,
+)
 
 
 @allure.feature("ETL – orders table")
@@ -19,28 +28,39 @@ import pytest
 class TestGxOrders:
     """Great Expectations validations for the ``orders`` table."""
 
-    @allure.title("orders table – id column is never null")
-    def test_orders_id_not_null(self, gx_context: Any) -> None:
+    @allure.title("orders table – schema and domain quality checks")
+    def test_orders_table_quality(
+        self, gx_context: Any, ge_run_id: RunIdentifier
+    ) -> None:
         ds = gx_context.data_sources.get("petstore_postgres")
-        asset = ds.add_table_asset(name="orders_id_check", table_name="orders")
-        batch_def = asset.add_batch_definition_whole_table("whole_orders_id")
-        suite = gx_context.suites.add(
-            gx.ExpectationSuite(name="orders_id_suite")
+        asset = get_or_create_query_asset(
+            ds,
+            name="orders_quality_check",
+            query="SELECT id, quantity, status::text AS status FROM orders",
         )
+        batch_def = get_or_create_batch_definition(asset, name="whole_orders_quality")
+        suite = gx_context.suites.add_or_update(
+            gx.ExpectationSuite(name="orders_quality_suite")
+        )
+        suite.expectations = []
         suite.add_expectation(
             gx.expectations.ExpectColumnValuesToNotBeNull(column="id")
         )
-        batch = batch_def.get_batch()
-        result = batch.validate(suite)
-        assert result.success, result.describe()
-
-    @allure.title("orders table – status is one of allowed values")
-    def test_orders_status_valid_values(self, gx_context: Any) -> None:
-        ds = gx_context.data_sources.get("petstore_postgres")
-        asset = ds.add_table_asset(name="orders_status_check", table_name="orders")
-        batch_def = asset.add_batch_definition_whole_table("whole_orders_status")
-        suite = gx_context.suites.add(
-            gx.ExpectationSuite(name="orders_status_suite")
+        suite.add_expectation(
+            gx.expectations.ExpectColumnValuesToBeBetween(column="id", min_value=1)
+        )
+        suite.add_expectation(
+            gx.expectations.ExpectColumnValuesToNotBeNull(column="quantity")
+        )
+        suite.add_expectation(
+            gx.expectations.ExpectColumnValuesToNotBeNull(column="status")
+        )
+        suite.add_expectation(gx.expectations.ExpectColumnValuesToBeUnique(column="id"))
+        suite.add_expectation(
+            gx.expectations.ExpectColumnValuesToBeBetween(
+                column="quantity",
+                min_value=1,
+            )
         )
         suite.add_expectation(
             gx.expectations.ExpectColumnValuesToBeInSet(
@@ -48,39 +68,18 @@ class TestGxOrders:
                 value_set=["placed", "approved", "delivered"],
             )
         )
-        batch = batch_def.get_batch()
-        result = batch.validate(suite)
-        assert result.success, result.describe()
-
-    @allure.title("orders table – quantity is a positive integer")
-    def test_orders_quantity_positive(self, gx_context: Any) -> None:
-        ds = gx_context.data_sources.get("petstore_postgres")
-        asset = ds.add_table_asset(name="orders_qty_check", table_name="orders")
-        batch_def = asset.add_batch_definition_whole_table("whole_orders_qty")
-        suite = gx_context.suites.add(
-            gx.ExpectationSuite(name="orders_qty_suite")
-        )
-        suite.add_expectation(
-            gx.expectations.ExpectColumnValuesToBeBetween(
-                column="quantity",
-                min_value=1,
+        validation = gx_context.validation_definitions.add_or_update(
+            ValidationDefinition(
+                name="orders_quality_validation",
+                data=batch_def,
+                suite=suite,
             )
         )
-        batch = batch_def.get_batch()
-        result = batch.validate(suite)
-        assert result.success, result.describe()
-
-    @allure.title("orders table – id values are unique")
-    def test_orders_id_unique(self, gx_context: Any) -> None:
-        ds = gx_context.data_sources.get("petstore_postgres")
-        asset = ds.add_table_asset(name="orders_unique_check", table_name="orders")
-        batch_def = asset.add_batch_definition_whole_table("whole_orders_unique")
-        suite = gx_context.suites.add(
-            gx.ExpectationSuite(name="orders_unique_suite")
+        checkpoint = gx_context.checkpoints.add_or_update(
+            Checkpoint(
+                name="orders_quality_checkpoint",
+                validation_definitions=[validation],
+            )
         )
-        suite.add_expectation(
-            gx.expectations.ExpectColumnValuesToBeUnique(column="id")
-        )
-        batch = batch_def.get_batch()
-        result = batch.validate(suite)
-        assert result.success, result.describe()
+        checkpoint_result = checkpoint.run(run_id=ge_run_id)
+        assert_checkpoint_result_steps(checkpoint_result)

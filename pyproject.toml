@@ -40,6 +40,7 @@ dev = [
     "sqlalchemy>=2.0.0",
     # ETL / data quality
     "great-expectations>=1.4.0",
+    "great-expectations[cli]",
     # Pre-commit
     "pre-commit>=3.7.0",
     # Docs
