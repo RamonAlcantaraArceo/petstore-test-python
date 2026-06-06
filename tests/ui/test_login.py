@@ -35,7 +35,7 @@ scenario_definition_only = pytest.mark.skip(
 class TestSignInSignOutBddScenarios:
     """Scenario definitions for login/logout user journeys."""
 
-    # @skip_if_no_ui
+    @skip_if_no_ui
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.tag("ui", "auth", "bdd", "happy-path")
     @allure.title("Sign In with valid credentials")
@@ -67,7 +67,7 @@ class TestSignInSignOutBddScenarios:
             assert ui_client.login_page.is_logged_in()
 
         with allure.step("And the Sign In form is no longer shown"):
-            assert not ui_client.login_page._is_login_form_visible()
+            assert ui_client.login_page._is_login_form_absent()
 
     @skip_if_no_ui
     @scenario_definition_only
@@ -76,16 +76,16 @@ class TestSignInSignOutBddScenarios:
     @allure.title("Sign In with invalid password is rejected")
     def test_sign_in_with_invalid_password_is_rejected(self) -> None:
         """Authentication should fail with invalid credentials.
-
-        Instructions:
-            Given the Petstore application is open at /petstore
-            And the Sign In form is visible
-            When the user enters username "admin"
-            And enters password "invalid-secret"
-            And submits the Sign In form
-            Then an authentication error message is displayed
-            And the Sign In form remains visible
-            And the user does not see the authenticated navigation
+        d
+                Instructions:
+                    Given the Petstore application is open at /petstore
+                    And the Sign In form is visible
+                    When the user enters username "admin"
+                    And enters password "invalid-secret"
+                    And submits the Sign In form
+                    Then an authentication error message is displayed
+                    And the Sign In form remains visible
+                    And the user does not see the authenticated navigation
         """
 
     @skip_if_no_ui

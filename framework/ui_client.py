@@ -19,7 +19,6 @@ Example
 from __future__ import annotations
 
 import logging
-import os
 from typing import Any
 
 from selenium import webdriver
@@ -34,14 +33,11 @@ try:
 except ImportError:
     _WDM_AVAILABLE = False
 
+from framework.config import get_ui_base_url
 from framework.interfaces import PetstoreClientProtocol
 from framework.pages.login_page import LoginPage
 
 logger = logging.getLogger(__name__)
-
-DEFAULT_UI_BASE_URL = os.getenv(
-    "PETSTORE_UI_BASE_URL", "https://the-internet.herokuapp.com"
-)
 
 
 def _build_chrome_driver(headless: bool = True) -> webdriver.Chrome:
@@ -87,7 +83,7 @@ class PetstoreUiClient(PetstoreClientProtocol):
 
     def __init__(
         self,
-        base_url: str = DEFAULT_UI_BASE_URL,
+        base_url: str | None = None,
         headless: bool = True,
         driver: webdriver.Remote | None = None,
     ) -> None:
@@ -98,7 +94,8 @@ class PetstoreUiClient(PetstoreClientProtocol):
             headless: Whether to run Chrome in headless mode.
             driver: Optional pre-configured WebDriver to reuse.
         """
-        self._base_url = base_url.rstrip("/")
+        resolved_base_url = base_url or get_ui_base_url()
+        self._base_url = resolved_base_url.rstrip("/")
         self._driver = driver or _build_chrome_driver(headless=headless)
         self._login_page = LoginPage(self._driver, base_url=self._base_url)
         self._logged_in = False
@@ -122,7 +119,9 @@ class PetstoreUiClient(PetstoreClientProtocol):
         Returns:
             Self, to allow method chaining.
         """
-        self._login_page.open().login(username, password)
+        if not self._login_page._is_login_form_visible():
+            self._login_page.open()
+        self._login_page.login(username, password)
         self._logged_in = self._login_page.is_logged_in()
         return self
 

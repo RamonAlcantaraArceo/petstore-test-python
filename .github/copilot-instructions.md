@@ -53,8 +53,9 @@ Never use `pip install` directly in this project.
 
 - All code must pass `ruff`, `black`, and `mypy` before merging.
 - Run `uv run pre-commit run --all-files` before opening a PR.
-- Type annotations are **required** on all framework code.
-- Test files may omit return type annotations for brevity.
+- All functions must include type hints for parameters and return values.
+- Avoid using `Any` unless it is a last resort and justified with an inline comment explaining why a precise type is not feasible.
+- All functions must include docstrings using Google style.
 
 ## CI/CD
 

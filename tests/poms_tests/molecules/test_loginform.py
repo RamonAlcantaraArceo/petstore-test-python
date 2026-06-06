@@ -1,4 +1,5 @@
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from framework.poms.molecules.loginform_pom import LoginformPOM
 
@@ -27,13 +28,13 @@ def test_loginform_story_id_defined():
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")
-def test_loginform_navigate_and_verify(driver, pom_interaction_helper):
+def test_loginform_navigate_and_verify(driver: WebDriver):
     """Verify Loginform POM can navigate to story and interact with the component."""
     pom = LoginformPOM(driver)
     pom.navigate_to_story()
 
     # Wait for root element to be visible (timeout 10s)
-    root_element = pom_interaction_helper.wait_for_visibility(pom, timeout=10)
+    root_element = pom.wait_for_visibility(timeout=10)
     assert root_element is not None, f"Root element not visible: {pom.SELECTOR}"
 
     # Form/Molecule-specific: verify child form inputs exist and are interactable

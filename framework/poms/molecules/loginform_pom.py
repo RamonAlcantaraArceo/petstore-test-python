@@ -54,15 +54,15 @@ class LoginformPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def username_input(self):
+    def username_input(self) -> SeleniumBasePOM:
         """Single Input inside Loginform.  Selector: [data-component='Input'][name='username'] (name)"""
         return self._child_pom("Input", "[data-component='Input'][name='username']")
 
-    def password_input(self):
+    def password_input(self) -> SeleniumBasePOM:
         """Single Input inside Loginform.  Selector: [data-component='Input'][name='password'] (name)"""
         return self._child_pom("Input", "[data-component='Input'][name='password']")
 
-    def primary_button(self):
+    def primary_button(self) -> SeleniumBasePOM:
         """Single Button inside Loginform.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='primary']"

@@ -5,12 +5,15 @@ Test files import POM classes using the configured package path, e.g.:
 
 import os
 from pathlib import Path
+from typing import Any
 
 import pytest
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+
+from framework.config import DEFAULT_STORYBOOK_BASE_URL
+from framework.poms.base_selenium import RootablePOM
 
 
 def pytest_addoption(parser):
@@ -23,7 +26,7 @@ def pytest_addoption(parser):
     parser.addini(
         "storybook_url",
         "Default Storybook URL for generated POM navigation",
-        default="http://localhost:6006",
+        default=DEFAULT_STORYBOOK_BASE_URL,
     )
 
 
@@ -54,7 +57,7 @@ def driver():
 
 
 @pytest.fixture
-def capture_screenshot(request, driver):
+def capture_screenshot(request: pytest.FixtureRequest, driver: Any | Any):
     """Fixture to capture a screenshot of the page at test level."""
     yield
     # Capture screenshot on test teardown
@@ -92,55 +95,103 @@ def wait_for_element():
 def pom_interaction_helper():
     """Fixture that returns a helper for common multi-step POM interactions."""
 
-    class InteractionHelper:
-        @staticmethod
-        def wait_for_visibility(pom, timeout: int = 10, raise_on_timeout: bool = True):
-            selector = getattr(pom, "_selector", pom.SELECTOR)
-            wait = WebDriverWait(pom.driver, timeout)
-            try:
-                return wait.until(
-                    EC.visibility_of_element_located((By.CSS_SELECTOR, selector))
-                )
-            except TimeoutException:
-                if raise_on_timeout:
-                    raise
-                return None
+    class POMInteractionHelper:
+        """Compatibility wrapper exposing POM interaction methods."""
 
         @staticmethod
-        def type_into(element, text: str):
-            element.clear()
-            element.send_keys(text)
-            return element
+        def wait_for_visibility(
+            pom: RootablePOM,
+            timeout: int = 10,
+            raise_on_timeout: bool = True,
+        ):
+            """Wait until the POM root element is visible.
 
-        @staticmethod
-        def click_element(element):
-            element.click()
-            return element
+            Args:
+                pom: POM instance containing root-level interactions.
+                timeout: Maximum wait time in seconds.
+                raise_on_timeout: Whether to raise on timeout.
 
-        @staticmethod
-        def select_option(select_element, option_text: str):
-            from selenium.webdriver.support.select import Select
-
-            select = Select(select_element)
-            select.select_by_visible_text(option_text)
-            return select_element
-
-        @staticmethod
-        def assert_element_visible(element):
-            assert element.is_displayed(), f"Element not visible: {element}"
-            return True
-
-        @staticmethod
-        def assert_element_enabled(element):
-            assert element.is_enabled(), f"Element not enabled: {element}"
-            return True
-
-        @staticmethod
-        def assert_input_value(element, expected_value: str):
-            actual_value = element.get_attribute("value")
-            assert actual_value == expected_value, (
-                f"Expected '{expected_value}' but got '{actual_value}'"
+            Returns:
+                The visible root element, or ``None`` on timeout when
+                ``raise_on_timeout`` is ``False``.
+            """
+            return pom.wait_for_visibility(
+                timeout=timeout, raise_on_timeout=raise_on_timeout
             )
-            return True
 
-    return InteractionHelper()
+        @staticmethod
+        def type_into(pom: RootablePOM, text: str):
+            """Clear and type text into the POM root element.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+                text: Text to enter.
+
+            Returns:
+                The root element after typing.
+            """
+            return pom.type_into(text)
+
+        @staticmethod
+        def click_element(pom: RootablePOM):
+            """Click the POM root element.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+
+            Returns:
+                The root element after click.
+            """
+            return pom.click_element()
+
+        @staticmethod
+        def select_option(pom: RootablePOM, option_text: str):
+            """Select an option in the POM root `<select>` by visible text.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+                option_text: Visible text of the option to select.
+
+            Returns:
+                The root select element after option selection.
+            """
+            return pom.select_option(option_text)
+
+        @staticmethod
+        def assert_element_visible(pom: RootablePOM) -> bool:
+            """Assert that the POM root element is visible.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+
+            Returns:
+                ``True`` when the assertion passes.
+            """
+            return pom.assert_element_visible()
+
+        @staticmethod
+        def assert_element_enabled(pom: RootablePOM) -> bool:
+            """Assert that the POM root element is enabled.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+
+            Returns:
+                ``True`` when the assertion passes.
+            """
+            return pom.assert_element_enabled()
+
+        @staticmethod
+        def assert_input_value(pom: RootablePOM, expected_value: str) -> bool:
+            """Assert that the POM root input has the expected value.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+                expected_value: Expected value of the element.
+
+            Returns:
+                ``True`` when the assertion passes.
+            """
+            return pom.assert_input_value(expected_value)
+
+    return POMInteractionHelper()

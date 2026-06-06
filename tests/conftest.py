@@ -24,6 +24,7 @@ from r3a_logger.logger import (
     initialize_logging,
 )
 
+from framework.config import get_api_base_url, get_ui_base_url
 from framework.factories import UserFactory
 
 # Call r3a_logger's initialize_logging with new signature
@@ -60,18 +61,8 @@ def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
         env_file.parent.mkdir(parents=True, exist_ok=True)
         with env_file.open("w") as f:
             f.write(f"Python.Version={platform.python_version()}\n")
-            f.write(
-                "API.Base.URL="
-                + os.getenv("PETSTORE_API_BASE_URL", "http://localhost:8000/api/v1")
-                + "\n"
-            )
-            f.write(
-                "UI.Base.URL="
-                + os.getenv(
-                    "PETSTORE_UI_BASE_URL", "https://the-internet.herokuapp.com"
-                )
-                + "\n"
-            )
+            f.write("API.Base.URL=" + get_api_base_url() + "\n")
+            f.write("UI.Base.URL=" + get_ui_base_url() + "\n")
 
 
 @pytest.hookimpl(hookwrapper=True)
@@ -103,7 +94,7 @@ def pytest_runtest_makereport(
 @pytest.fixture(scope="session")
 def api_base_url() -> str:
     """Base URL for the Petstore REST API, read from the environment."""
-    return os.getenv("PETSTORE_API_BASE_URL", "http://localhost:8000/api/v1")
+    return get_api_base_url()
 
 
 def _extract_jwt_from_auth_response(payload: Any) -> str:
@@ -256,7 +247,7 @@ async def gen_store_api_client(
 @pytest.fixture(scope="session")
 def ui_base_url() -> str:
     """Base URL for the Petstore web UI, read from the environment."""
-    return os.getenv("PETSTORE_UI_BASE_URL", "https://the-internet.herokuapp.com")
+    return get_ui_base_url()
 
 
 @pytest.fixture
