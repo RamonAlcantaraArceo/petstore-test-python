@@ -6,9 +6,9 @@ Dependencies     : none
 Selector         : [data-component='StoreOrdersView']
 Strategy used    : data-component
 Discovered children:
-  - Input ×1  →  [data-component='Input'][name='orderId']  [name]  key=order_id
-  - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
   - Button ×1  →  [data-component='Button'][data-variant='primary']  [data-variant]  key=primary
+  - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
+  - Input ×1  →  [data-component='Input'][name='orderId']  [name]  key=order_id
   - OrderCard ×1  →  [data-component='OrderCard'][data-variant='default']  [data-variant]  key=default
   - Table ×1  →  [data-component='Table']  [grouped]
 
@@ -35,6 +35,12 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class StoreOrdersPOM(SeleniumBasePOM):
     STORY_ID = "petstore-views-store-orders--with-inventory"
+    ALL_STORY_IDS = [
+        "petstore-views-store-orders--with-inventory",
+        "petstore-views-store-orders--read-only",
+        "petstore-views-store-orders--inventory-only",
+        "petstore-views-store-orders--empty-inventory",
+    ]
     SELECTOR = "[data-component='StoreOrdersView']"
 
     def __init__(
@@ -56,28 +62,28 @@ class StoreOrdersPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def order_id_input(self):
-        """Single Input inside StoreOrders.  Selector: [data-component='Input'][name='orderId'] (name)"""
-        return self._child_pom("Input", "[data-component='Input'][name='orderId']")
-
-    def secondary_button(self):
-        """Single Button inside StoreOrders.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
-        return self._child_pom(
-            "Button", "[data-component='Button'][data-variant='secondary']"
-        )
-
-    def primary_button(self):
+    def primary_button(self) -> SeleniumBasePOM:
         """Single Button inside StoreOrders.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='primary']"
         )
 
-    def default_ordercard(self):
-        """Single OrderCard inside StoreOrders.  Selector: [data-component='OrderCard'][data-variant='default'] (data-variant)"""
+    def secondary_button(self) -> SeleniumBasePOM:
+        """Single Button inside StoreOrders.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
         return self._child_pom(
-            "OrderCard", "[data-component='OrderCard'][data-variant='default']"
+            "Button", "[data-component='Button'][data-variant='secondary']"
         )
 
-    def table(self):
+    def order_id_input(self) -> SeleniumBasePOM:
+        """Single Input inside StoreOrders.  Selector: [data-component='Input'][name='orderId'] (name)"""
+        return self._child_pom("Input", "[data-component='Input'][name='orderId']")
+
+    def default_ordercard(self) -> SeleniumBasePOM:
+        """Single OrderCard inside StoreOrders.  Selector: [data-component='OrderCard'][data-variant='default'] (data-variant)"""
+        return self._child_pom(
+            "Ordercard", "[data-component='OrderCard'][data-variant='default']"
+        )
+
+    def table(self) -> SeleniumBasePOM:
         """Single Table inside StoreOrders.  Selector: [data-component='Table'] (grouped)"""
         return self._child_pom("Table", "[data-component='Table']")

@@ -6,9 +6,10 @@ Dependencies     : none
 Selector         : [data-component='LoginForm']
 Strategy used    : data-component
 Discovered children:
-  - Input ×1  →  [data-component='Input'][name='username']  [name]  key=username
-  - Input ×1  →  [data-component='Input'][name='password']  [name]  key=password
   - Button ×1  →  [data-component='Button'][data-variant='primary']  [data-variant]  key=primary
+  - FormAlert ×1  →  [data-component='FormAlert'][data-variant='error']  [data-variant]  key=error
+  - Input ×1  →  [data-component='Input'][name='password']  [name]  key=password
+  - Input ×1  →  [data-component='Input'][name='username']  [name]  key=username
 
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
@@ -59,22 +60,22 @@ class LoginformPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def username_input(self) -> SeleniumBasePOM:
-        """Single Input inside Loginform.  Selector: [data-component='Input'][name='username'] (name)"""
-        return self._child_pom("Input", "[data-component='Input'][name='username']")
-
-    def password_input(self) -> SeleniumBasePOM:
-        """Single Input inside Loginform.  Selector: [data-component='Input'][name='password'] (name)"""
-        return self._child_pom("Input", "[data-component='Input'][name='password']")
-
     def primary_button(self) -> SeleniumBasePOM:
         """Single Button inside Loginform.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='primary']"
         )
 
-    def form_alert(self) -> SeleniumBasePOM:
-        """Possible error alert when issues happen.  Selector: [data-component='FormAlert'][data-variant='error'] (data-variant)"""
+    def error_formalert(self) -> SeleniumBasePOM:
+        """Single FormAlert inside Loginform.  Selector: [data-component='FormAlert'][data-variant='error'] (data-variant)"""
         return self._child_pom(
-            "Input", "[data-component='FormAlert'][data-variant='error']"
+            "Formalert", "[data-component='FormAlert'][data-variant='error']"
         )
+
+    def password_input(self) -> SeleniumBasePOM:
+        """Single Input inside Loginform.  Selector: [data-component='Input'][name='password'] (name)"""
+        return self._child_pom("Input", "[data-component='Input'][name='password']")
+
+    def username_input(self) -> SeleniumBasePOM:
+        """Single Input inside Loginform.  Selector: [data-component='Input'][name='username'] (name)"""
+        return self._child_pom("Input", "[data-component='Input'][name='username']")

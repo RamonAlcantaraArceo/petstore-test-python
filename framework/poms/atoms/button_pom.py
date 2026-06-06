@@ -28,6 +28,22 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class ButtonPOM(SeleniumBasePOM):
     STORY_ID = "common-atoms-button--primary"
+    ALL_STORY_IDS = [
+        "common-atoms-button--primary",
+        "common-atoms-button--secondary",
+        "common-atoms-button--danger",
+        "common-atoms-button--small",
+        "common-atoms-button--medium",
+        "common-atoms-button--large",
+        "common-atoms-button--disabled",
+        "common-atoms-button--loading",
+        "common-atoms-button--all-variants",
+        "common-atoms-button--all-sizes",
+        "common-atoms-button--accessibility-showcase",
+        "common-atoms-button--internationalization-demo",
+        "common-atoms-button--full-width",
+        "common-atoms-button--all-variants-comparison",
+    ]
     SELECTOR = "[data-component='Button']"
 
     def __init__(

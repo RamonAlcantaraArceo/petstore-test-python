@@ -6,9 +6,10 @@ Dependencies     : none
 Selector         : [data-component='UserManagementView']
 Strategy used    : data-component
 Discovered children:
+  - Button ×1  →  [data-component='Button'][data-variant='primary']  [data-variant]  key=primary
+  - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
   - Input ×1  →  [data-component='Input'][name='username']  [name]  key=username
   - UserCard ×1  →  [data-component='UserCard'][data-variant='default']  [data-variant]  key=default
-  - Button ×1  →  [data-component='Button']  [grouped]
 
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
@@ -33,6 +34,12 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class UserManagementPOM(SeleniumBasePOM):
     STORY_ID = "petstore-views-user-management--with-user"
+    ALL_STORY_IDS = [
+        "petstore-views-user-management--with-user",
+        "petstore-views-user-management--read-only",
+        "petstore-views-user-management--no-user",
+        "petstore-views-user-management--accessibility-and-locale-showcase",
+    ]
     SELECTOR = "[data-component='UserManagementView']"
 
     def __init__(
@@ -54,16 +61,24 @@ class UserManagementPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def username_input(self):
+    def primary_button(self) -> SeleniumBasePOM:
+        """Single Button inside UserManagement.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='primary']"
+        )
+
+    def secondary_button(self) -> SeleniumBasePOM:
+        """Single Button inside UserManagement.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
+        )
+
+    def username_input(self) -> SeleniumBasePOM:
         """Single Input inside UserManagement.  Selector: [data-component='Input'][name='username'] (name)"""
         return self._child_pom("Input", "[data-component='Input'][name='username']")
 
-    def default_usercard(self):
+    def default_usercard(self) -> SeleniumBasePOM:
         """Single UserCard inside UserManagement.  Selector: [data-component='UserCard'][data-variant='default'] (data-variant)"""
         return self._child_pom(
-            "UserCard", "[data-component='UserCard'][data-variant='default']"
+            "Usercard", "[data-component='UserCard'][data-variant='default']"
         )
-
-    def button(self):
-        """Single Button inside UserManagement.  Selector: [data-component='Button'] (grouped)"""
-        return self._child_pom("Button", "[data-component='Button']")

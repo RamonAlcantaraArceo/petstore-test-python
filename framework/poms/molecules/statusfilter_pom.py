@@ -32,6 +32,10 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class StatusfilterPOM(SeleniumBasePOM):
     STORY_ID = "petstore-molecules-statusfilter--default"
+    ALL_STORY_IDS = [
+        "petstore-molecules-statusfilter--default",
+        "petstore-molecules-statusfilter--loading",
+    ]
     SELECTOR = "[data-component='StatusFilter']"
 
     def __init__(
@@ -53,12 +57,12 @@ class StatusfilterPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def secondary_button(self):
+    def secondary_button(self) -> SeleniumBasePOM:
         """Single Button inside Statusfilter.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='secondary']"
         )
 
-    def select(self):
+    def select(self) -> SeleniumBasePOM:
         """Single Select inside Statusfilter.  Selector: [data-component='Select'] (grouped)"""
         return self._child_pom("Select", "[data-component='Select']")

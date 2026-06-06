@@ -7,8 +7,10 @@ Selector         : [data-component='PetCard']
 Strategy used    : data-component
 Discovered children:
   - Badge ×1  →  [data-component='Badge'][data-variant='available']  [data-variant]  key=available
-  - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
+  - Badge ×1  →  [data-component='Badge'][data-variant='pending']  [data-variant]  key=pending
+  - Badge ×1  →  [data-component='Badge'][data-variant='sold']  [data-variant]  key=sold
   - Button ×1  →  [data-component='Button'][data-variant='danger']  [data-variant]  key=danger
+  - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
 
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
@@ -33,6 +35,12 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class PetcardPOM(SeleniumBasePOM):
     STORY_ID = "petstore-molecules-petcard--available"
+    ALL_STORY_IDS = [
+        "petstore-molecules-petcard--available",
+        "petstore-molecules-petcard--pending",
+        "petstore-molecules-petcard--sold",
+        "petstore-molecules-petcard--readonly",
+    ]
     SELECTOR = "[data-component='PetCard']"
 
     def __init__(
@@ -54,20 +62,30 @@ class PetcardPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def available_badge(self):
+    def available_badge(self) -> SeleniumBasePOM:
         """Single Badge inside Petcard.  Selector: [data-component='Badge'][data-variant='available'] (data-variant)"""
         return self._child_pom(
             "Badge", "[data-component='Badge'][data-variant='available']"
         )
 
-    def secondary_button(self):
-        """Single Button inside Petcard.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
+    def pending_badge(self) -> SeleniumBasePOM:
+        """Single Badge inside Petcard.  Selector: [data-component='Badge'][data-variant='pending'] (data-variant)"""
         return self._child_pom(
-            "Button", "[data-component='Button'][data-variant='secondary']"
+            "Badge", "[data-component='Badge'][data-variant='pending']"
         )
 
-    def danger_button(self):
+    def sold_badge(self) -> SeleniumBasePOM:
+        """Single Badge inside Petcard.  Selector: [data-component='Badge'][data-variant='sold'] (data-variant)"""
+        return self._child_pom("Badge", "[data-component='Badge'][data-variant='sold']")
+
+    def danger_button(self) -> SeleniumBasePOM:
         """Single Button inside Petcard.  Selector: [data-component='Button'][data-variant='danger'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='danger']"
+        )
+
+    def secondary_button(self) -> SeleniumBasePOM:
+        """Single Button inside Petcard.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
         )

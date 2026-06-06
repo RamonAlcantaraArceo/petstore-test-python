@@ -28,6 +28,11 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class SelectPOM(SeleniumBasePOM):
     STORY_ID = "common-atoms-select--default"
+    ALL_STORY_IDS = [
+        "common-atoms-select--default",
+        "common-atoms-select--disabled",
+        "common-atoms-select--with-options",
+    ]
     SELECTOR = "[data-component='Select']"
 
     def __init__(

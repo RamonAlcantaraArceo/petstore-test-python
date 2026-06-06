@@ -3,8 +3,8 @@
 Storybook title  : Common/Atoms/Badge
 Story IDs        : ['common-atoms-badge--default', 'common-atoms-badge--all-variants', 'common-atoms-badge--sizes']
 Dependencies     : none
-Selector         : #storybook-root > *:first-child
-Strategy used    : storybook-root
+Selector         : [data-component='Badge']
+Strategy used    : data-component
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
     driver.get(f"{STORYBOOK_URL}/iframe.html?id=common-atoms-badge--default")
@@ -28,7 +28,12 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class BadgePOM(SeleniumBasePOM):
     STORY_ID = "common-atoms-badge--default"
-    SELECTOR = "#storybook-root > *:first-child"
+    ALL_STORY_IDS = [
+        "common-atoms-badge--default",
+        "common-atoms-badge--all-variants",
+        "common-atoms-badge--sizes",
+    ]
+    SELECTOR = "[data-component='Badge']"
 
     def __init__(
         self,

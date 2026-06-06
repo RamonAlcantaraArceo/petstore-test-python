@@ -156,7 +156,7 @@ def test_loginform_with_error_story_shows_alert(driver: WebDriver) -> None:
         f"Root element not visible in error story: {error_story_id}"
     )
 
-    alert_element = pom.form_alert().wait_for_visibility(
+    alert_element = pom.error_formalert().wait_for_visibility(
         timeout=10,
         raise_on_timeout=False,
     )

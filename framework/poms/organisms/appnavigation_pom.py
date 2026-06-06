@@ -6,6 +6,7 @@ Dependencies     : none
 Selector         : [data-component='AppNavigation']
 Strategy used    : data-component
 Discovered children:
+  - Button ×1  →  [data-component='Button'][data-variant='primary']  [data-variant]  key=primary
   - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
   - Tabs ×1  →  [data-component='Tabs']  [grouped]
 
@@ -32,6 +33,12 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class AppnavigationPOM(SeleniumBasePOM):
     STORY_ID = "petstore-organisms-appnavigation--logged-in"
+    ALL_STORY_IDS = [
+        "petstore-organisms-appnavigation--logged-in",
+        "petstore-organisms-appnavigation--logged-out",
+        "petstore-organisms-appnavigation--orders-tab-active",
+        "petstore-organisms-appnavigation--users-tab-active",
+    ]
     SELECTOR = "[data-component='AppNavigation']"
 
     def __init__(
@@ -54,7 +61,7 @@ class AppnavigationPOM(SeleniumBasePOM):
     # ------------------------------------------------------------------
 
     def primary_button(self) -> SeleniumBasePOM:
-        """Single Button inside Appnavigation.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
+        """Single Button inside Appnavigation.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='primary']"
         )
@@ -65,6 +72,6 @@ class AppnavigationPOM(SeleniumBasePOM):
             "Button", "[data-component='Button'][data-variant='secondary']"
         )
 
-    def tabs(self):
+    def tabs(self) -> SeleniumBasePOM:
         """Single Tabs inside Appnavigation.  Selector: [data-component='Tabs'] (grouped)"""
         return self._child_pom("Tabs", "[data-component='Tabs']")

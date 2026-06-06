@@ -28,6 +28,10 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class TabsPOM(SeleniumBasePOM):
     STORY_ID = "common-atoms-tabs--keyboard-navigation"
+    ALL_STORY_IDS = [
+        "common-atoms-tabs--keyboard-navigation",
+        "common-atoms-tabs--three-tabs",
+    ]
     SELECTOR = "[data-component='Tabs']"
 
     def __init__(

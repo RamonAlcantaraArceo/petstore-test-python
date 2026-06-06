@@ -28,6 +28,29 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class InputPOM(SeleniumBasePOM):
     STORY_ID = "common-atoms-input--default"
+    ALL_STORY_IDS = [
+        "common-atoms-input--default",
+        "common-atoms-input--text-input",
+        "common-atoms-input--email-input",
+        "common-atoms-input--password-input",
+        "common-atoms-input--search-input",
+        "common-atoms-input--small",
+        "common-atoms-input--medium",
+        "common-atoms-input--large",
+        "common-atoms-input--success-state",
+        "common-atoms-input--warning-state",
+        "common-atoms-input--error-state",
+        "common-atoms-input--required",
+        "common-atoms-input--disabled",
+        "common-atoms-input--with-helper-text",
+        "common-atoms-input--full-width",
+        "common-atoms-input--all-sizes",
+        "common-atoms-input--all-validation-states",
+        "common-atoms-input--all-input-types",
+        "common-atoms-input--accessibility-showcase",
+        "common-atoms-input--internationalization-demo",
+        "common-atoms-input--form-example",
+    ]
     SELECTOR = "[data-component='Input']"
 
     def __init__(

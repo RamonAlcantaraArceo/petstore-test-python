@@ -32,6 +32,10 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class FullApplicationPOM(SeleniumBasePOM):
     STORY_ID = "petstore-app-full-application--default"
+    ALL_STORY_IDS = [
+        "petstore-app-full-application--default",
+        "petstore-app-full-application--chef-locale",
+    ]
     SELECTOR = "[data-component='PetstoreApp']"
 
     def __init__(
@@ -53,12 +57,12 @@ class FullApplicationPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def appnavigation(self):
+    def appnavigation(self) -> SeleniumBasePOM:
         """Single AppNavigation inside FullApplication.  Selector: [data-component='AppNavigation'] (grouped)"""
-        return self._child_pom("AppNavigation", "[data-component='AppNavigation']")
+        return self._child_pom("Appnavigation", "[data-component='AppNavigation']")
 
-    def petmanagementview(self):
+    def petmanagementview(self) -> SeleniumBasePOM:
         """Single PetManagementView inside FullApplication.  Selector: [data-component='PetManagementView'] (grouped)"""
         return self._child_pom(
-            "PetManagementView", "[data-component='PetManagementView']"
+            "Petmanagementview", "[data-component='PetManagementView']"
         )

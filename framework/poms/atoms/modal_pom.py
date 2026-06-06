@@ -28,6 +28,11 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class ModalPOM(SeleniumBasePOM):
     STORY_ID = "common-atoms-modal--open-closed"
+    ALL_STORY_IDS = [
+        "common-atoms-modal--open-closed",
+        "common-atoms-modal--sizes",
+        "common-atoms-modal--focus-trap",
+    ]
     SELECTOR = "[data-component='Button']"
 
     def __init__(

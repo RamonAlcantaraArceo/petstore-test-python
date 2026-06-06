@@ -6,10 +6,10 @@ Dependencies     : none
 Selector         : [data-component='OrderForm']
 Strategy used    : data-component
 Discovered children:
-  - Input ×1  →  [data-component='Input'][name='petId']  [name]  key=pet_id
-  - Input ×1  →  [data-component='Input'][name='quantity']  [name]  key=quantity
   - Button ×1  →  [data-component='Button'][data-variant='primary']  [data-variant]  key=primary
   - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
+  - Input ×1  →  [data-component='Input'][name='petId']  [name]  key=pet_id
+  - Input ×1  →  [data-component='Input'][name='quantity']  [name]  key=quantity
 
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
@@ -34,6 +34,10 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class OrderformPOM(SeleniumBasePOM):
     STORY_ID = "petstore-molecules-orderform--default"
+    ALL_STORY_IDS = [
+        "petstore-molecules-orderform--default",
+        "petstore-molecules-orderform--loading",
+    ]
     SELECTOR = "[data-component='OrderForm']"
 
     def __init__(
@@ -55,22 +59,22 @@ class OrderformPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def pet_id_input(self):
-        """Single Input inside Orderform.  Selector: [data-component='Input'][name='petId'] (name)"""
-        return self._child_pom("Input", "[data-component='Input'][name='petId']")
-
-    def quantity_input(self):
-        """Single Input inside Orderform.  Selector: [data-component='Input'][name='quantity'] (name)"""
-        return self._child_pom("Input", "[data-component='Input'][name='quantity']")
-
-    def primary_button(self):
+    def primary_button(self) -> SeleniumBasePOM:
         """Single Button inside Orderform.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='primary']"
         )
 
-    def secondary_button(self):
+    def secondary_button(self) -> SeleniumBasePOM:
         """Single Button inside Orderform.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='secondary']"
         )
+
+    def pet_id_input(self) -> SeleniumBasePOM:
+        """Single Input inside Orderform.  Selector: [data-component='Input'][name='petId'] (name)"""
+        return self._child_pom("Input", "[data-component='Input'][name='petId']")
+
+    def quantity_input(self) -> SeleniumBasePOM:
+        """Single Input inside Orderform.  Selector: [data-component='Input'][name='quantity'] (name)"""
+        return self._child_pom("Input", "[data-component='Input'][name='quantity']")

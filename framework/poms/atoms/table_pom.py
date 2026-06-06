@@ -28,6 +28,7 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class TablePOM(SeleniumBasePOM):
     STORY_ID = "common-atoms-table--with-data"
+    ALL_STORY_IDS = ["common-atoms-table--with-data", "common-atoms-table--empty-state"]
     SELECTOR = "[data-component='Table']"
 
     def __init__(

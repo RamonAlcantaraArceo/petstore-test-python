@@ -7,8 +7,8 @@ Selector         : [data-component='PetManagementView']
 Strategy used    : data-component
 Discovered children:
   - Button ×1  →  [data-component='Button'][data-variant='primary']  [data-variant]  key=primary
-  - StatusFilter ×1  →  [data-component='StatusFilter']  [grouped]
   - PetCard ×4  →  [data-component='PetCard']  [grouped]
+  - StatusFilter ×1  →  [data-component='StatusFilter']  [grouped]
 
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
@@ -33,6 +33,11 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class PetManagementPOM(SeleniumBasePOM):
     STORY_ID = "petstore-views-pet-management--with-pets"
+    ALL_STORY_IDS = [
+        "petstore-views-pet-management--with-pets",
+        "petstore-views-pet-management--read-only",
+        "petstore-views-pet-management--empty",
+    ]
     SELECTOR = "[data-component='PetManagementView']"
 
     def __init__(
@@ -54,16 +59,16 @@ class PetManagementPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def primary_button(self):
+    def primary_button(self) -> SeleniumBasePOM:
         """Single Button inside PetManagement.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='primary']"
         )
 
-    def statusfilter(self):
-        """Single StatusFilter inside PetManagement.  Selector: [data-component='StatusFilter'] (grouped)"""
-        return self._child_pom("StatusFilter", "[data-component='StatusFilter']")
-
-    def petcards(self):
+    def petcards(self) -> list[SeleniumBasePOM]:
         """All PetCard instances (4) inside PetManagement.  Selector: [data-component='PetCard'] (grouped)"""
-        return self._child_poms("PetCard", "[data-component='PetCard']")
+        return self._child_poms("Petcard", "[data-component='PetCard']")
+
+    def statusfilter(self) -> SeleniumBasePOM:
+        """Single StatusFilter inside PetManagement.  Selector: [data-component='StatusFilter'] (grouped)"""
+        return self._child_pom("Statusfilter", "[data-component='StatusFilter']")

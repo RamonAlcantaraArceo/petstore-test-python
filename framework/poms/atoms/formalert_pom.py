@@ -1,21 +1,21 @@
-"""Page Object Model for Badge (atoms).
+"""Page Object Model for Formalert (atoms).
 
 Storybook title  : Common/Atoms/FormAlert
 Story IDs        : ['common-atoms-formalert--error', 'common-atoms-formalert--warning', 'common-atoms-formalert--info', 'common-atoms-formalert--success']
 Dependencies     : none
-Selector         : #storybook-root > *:first-child
-Strategy used    : storybook-root
+Selector         : [data-component='FormAlert']
+Strategy used    : data-component
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
     driver.get(f"{STORYBOOK_URL}/iframe.html?id=common-atoms-formalert--error")
-    pom = BadgePOM(driver)
+    pom = FormalertPOM(driver)
     root = pom.root()   # uses the discovered selector above
 
 Usage against the application
 ------------------------------
     # Confirm the selector still works in your app's DOM.
     # Run `sbpom --verify` to re-check live selectors at any time.
-    pom = BadgePOM(driver)
+    pom = FormalertPOM(driver)
     root = pom.root()
 """
 
@@ -26,8 +26,14 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
-class BadgePOM(SeleniumBasePOM):
-    STORY_ID = "common-atoms-badge--error"
+class FormalertPOM(SeleniumBasePOM):
+    STORY_ID = "common-atoms-formalert--error"
+    ALL_STORY_IDS = [
+        "common-atoms-formalert--error",
+        "common-atoms-formalert--warning",
+        "common-atoms-formalert--info",
+        "common-atoms-formalert--success",
+    ]
     SELECTOR = "[data-component='FormAlert']"
 
     def __init__(

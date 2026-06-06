@@ -6,8 +6,8 @@ Dependencies     : none
 Selector         : [data-component='UserCard']
 Strategy used    : data-component
 Discovered children:
-  - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
   - Button ×1  →  [data-component='Button'][data-variant='danger']  [data-variant]  key=danger
+  - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
 
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
@@ -32,6 +32,11 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class UsercardPOM(SeleniumBasePOM):
     STORY_ID = "petstore-molecules-usercard--with-full-details"
+    ALL_STORY_IDS = [
+        "petstore-molecules-usercard--with-full-details",
+        "petstore-molecules-usercard--username-only",
+        "petstore-molecules-usercard--readonly",
+    ]
     SELECTOR = "[data-component='UserCard']"
 
     def __init__(
@@ -53,14 +58,14 @@ class UsercardPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def secondary_button(self):
-        """Single Button inside Usercard.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
-        return self._child_pom(
-            "Button", "[data-component='Button'][data-variant='secondary']"
-        )
-
-    def danger_button(self):
+    def danger_button(self) -> SeleniumBasePOM:
         """Single Button inside Usercard.  Selector: [data-component='Button'][data-variant='danger'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='danger']"
+        )
+
+    def secondary_button(self) -> SeleniumBasePOM:
+        """Single Button inside Usercard.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
         )

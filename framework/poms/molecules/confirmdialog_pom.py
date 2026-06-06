@@ -28,6 +28,11 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class ConfirmdialogPOM(SeleniumBasePOM):
     STORY_ID = "petstore-molecules-confirmdialog--default"
+    ALL_STORY_IDS = [
+        "petstore-molecules-confirmdialog--default",
+        "petstore-molecules-confirmdialog--danger-variant",
+        "petstore-molecules-confirmdialog--custom-title",
+    ]
     SELECTOR = "[data-component='Button']"
 
     def __init__(

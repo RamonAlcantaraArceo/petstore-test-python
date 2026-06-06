@@ -6,11 +6,11 @@ Dependencies     : none
 Selector         : [data-component='PetForm']
 Strategy used    : data-component
 Discovered children:
-  - Input ×1  →  [data-component='Input'][name='name']  [name]  key=name
-  - Input ×1  →  [data-component='Input'][name='categoryName']  [name]  key=category_name
-  - Input ×1  →  [data-component='Input'][name='photoUrl']  [name]  key=photo_url
   - Button ×1  →  [data-component='Button'][data-variant='primary']  [data-variant]  key=primary
   - Button ×1  →  [data-component='Button'][data-variant='secondary']  [data-variant]  key=secondary
+  - Input ×1  →  [data-component='Input'][name='categoryName']  [name]  key=category_name
+  - Input ×1  →  [data-component='Input'][name='name']  [name]  key=name
+  - Input ×1  →  [data-component='Input'][name='photoUrl']  [name]  key=photo_url
   - Select ×1  →  [data-component='Select']  [grouped]
 
 Usage against Storybook (isolated component testing)
@@ -36,6 +36,11 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class PetformPOM(SeleniumBasePOM):
     STORY_ID = "petstore-molecules-petform--create-mode"
+    ALL_STORY_IDS = [
+        "petstore-molecules-petform--create-mode",
+        "petstore-molecules-petform--edit-mode",
+        "petstore-molecules-petform--loading",
+    ]
     SELECTOR = "[data-component='PetForm']"
 
     def __init__(
@@ -57,30 +62,30 @@ class PetformPOM(SeleniumBasePOM):
     # Child component accessors (discovered from live Storybook DOM)
     # ------------------------------------------------------------------
 
-    def name_input(self):
-        """Single Input inside Petform.  Selector: [data-component='Input'][name='name'] (name)"""
-        return self._child_pom("Input", "[data-component='Input'][name='name']")
-
-    def category_name_input(self):
-        """Single Input inside Petform.  Selector: [data-component='Input'][name='categoryName'] (name)"""
-        return self._child_pom("Input", "[data-component='Input'][name='categoryName']")
-
-    def photo_url_input(self):
-        """Single Input inside Petform.  Selector: [data-component='Input'][name='photoUrl'] (name)"""
-        return self._child_pom("Input", "[data-component='Input'][name='photoUrl']")
-
-    def primary_button(self):
+    def primary_button(self) -> SeleniumBasePOM:
         """Single Button inside Petform.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='primary']"
         )
 
-    def secondary_button(self):
+    def secondary_button(self) -> SeleniumBasePOM:
         """Single Button inside Petform.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='secondary']"
         )
 
-    def select(self):
+    def category_name_input(self) -> SeleniumBasePOM:
+        """Single Input inside Petform.  Selector: [data-component='Input'][name='categoryName'] (name)"""
+        return self._child_pom("Input", "[data-component='Input'][name='categoryName']")
+
+    def name_input(self) -> SeleniumBasePOM:
+        """Single Input inside Petform.  Selector: [data-component='Input'][name='name'] (name)"""
+        return self._child_pom("Input", "[data-component='Input'][name='name']")
+
+    def photo_url_input(self) -> SeleniumBasePOM:
+        """Single Input inside Petform.  Selector: [data-component='Input'][name='photoUrl'] (name)"""
+        return self._child_pom("Input", "[data-component='Input'][name='photoUrl']")
+
+    def select(self) -> SeleniumBasePOM:
         """Single Select inside Petform.  Selector: [data-component='Select'] (grouped)"""
         return self._child_pom("Select", "[data-component='Select']")
