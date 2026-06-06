@@ -22,9 +22,11 @@ Usage against the application
     pom = FullApplicationPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -57,4 +59,6 @@ class FullApplicationPOM(SeleniumBasePOM):
 
     def petmanagementview(self):
         """Single PetManagementView inside FullApplication.  Selector: [data-component='PetManagementView'] (grouped)"""
-        return self._child_pom("PetManagementView", "[data-component='PetManagementView']")
+        return self._child_pom(
+            "PetManagementView", "[data-component='PetManagementView']"
+        )

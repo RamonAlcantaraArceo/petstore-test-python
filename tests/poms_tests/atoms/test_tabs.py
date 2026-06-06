@@ -1,6 +1,5 @@
 import pytest
 
-
 from framework.poms.atoms.tabs_pom import TabsPOM
 
 
@@ -13,13 +12,18 @@ def test_tabs_pom_class_imports():
 def test_tabs_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(TabsPOM, "SELECTOR")
-    assert TabsPOM.SELECTOR, "SELECTOR is empty — run sbpom again with playwright installed"
+    assert (
+        TabsPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
 def test_tabs_story_id_defined():
     assert hasattr(TabsPOM, "STORY_ID")
-    assert TabsPOM.STORY_ID, "STORY_ID is empty — no renderable story found for this component"
+    assert (
+        TabsPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
+
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")

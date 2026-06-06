@@ -37,6 +37,7 @@ initialize_logging(
 )
 
 logging.getLogger("faker").setLevel(logging.WARNING)
+logging.getLogger("great_expectations").setLevel(logging.WARNING)
 
 from framework.api_client import PetstoreApiClient  # noqa: E402
 
@@ -75,7 +76,8 @@ def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(
-    item: pytest.Item, call: pytest.CallInfo  # type: ignore[type-arg]
+    item: pytest.Item,
+    call: pytest.CallInfo,  # type: ignore[type-arg]
 ) -> Generator[None, None, None]:
     """Attach a screenshot to the Allure report when a UI test fails."""
     outcome = yield

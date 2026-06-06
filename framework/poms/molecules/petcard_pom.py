@@ -23,9 +23,11 @@ Usage against the application
     pom = PetcardPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -54,12 +56,18 @@ class PetcardPOM(SeleniumBasePOM):
 
     def available_badge(self):
         """Single Badge inside Petcard.  Selector: [data-component='Badge'][data-variant='available'] (data-variant)"""
-        return self._child_pom("Badge", "[data-component='Badge'][data-variant='available']")
+        return self._child_pom(
+            "Badge", "[data-component='Badge'][data-variant='available']"
+        )
 
     def secondary_button(self):
         """Single Button inside Petcard.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='secondary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
+        )
 
     def danger_button(self):
         """Single Button inside Petcard.  Selector: [data-component='Button'][data-variant='danger'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='danger']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='danger']"
+        )

@@ -22,9 +22,11 @@ Usage against the application
     pom = StatusfilterPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -53,7 +55,9 @@ class StatusfilterPOM(SeleniumBasePOM):
 
     def secondary_button(self):
         """Single Button inside Statusfilter.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='secondary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
+        )
 
     def select(self):
         """Single Select inside Statusfilter.  Selector: [data-component='Select'] (grouped)"""

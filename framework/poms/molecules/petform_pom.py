@@ -26,9 +26,11 @@ Usage against the application
     pom = PetformPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -69,11 +71,15 @@ class PetformPOM(SeleniumBasePOM):
 
     def primary_button(self):
         """Single Button inside Petform.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='primary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='primary']"
+        )
 
     def secondary_button(self):
         """Single Button inside Petform.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='secondary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
+        )
 
     def select(self):
         """Single Select inside Petform.  Selector: [data-component='Select'] (grouped)"""

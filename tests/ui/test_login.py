@@ -15,11 +15,7 @@ from __future__ import annotations
 
 import os
 
-import allure
 import pytest
-from selenium.webdriver.common.by import By
-
-from framework.assertions import assert_that
 
 # Skip entire module when Selenium is unavailable or UI tests are disabled
 pytestmark = pytest.mark.ui
@@ -33,4 +29,3 @@ skip_if_no_ui = pytest.mark.skipif(
     not _ui_enabled(),
     reason="UI tests are disabled. Set RUN_UI_TESTS=1 to enable.",
 )
-

@@ -9,6 +9,7 @@ with ``pytest-benchmark``'s histogram and comparison features.
 """
 
 from __future__ import annotations
+
 import os
 
 import pytest
@@ -16,7 +17,11 @@ import pytest
 from framework.api_client import PetstoreApiClient
 from framework.factories import PetFactory
 
-@pytest.mark.skipif(os.getenv("CI", None) == "true", reason="Runs only in local environments due to performance test nature.")
+
+@pytest.mark.skipif(
+    os.getenv("CI", None) == "true",
+    reason="Runs only in local environments due to performance test nature.",
+)
 @pytest.mark.performance
 class TestApiPerformance:
     """Benchmark key API operations."""

@@ -1,6 +1,5 @@
 import pytest
 
-
 from framework.poms.atoms.input_pom import InputPOM
 
 
@@ -13,13 +12,18 @@ def test_input_pom_class_imports():
 def test_input_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(InputPOM, "SELECTOR")
-    assert InputPOM.SELECTOR, "SELECTOR is empty — run sbpom again with playwright installed"
+    assert (
+        InputPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
 def test_input_story_id_defined():
     assert hasattr(InputPOM, "STORY_ID")
-    assert InputPOM.STORY_ID, "STORY_ID is empty — no renderable story found for this component"
+    assert (
+        InputPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
+
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")
@@ -37,4 +41,6 @@ def test_input_navigate_and_verify(driver, pom_interaction_helper):
     input_elem.clear()
     test_input_value = "test_value_123"
     input_elem.send_keys(test_input_value)
-    assert input_elem.get_attribute("value") == test_input_value, "Input value not set correctly"
+    assert (
+        input_elem.get_attribute("value") == test_input_value
+    ), "Input value not set correctly"

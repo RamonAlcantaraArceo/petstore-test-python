@@ -23,9 +23,11 @@ Usage against the application
     pom = UserManagementPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -58,7 +60,9 @@ class UserManagementPOM(SeleniumBasePOM):
 
     def default_usercard(self):
         """Single UserCard inside UserManagement.  Selector: [data-component='UserCard'][data-variant='default'] (data-variant)"""
-        return self._child_pom("UserCard", "[data-component='UserCard'][data-variant='default']")
+        return self._child_pom(
+            "UserCard", "[data-component='UserCard'][data-variant='default']"
+        )
 
     def button(self):
         """Single Button inside UserManagement.  Selector: [data-component='Button'] (grouped)"""

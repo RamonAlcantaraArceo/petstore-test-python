@@ -250,7 +250,7 @@ class ResponseAssertion:
             400 <= actual < 500
         ), f"Expected HTTP 4xx client error, got {actual}. Body: {self._response.text[:200]}"
         return self
-    
+
     def is_bad_request(self) -> ResponseAssertion:
         return self.has_status(400)
 
@@ -350,54 +350,52 @@ class DbRecordAssertion:
 
     def is_deleted(self) -> DbRecordAssertion:
         """Assert the record was *not* found (has been deleted)."""
-        assert self._record is None, (
-            f"Expected DB record to be deleted, but found: {self._record!r}"
-        )
+        assert (
+            self._record is None
+        ), f"Expected DB record to be deleted, but found: {self._record!r}"
         return self
 
     def field_equals(self, field: str, expected: Any) -> DbRecordAssertion:
         """Assert ``record[field] == expected``."""
         self.exists()
         actual = self._record[field]  # type: ignore[index]
-        assert actual == expected, (
-            f"Expected DB record field {field!r} == {expected!r}, got {actual!r}"
-        )
+        assert (
+            actual == expected
+        ), f"Expected DB record field {field!r} == {expected!r}, got {actual!r}"
         return self
 
     def field_not_equals(self, field: str, unexpected: Any) -> DbRecordAssertion:
         """Assert ``record[field] != unexpected``."""
         self.exists()
         actual = self._record[field]  # type: ignore[index]
-        assert actual != unexpected, (
-            f"Expected DB record field {field!r} != {unexpected!r}, but it was equal"
-        )
+        assert (
+            actual != unexpected
+        ), f"Expected DB record field {field!r} != {unexpected!r}, but it was equal"
         return self
 
     def field_is_not_none(self, field: str) -> DbRecordAssertion:
         """Assert ``record[field]`` is not ``None``."""
         self.exists()
         actual = self._record[field]  # type: ignore[index]
-        assert actual is not None, (
-            f"Expected DB record field {field!r} to be non-None"
-        )
+        assert actual is not None, f"Expected DB record field {field!r} to be non-None"
         return self
 
     def field_is_none(self, field: str) -> DbRecordAssertion:
         """Assert ``record[field]`` is ``None``."""
         self.exists()
         actual = self._record[field]  # type: ignore[index]
-        assert actual is None, (
-            f"Expected DB record field {field!r} to be None, got {actual!r}"
-        )
+        assert (
+            actual is None
+        ), f"Expected DB record field {field!r} to be None, got {actual!r}"
         return self
 
     def field_in(self, field: str, allowed: list[Any]) -> DbRecordAssertion:
         """Assert ``record[field]`` is one of the *allowed* values."""
         self.exists()
         actual = self._record[field]  # type: ignore[index]
-        assert actual in allowed, (
-            f"Expected DB record field {field!r} to be one of {allowed!r}, got {actual!r}"
-        )
+        assert (
+            actual in allowed
+        ), f"Expected DB record field {field!r} to be one of {allowed!r}, got {actual!r}"
         return self
 
     def has_field(self, field: str) -> DbRecordAssertion:

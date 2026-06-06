@@ -33,7 +33,9 @@ class TestLogin:
             )
 
         with allure.step("Verify 200 OK and token present in body"):
-            assert_response(response).is_ok().body_contains("access_token").body_contains("bearer")
+            assert_response(response).is_ok().body_contains(
+                "access_token"
+            ).body_contains("bearer")
 
     @allure.story("Session state")
     @allure.title("Login sets authenticated state on client")
@@ -92,4 +94,6 @@ class TestLogin:
             )
 
         with allure.step("Verify response has 'token' key"):
-            assert_response(response).is_ok().json_has_key("access_token").json_has_key("token_type")
+            assert_response(response).is_ok().json_has_key("access_token").json_has_key(
+                "token_type"
+            )

@@ -1,6 +1,5 @@
 import pytest
 
-
 from framework.poms.atoms.modal_pom import ModalPOM
 
 
@@ -13,13 +12,18 @@ def test_modal_pom_class_imports():
 def test_modal_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(ModalPOM, "SELECTOR")
-    assert ModalPOM.SELECTOR, "SELECTOR is empty — run sbpom again with playwright installed"
+    assert (
+        ModalPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
 def test_modal_story_id_defined():
     assert hasattr(ModalPOM, "STORY_ID")
-    assert ModalPOM.STORY_ID, "STORY_ID is empty — no renderable story found for this component"
+    assert (
+        ModalPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
+
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")

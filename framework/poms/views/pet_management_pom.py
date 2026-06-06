@@ -23,9 +23,11 @@ Usage against the application
     pom = PetManagementPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -54,7 +56,9 @@ class PetManagementPOM(SeleniumBasePOM):
 
     def primary_button(self):
         """Single Button inside PetManagement.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='primary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='primary']"
+        )
 
     def statusfilter(self):
         """Single StatusFilter inside PetManagement.  Selector: [data-component='StatusFilter'] (grouped)"""

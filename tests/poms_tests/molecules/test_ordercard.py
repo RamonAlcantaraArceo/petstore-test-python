@@ -1,6 +1,5 @@
 import pytest
 
-
 from framework.poms.molecules.ordercard_pom import OrdercardPOM
 
 
@@ -13,13 +12,18 @@ def test_ordercard_pom_class_imports():
 def test_ordercard_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(OrdercardPOM, "SELECTOR")
-    assert OrdercardPOM.SELECTOR, "SELECTOR is empty — run sbpom again with playwright installed"
+    assert (
+        OrdercardPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
 def test_ordercard_story_id_defined():
     assert hasattr(OrdercardPOM, "STORY_ID")
-    assert OrdercardPOM.STORY_ID, "STORY_ID is empty — no renderable story found for this component"
+    assert (
+        OrdercardPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
+
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")

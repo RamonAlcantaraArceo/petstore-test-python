@@ -38,9 +38,9 @@ class TestPetDbCreate:
         try:
             with allure.step("Verify row exists in pets table"):
                 row = db_client.get_pet(pet["id"])
-                assert_db_record(row).exists().field_equals("name", pet["name"]).field_equals(
-                    "status", "available"
-                )
+                assert_db_record(row).exists().field_equals(
+                    "name", pet["name"]
+                ).field_equals("status", "available")
         finally:
             api_client.delete_pet(pet["id"])
 

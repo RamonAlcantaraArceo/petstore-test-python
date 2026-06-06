@@ -40,7 +40,6 @@ dev = [
     "sqlalchemy>=2.0.0",
     # ETL / data quality
     "great-expectations>=1.4.0",
-    "great-expectations[cli]",
     # Pre-commit
     "pre-commit>=3.7.0",
     # Docs
@@ -75,6 +74,11 @@ asyncio_mode = "auto"
 
 env_files = ".env.test"
 
+filterwarnings = [
+    "ignore:.*sre_constants.*:DeprecationWarning",
+    "ignore:.*sre_parse.*:DeprecationWarning",
+]
+
 # ---------------------------------------------------------------------------
 # Coverage
 # ---------------------------------------------------------------------------
@@ -93,7 +97,7 @@ fail_under = 0
 python_version = "3.12"
 strict = true
 ignore_missing_imports = true
-exclude = ["tests/performance"]
+exclude = ["tests/performance", "framework/poms"]
 
 [[tool.mypy.overrides]]
 module = "framework.factories"

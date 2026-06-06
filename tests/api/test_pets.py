@@ -80,7 +80,10 @@ class TestGetPet:
             assert_response(response).is_not_found()
 
     @allure.title("Fetching an out-of-range pet id returns a client error")
-    @pytest.mark.xfail(reason="API should return 400 Bad Request for out-of-range IDs, but currently returns 500 Server Error", raises=AssertionError)
+    @pytest.mark.xfail(
+        reason="API should return 400 Bad Request for out-of-range IDs, but currently returns 500 Server Error",
+        raises=AssertionError,
+    )
     def test_get_pet_with_out_of_range_id(self, api_client: PetstoreApiClient) -> None:
         """Fetching a pet with an ID outside the integer range should fail."""
 

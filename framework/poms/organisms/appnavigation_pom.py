@@ -22,9 +22,11 @@ Usage against the application
     pom = AppnavigationPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -53,7 +55,9 @@ class AppnavigationPOM(SeleniumBasePOM):
 
     def secondary_button(self):
         """Single Button inside Appnavigation.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='secondary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
+        )
 
     def tabs(self):
         """Single Tabs inside Appnavigation.  Selector: [data-component='Tabs'] (grouped)"""

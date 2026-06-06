@@ -1,6 +1,5 @@
 import pytest
 
-
 from framework.poms.molecules.userform_pom import UserformPOM
 
 
@@ -13,13 +12,18 @@ def test_userform_pom_class_imports():
 def test_userform_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(UserformPOM, "SELECTOR")
-    assert UserformPOM.SELECTOR, "SELECTOR is empty — run sbpom again with playwright installed"
+    assert (
+        UserformPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
 def test_userform_story_id_defined():
     assert hasattr(UserformPOM, "STORY_ID")
-    assert UserformPOM.STORY_ID, "STORY_ID is empty — no renderable story found for this component"
+    assert (
+        UserformPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
+
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")

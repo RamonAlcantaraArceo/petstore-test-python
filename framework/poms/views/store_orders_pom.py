@@ -25,9 +25,11 @@ Usage against the application
     pom = StoreOrdersPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -60,15 +62,21 @@ class StoreOrdersPOM(SeleniumBasePOM):
 
     def secondary_button(self):
         """Single Button inside StoreOrders.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='secondary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
+        )
 
     def primary_button(self):
         """Single Button inside StoreOrders.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='primary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='primary']"
+        )
 
     def default_ordercard(self):
         """Single OrderCard inside StoreOrders.  Selector: [data-component='OrderCard'][data-variant='default'] (data-variant)"""
-        return self._child_pom("OrderCard", "[data-component='OrderCard'][data-variant='default']")
+        return self._child_pom(
+            "OrderCard", "[data-component='OrderCard'][data-variant='default']"
+        )
 
     def table(self):
         """Single Table inside StoreOrders.  Selector: [data-component='Table'] (grouped)"""

@@ -1,6 +1,5 @@
 import pytest
 
-
 from framework.poms.atoms.card_pom import CardPOM
 
 
@@ -13,13 +12,18 @@ def test_card_pom_class_imports():
 def test_card_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(CardPOM, "SELECTOR")
-    assert CardPOM.SELECTOR, "SELECTOR is empty — run sbpom again with playwright installed"
+    assert (
+        CardPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
 def test_card_story_id_defined():
     assert hasattr(CardPOM, "STORY_ID")
-    assert CardPOM.STORY_ID, "STORY_ID is empty — no renderable story found for this component"
+    assert (
+        CardPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
+
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")

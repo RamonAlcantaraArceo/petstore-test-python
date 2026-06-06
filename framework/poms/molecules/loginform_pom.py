@@ -23,9 +23,11 @@ Usage against the application
     pom = LoginformPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -62,4 +64,6 @@ class LoginformPOM(SeleniumBasePOM):
 
     def primary_button(self):
         """Single Button inside Loginform.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='primary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='primary']"
+        )

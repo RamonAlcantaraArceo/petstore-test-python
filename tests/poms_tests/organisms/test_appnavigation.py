@@ -1,6 +1,5 @@
 import pytest
 
-
 from framework.poms.organisms.appnavigation_pom import AppnavigationPOM
 
 
@@ -13,13 +12,18 @@ def test_appnavigation_pom_class_imports():
 def test_appnavigation_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(AppnavigationPOM, "SELECTOR")
-    assert AppnavigationPOM.SELECTOR, "SELECTOR is empty — run sbpom again with playwright installed"
+    assert (
+        AppnavigationPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
 def test_appnavigation_story_id_defined():
     assert hasattr(AppnavigationPOM, "STORY_ID")
-    assert AppnavigationPOM.STORY_ID, "STORY_ID is empty — no renderable story found for this component"
+    assert (
+        AppnavigationPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
+
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")

@@ -22,9 +22,11 @@ Usage against the application
     pom = OrdercardPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -53,8 +55,12 @@ class OrdercardPOM(SeleniumBasePOM):
 
     def placed_badge(self):
         """Single Badge inside Ordercard.  Selector: [data-component='Badge'][data-variant='placed'] (data-variant)"""
-        return self._child_pom("Badge", "[data-component='Badge'][data-variant='placed']")
+        return self._child_pom(
+            "Badge", "[data-component='Badge'][data-variant='placed']"
+        )
 
     def danger_button(self):
         """Single Button inside Ordercard.  Selector: [data-component='Button'][data-variant='danger'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='danger']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='danger']"
+        )

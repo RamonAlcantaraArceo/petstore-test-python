@@ -1,6 +1,5 @@
 import pytest
 
-
 from framework.poms.molecules.petcard_pom import PetcardPOM
 
 
@@ -13,13 +12,18 @@ def test_petcard_pom_class_imports():
 def test_petcard_selector_defined():
     """Selector discovered from the live Storybook DOM should be non-empty."""
     assert hasattr(PetcardPOM, "SELECTOR")
-    assert PetcardPOM.SELECTOR, "SELECTOR is empty — run sbpom again with playwright installed"
+    assert (
+        PetcardPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
 def test_petcard_story_id_defined():
     assert hasattr(PetcardPOM, "STORY_ID")
-    assert PetcardPOM.STORY_ID, "STORY_ID is empty — no renderable story found for this component"
+    assert (
+        PetcardPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
+
 
 @pytest.mark.functional
 @pytest.mark.usefixtures("capture_screenshot")

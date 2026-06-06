@@ -22,9 +22,11 @@ Usage against the application
     pom = UsercardPOM(driver)
     root = pom.root()
 """
+
 from __future__ import annotations
 
 from selenium.webdriver.remote.webdriver import WebDriver
+
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
@@ -53,8 +55,12 @@ class UsercardPOM(SeleniumBasePOM):
 
     def secondary_button(self):
         """Single Button inside Usercard.  Selector: [data-component='Button'][data-variant='secondary'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='secondary']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='secondary']"
+        )
 
     def danger_button(self):
         """Single Button inside Usercard.  Selector: [data-component='Button'][data-variant='danger'] (data-variant)"""
-        return self._child_pom("Button", "[data-component='Button'][data-variant='danger']")
+        return self._child_pom(
+            "Button", "[data-component='Button'][data-variant='danger']"
+        )
