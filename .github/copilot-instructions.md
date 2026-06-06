@@ -29,6 +29,7 @@ It uses `pytest` (never `unittest`) with the following layers:
 - All page interactions live in `framework/pages/`.
 - Page objects extend `BasePage` and return `self` for method chaining.
 - Locators are class-level tuples `(By.ID, "selector")`.
+- In `tests/ui/` and `tests/e2e/`, minimize direct raw `WebElement` interactions in tests; prefer POM methods and assertions as the primary interface.
 
 ### File Organisation
 - One test class per feature/endpoint.

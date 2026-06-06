@@ -158,31 +158,68 @@ def pom_interaction_helper():
             return pom.select_option(option_text)
 
         @staticmethod
-        def assert_element_visible(pom: RootablePOM) -> bool:
+        def is_element_visible(pom: RootablePOM) -> bool:
+            """Return whether the POM root element is visible.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+
+            Returns:
+                ``True`` when the root element is visible, else ``False``.
+            """
+            return pom.is_element_visible()
+
+        @staticmethod
+        def assert_element_visible(pom: RootablePOM) -> RootablePOM:
             """Assert that the POM root element is visible.
 
             Args:
                 pom: POM instance containing root-level interactions.
 
             Returns:
-                ``True`` when the assertion passes.
+                The same POM instance to allow chaining.
             """
             return pom.assert_element_visible()
 
         @staticmethod
-        def assert_element_enabled(pom: RootablePOM) -> bool:
+        def is_element_enabled(pom: RootablePOM) -> bool:
+            """Return whether the POM root element is enabled.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+
+            Returns:
+                ``True`` when the root element is enabled, else ``False``.
+            """
+            return pom.is_element_enabled()
+
+        @staticmethod
+        def assert_element_enabled(pom: RootablePOM) -> RootablePOM:
             """Assert that the POM root element is enabled.
 
             Args:
                 pom: POM instance containing root-level interactions.
 
             Returns:
-                ``True`` when the assertion passes.
+                The same POM instance to allow chaining.
             """
             return pom.assert_element_enabled()
 
         @staticmethod
-        def assert_input_value(pom: RootablePOM, expected_value: str) -> bool:
+        def has_input_value(pom: RootablePOM, expected_value: str) -> bool:
+            """Return whether the POM root input has the expected value.
+
+            Args:
+                pom: POM instance containing root-level interactions.
+                expected_value: Expected value of the element.
+
+            Returns:
+                ``True`` when the root input value matches, else ``False``.
+            """
+            return pom.has_input_value(expected_value)
+
+        @staticmethod
+        def assert_input_value(pom: RootablePOM, expected_value: str) -> RootablePOM:
             """Assert that the POM root input has the expected value.
 
             Args:
@@ -190,7 +227,7 @@ def pom_interaction_helper():
                 expected_value: Expected value of the element.
 
             Returns:
-                ``True`` when the assertion passes.
+                The same POM instance to allow chaining.
             """
             return pom.assert_input_value(expected_value)
 

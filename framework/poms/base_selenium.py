@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from importlib import import_module
-from typing import Protocol, cast
+from typing import Protocol, Self, cast
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -48,16 +48,28 @@ class RootablePOM(Protocol):
         """Select an option by visible text on this POM root `<select>`."""
         ...
 
-    def assert_element_visible(self) -> bool:
-        """Assert that this POM root element is visible."""
+    def is_element_visible(self) -> bool:
+        """Return whether this POM root element is visible."""
         ...
 
-    def assert_element_enabled(self) -> bool:
-        """Assert that this POM root element is enabled."""
+    def assert_element_visible(self) -> Self:
+        """Assert that this POM root element is visible and return self."""
         ...
 
-    def assert_input_value(self, expected_value: str) -> bool:
-        """Assert that this POM root input has the expected value."""
+    def is_element_enabled(self) -> bool:
+        """Return whether this POM root element is enabled."""
+        ...
+
+    def assert_element_enabled(self) -> Self:
+        """Assert that this POM root element is enabled and return self."""
+        ...
+
+    def has_input_value(self, expected_value: str) -> bool:
+        """Return whether this POM root input has the expected value."""
+        ...
+
+    def assert_input_value(self, expected_value: str) -> Self:
+        """Assert that this POM root input has the expected value and return self."""
         ...
 
 
@@ -117,9 +129,11 @@ class POMInteractionMixin:
         selector = getattr(self, "_selector", self.SELECTOR)
         wait = WebDriverWait(self.driver, timeout)
         try:
-            return wait.until(
+            result = wait.until(
                 EC.invisibility_of_element_located((By.CSS_SELECTOR, selector))
             )
+            # TODO: I have doubs about this.
+            return bool(result)
         except TimeoutException:
             if raise_on_timeout:
                 raise
@@ -164,38 +178,66 @@ class POMInteractionMixin:
         Select(element).select_by_visible_text(option_text)
         return element
 
-    def assert_element_visible(self) -> bool:
-        """Assert that this POM root element is visible.
+    def is_element_displayed(self) -> bool:
+        """Return whether this POM root element is displayed.
 
         Returns:
-            ``True`` when the assertion passes.
+            ``True`` when the root element is displayed, else ``False``.
         """
-        assert self.root().is_displayed(), f"Element not visible: {self}"
-        return True
+        return self.root().is_displayed()
 
-    def assert_element_enabled(self) -> bool:
-        """Assert that this POM root element is enabled.
+    def assert_element_displayed(self) -> Self:
+        """Assert that this POM root element is displayed and return self.
 
         Returns:
-            ``True`` when the assertion passes.
+            This page object to allow method chaining.
         """
-        assert self.root().is_enabled(), f"Element not enabled: {self}"
-        return True
+        assert self.is_element_displayed(), f"Element not displayed: {self}"
+        return self
 
-    def assert_input_value(self, expected_value: str) -> bool:
-        """Assert that this POM root input has the expected value.
+    def is_element_enabled(self) -> bool:
+        """Return whether this POM root element is enabled.
+
+        Returns:
+            ``True`` when the root element is enabled, else ``False``.
+        """
+        return self.root().is_enabled()
+
+    def assert_element_enabled(self) -> Self:
+        """Assert that this POM root element is enabled and return self.
+
+        Returns:
+            This page object to allow method chaining.
+        """
+        assert self.is_element_enabled(), f"Element not enabled: {self}"
+        return self
+
+    def has_input_value(self, expected_value: str) -> bool:
+        """Return whether this POM root input has the expected value.
 
         Args:
             expected_value: Expected input value.
 
         Returns:
-            ``True`` when the assertion passes.
+            ``True`` when the value matches, else ``False``.
         """
         actual_value = self.root().get_attribute("value")
-        assert actual_value == expected_value, (
+        return actual_value == expected_value
+
+    def assert_input_value(self, expected_value: str) -> Self:
+        """Assert that this POM root input has the expected value and return self.
+
+        Args:
+            expected_value: Expected input value.
+
+        Returns:
+            This page object to allow method chaining.
+        """
+        actual_value = self.root().get_attribute("value")
+        assert self.has_input_value(expected_value), (
             f"Expected '{expected_value}' but got '{actual_value}'"
         )
-        return True
+        return self
 
 
 class SeleniumBasePOM(POMInteractionMixin):

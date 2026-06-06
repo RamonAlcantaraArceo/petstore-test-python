@@ -33,6 +33,11 @@ from framework.poms.base_selenium import SeleniumBasePOM
 
 class LoginformPOM(SeleniumBasePOM):
     STORY_ID = "petstore-molecules-loginform--default"
+    ALL_STORY_IDS = [
+        "petstore-molecules-loginform--default",
+        "petstore-molecules-loginform--with-error",
+        "petstore-molecules-loginform--loading",
+    ]
     SELECTOR = "[data-component='LoginForm']"
 
     def __init__(
@@ -66,4 +71,10 @@ class LoginformPOM(SeleniumBasePOM):
         """Single Button inside Loginform.  Selector: [data-component='Button'][data-variant='primary'] (data-variant)"""
         return self._child_pom(
             "Button", "[data-component='Button'][data-variant='primary']"
+        )
+
+    def form_alert(self) -> SeleniumBasePOM:
+        """Possible error alert when issues happen.  Selector: [data-component='FormAlert'][data-variant='error'] (data-variant)"""
+        return self._child_pom(
+            "Input", "[data-component='FormAlert'][data-variant='error']"
         )
