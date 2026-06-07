@@ -21,12 +21,12 @@ from tests.etl.gx_helpers import (
 @allure.feature("ETL – failure demos")
 @allure.story("Intentional failure examples")
 @pytest.mark.etl
+# @pytest.mark.skip(
+#     reason="Intentional failing demo. Unskip locally to view failure output."
+# )
 class TestGxFailureDemos:
     """Demonstrate deterministic GX failures without affecting CI stability."""
 
-    @pytest.mark.skip(
-        reason="Intentional failing demo. Unskip locally to view failure output."
-    )
     @allure.title("demo failure – numeric expectation mismatch")
     def test_demo_failure_numeric(
         self, gx_context: Any, ge_run_id: RunIdentifier
@@ -66,9 +66,6 @@ class TestGxFailureDemos:
         checkpoint_result = checkpoint.run(run_id=ge_run_id)
         assert_checkpoint_result_steps(checkpoint_result)
 
-    @pytest.mark.skip(
-        reason="Intentional failing demo. Unskip locally to view failure output."
-    )
     @allure.title("demo failure – string set mismatch")
     def test_demo_failure_set(self, gx_context: Any, ge_run_id: RunIdentifier) -> None:
         ds = gx_context.data_sources.get("petstore_postgres")

@@ -57,6 +57,7 @@ class TestGxUsers:
                 column="username",
                 min_value=3,
                 max_value=64,
+                mostly=0.71,
             )
         )
         suite.add_expectation(

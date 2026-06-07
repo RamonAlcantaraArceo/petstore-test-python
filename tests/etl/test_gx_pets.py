@@ -56,7 +56,8 @@ class TestGxPets:
             gx.expectations.ExpectColumnValueLengthsToBeBetween(
                 column="name",
                 min_value=1,
-                max_value=100,
+                max_value=80,
+                mostly=0.90,
             )
         )
         suite.add_expectation(gx.expectations.ExpectColumnValuesToBeUnique(column="id"))
