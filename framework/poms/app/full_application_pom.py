@@ -63,6 +63,4 @@ class FullApplicationPOM(SeleniumBasePOM):
 
     def petmanagementview(self) -> SeleniumBasePOM:
         """Single PetManagementView inside FullApplication.  Selector: [data-component='PetManagementView'] (grouped)"""
-        return self._child_pom(
-            "Petmanagementview", "[data-component='PetManagementView']"
-        )
+        return self._child_pom("PetManagement", "[data-component='PetManagementView']")

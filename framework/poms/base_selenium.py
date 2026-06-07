@@ -178,6 +178,16 @@ class POMInteractionMixin:
         Select(element).select_by_visible_text(option_text)
         return element
 
+    def is_element_absent(self) -> bool:
+        """Return whether this POM root element is absent or not visible.
+
+        TODO: This is kind of slow
+        """
+        try:
+            return not self.is_element_displayed()
+        except Exception:
+            return True
+
     def is_element_displayed(self) -> bool:
         """Return whether this POM root element is displayed.
 
@@ -234,9 +244,9 @@ class POMInteractionMixin:
             This page object to allow method chaining.
         """
         actual_value = self.root().get_attribute("value")
-        assert self.has_input_value(expected_value), (
-            f"Expected '{expected_value}' but got '{actual_value}'"
-        )
+        assert self.has_input_value(
+            expected_value
+        ), f"Expected '{expected_value}' but got '{actual_value}'"
         return self
 
 

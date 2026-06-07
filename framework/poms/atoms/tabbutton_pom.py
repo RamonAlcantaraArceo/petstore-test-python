@@ -1,21 +1,21 @@
-"""Page Object Model for Tabs (atoms).
+"""Page Object Model for Tabbutton (atoms).
 
-Storybook title  : Common/Atoms/Tabs
-Story IDs        : ['common-atoms-tabs--keyboard-navigation', 'common-atoms-tabs--three-tabs']
+Storybook title  : Common/Atoms/TabButton
+Story IDs        : ['common-atoms-tabbutton--underline', 'common-atoms-tabbutton--pill', 'common-atoms-tabbutton--selected-and-disabled']
 Dependencies     : none
-Selector         : [data-component='Tabs']
+Selector         : [data-component='TabButton']
 Strategy used    : data-component
 Usage against Storybook (isolated component testing)
 -----------------------------------------------------
-    driver.get(f"{STORYBOOK_URL}/iframe.html?id=common-atoms-tabs--keyboard-navigation")
-    pom = TabsPOM(driver)
+    driver.get(f"{STORYBOOK_URL}/iframe.html?id=common-atoms-tabbutton--underline")
+    pom = TabbuttonPOM(driver)
     root = pom.root()   # uses the discovered selector above
 
 Usage against the application
 ------------------------------
     # Confirm the selector still works in your app's DOM.
     # Run `sbpom --verify` to re-check live selectors at any time.
-    pom = TabsPOM(driver)
+    pom = TabbuttonPOM(driver)
     root = pom.root()
 """
 
@@ -26,13 +26,14 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from framework.poms.base_selenium import SeleniumBasePOM
 
 
-class TabsPOM(SeleniumBasePOM):
-    STORY_ID = "common-atoms-tabs--keyboard-navigation"
+class TabbuttonPOM(SeleniumBasePOM):
+    STORY_ID = "common-atoms-tabbutton--underline"
     ALL_STORY_IDS = [
-        "common-atoms-tabs--keyboard-navigation",
-        "common-atoms-tabs--three-tabs",
+        "common-atoms-tabbutton--underline",
+        "common-atoms-tabbutton--pill",
+        "common-atoms-tabbutton--selected-and-disabled",
     ]
-    SELECTOR = "[data-component='Tabs']"
+    SELECTOR = "[data-component='TabButton']"
 
     def __init__(
         self,
@@ -48,3 +49,10 @@ class TabsPOM(SeleniumBasePOM):
             selector_override=selector_override,
             index_override=index_override,
         )
+
+    # ------------------------------------------------------------------
+    def is_selected(self) -> bool:
+        """Returns True if the TabButton is selected, False otherwise."""
+        root = self.root()
+        aria_selected = root.get_attribute("aria-selected")
+        return aria_selected == "true"

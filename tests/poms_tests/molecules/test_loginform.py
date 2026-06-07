@@ -22,9 +22,9 @@ def test_loginform_selector_defined() -> None:
         None
     """
     assert hasattr(LoginformPOM, "SELECTOR")
-    assert LoginformPOM.SELECTOR, (
-        "SELECTOR is empty — run sbpom again with playwright installed"
-    )
+    assert (
+        LoginformPOM.SELECTOR
+    ), "SELECTOR is empty — run sbpom again with playwright installed"
 
 
 @pytest.mark.smoke
@@ -35,9 +35,9 @@ def test_loginform_story_id_defined() -> None:
         None
     """
     assert hasattr(LoginformPOM, "STORY_ID")
-    assert LoginformPOM.STORY_ID, (
-        "STORY_ID is empty — no renderable story found for this component"
-    )
+    assert (
+        LoginformPOM.STORY_ID
+    ), "STORY_ID is empty — no renderable story found for this component"
 
 
 @pytest.mark.smoke
@@ -48,9 +48,9 @@ def test_loginform_all_story_ids_defined() -> None:
         None
     """
     assert hasattr(LoginformPOM, "ALL_STORY_IDS")
-    assert LoginformPOM.ALL_STORY_IDS, (
-        "ALL_STORY_IDS is empty — expected at least one renderable story"
-    )
+    assert (
+        LoginformPOM.ALL_STORY_IDS
+    ), "ALL_STORY_IDS is empty — expected at least one renderable story"
 
 
 @pytest.mark.smoke
@@ -60,9 +60,9 @@ def test_loginform_default_story_in_all_story_ids() -> None:
     Returns:
         None
     """
-    assert LoginformPOM.STORY_ID in LoginformPOM.ALL_STORY_IDS, (
-        "STORY_ID must be present in ALL_STORY_IDS"
-    )
+    assert (
+        LoginformPOM.STORY_ID in LoginformPOM.ALL_STORY_IDS
+    ), "STORY_ID must be present in ALL_STORY_IDS"
 
 
 @pytest.mark.functional
@@ -80,9 +80,9 @@ def test_loginform_navigate_and_verify_default_story(driver: WebDriver) -> None:
     pom.navigate_to_story(LoginformPOM.STORY_ID)
 
     root_element = pom.wait_for_visibility(timeout=10, raise_on_timeout=False)
-    assert root_element is not None, (
-        f"Root element not visible in default story: {LoginformPOM.STORY_ID}"
-    )
+    assert (
+        root_element is not None
+    ), f"Root element not visible in default story: {LoginformPOM.STORY_ID}"
 
     required_atoms = ["username_input", "password_input", "primary_button"]
     for atom_name in required_atoms:
@@ -144,25 +144,25 @@ def test_loginform_with_error_story_shows_alert(driver: WebDriver) -> None:
         None
     """
     error_story_id = "petstore-molecules-loginform--with-error"
-    assert error_story_id in LoginformPOM.ALL_STORY_IDS, (
-        f"Expected error story not found in ALL_STORY_IDS: {error_story_id}"
-    )
+    assert (
+        error_story_id in LoginformPOM.ALL_STORY_IDS
+    ), f"Expected error story not found in ALL_STORY_IDS: {error_story_id}"
 
     pom = LoginformPOM(driver)
     pom.navigate_to_story(error_story_id)
 
     root_element = pom.wait_for_visibility(timeout=10, raise_on_timeout=False)
-    assert root_element is not None, (
-        f"Root element not visible in error story: {error_story_id}"
-    )
+    assert (
+        root_element is not None
+    ), f"Root element not visible in error story: {error_story_id}"
 
     alert_element = pom.error_formalert().wait_for_visibility(
         timeout=10,
         raise_on_timeout=False,
     )
-    assert alert_element is not None, (
-        f"Expected error alert is not visible in story: {error_story_id}"
-    )
+    assert (
+        alert_element is not None
+    ), f"Expected error alert is not visible in story: {error_story_id}"
 
 
 @pytest.mark.functional
@@ -179,27 +179,27 @@ def test_loginform_loading_story_shows_disabled_primary_button(
         None
     """
     loading_story_id = "petstore-molecules-loginform--loading"
-    assert loading_story_id in LoginformPOM.ALL_STORY_IDS, (
-        f"Expected loading story not found in ALL_STORY_IDS: {loading_story_id}"
-    )
+    assert (
+        loading_story_id in LoginformPOM.ALL_STORY_IDS
+    ), f"Expected loading story not found in ALL_STORY_IDS: {loading_story_id}"
 
     pom = LoginformPOM(driver)
     pom.navigate_to_story(loading_story_id)
 
     root_element = pom.wait_for_visibility(timeout=10, raise_on_timeout=False)
-    assert root_element is not None, (
-        f"Root element not visible in loading story: {loading_story_id}"
-    )
+    assert (
+        root_element is not None
+    ), f"Root element not visible in loading story: {loading_story_id}"
 
     submit_pom = pom.primary_button()
     submit_element = submit_pom.wait_for_visibility(
         timeout=10,
         raise_on_timeout=False,
     )
-    assert submit_element is not None, (
-        f"Primary button not visible in loading story: {loading_story_id}"
-    )
+    assert (
+        submit_element is not None
+    ), f"Primary button not visible in loading story: {loading_story_id}"
 
-    assert not submit_element.is_enabled(), (
-        "Primary button should be disabled in loading story"
-    )
+    assert (
+        not submit_element.is_enabled()
+    ), "Primary button should be disabled in loading story"

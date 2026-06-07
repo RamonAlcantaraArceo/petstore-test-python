@@ -262,8 +262,7 @@ def browser(ui_base_url: str) -> Generator[Any, None, None]:
 
     from framework.ui_client import _build_chrome_driver  # noqa: PLC0415
 
-    # headless = os.getenv("HEADLESS", "true").lower() not in ("0", "false", "no")
-    headless = False
+    headless = os.getenv("HEADLESS", "true").lower() not in ("0", "false", "no")
     try:
         driver = _build_chrome_driver(headless=headless)
     except WebDriverException as exc:
