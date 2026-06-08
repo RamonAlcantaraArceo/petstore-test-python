@@ -23,45 +23,13 @@ from typing import Any
 
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.chrome.service import Service as ChromeService
-
-try:
-    from webdriver_manager.chrome import ChromeDriverManager
-
-    _WDM_AVAILABLE = True
-except ImportError:
-    _WDM_AVAILABLE = False
 
 from framework.config import get_ui_base_url
 from framework.interfaces import PetstoreClientProtocol
 from framework.pages.login_page import LoginPage
+from framework.pages.pet_management_page import PetManagementPage
 
 logger = logging.getLogger(__name__)
-
-
-def _build_chrome_driver(headless: bool = True) -> webdriver.Chrome:
-    """Build a Chrome WebDriver with sensible CI and local defaults.
-
-    Args:
-        headless: Whether to run Chrome without a visible window.
-
-    Returns:
-        A configured Chrome WebDriver instance.
-    """
-    options = ChromeOptions()
-    if headless:
-        options.add_argument("--headless=new")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--window-size=1920,1080")
-    options.add_argument("--disable-extensions")
-
-    if _WDM_AVAILABLE:
-        service = ChromeService(ChromeDriverManager().install())
-        return webdriver.Chrome(service=service, options=options)
-    return webdriver.Chrome(options=options)
 
 
 class PetstoreUiClient(PetstoreClientProtocol):
@@ -83,9 +51,9 @@ class PetstoreUiClient(PetstoreClientProtocol):
 
     def __init__(
         self,
+        driver: webdriver.Remote,
         base_url: str | None = None,
         headless: bool = True,
-        driver: webdriver.Remote | None = None,
     ) -> None:
         """Create a browser-backed Petstore client.
 
@@ -96,14 +64,22 @@ class PetstoreUiClient(PetstoreClientProtocol):
         """
         resolved_base_url = base_url or get_ui_base_url()
         self._base_url = resolved_base_url.rstrip("/")
-        self._driver = driver or _build_chrome_driver(headless=headless)
+        self._driver = driver
         self._login_page = LoginPage(self._driver, base_url=self._base_url)
+        self._pet_management_page = PetManagementPage(
+            self._driver, base_url=self._base_url
+        )
         self._logged_in = False
 
     @property
     def login_page(self) -> LoginPage:
         """Expose the LoginPage for direct interactions in tests."""
         return self._login_page
+
+    @property
+    def pet_management_page(self) -> PetManagementPage:
+        """Expose the PetManagementPage for direct interactions in tests."""
+        return self._pet_management_page
 
     # ------------------------------------------------------------------
     # Auth
@@ -139,14 +115,29 @@ class PetstoreUiClient(PetstoreClientProtocol):
         """Return whether the client believes it is authenticated."""
         return self._logged_in
 
+    def _require_authenticated_session(self, operation_name: str) -> None:
+        """Require a logged-in session before mutating pet data.
+
+        Args:
+            operation_name: Name of the attempted operation.
+
+        Raises:
+            PermissionError: If the current UI session is not authenticated.
+        """
+        if not self._logged_in:
+            raise PermissionError(
+                f"{operation_name} requires an authenticated UI session. "
+                "Log in before managing pets."
+            )
+
     # ------------------------------------------------------------------
-    # Pets (stub – wire up to your real UI once the front-end exists)
+    # Pets
     # ------------------------------------------------------------------
 
     def add_pet(
         self, name: str, status: str = "available", **kwargs: Any
     ) -> dict[str, Any]:
-        """Signal that UI-based pet creation is not implemented yet.
+        """Create a pet through the UI.
 
         Args:
             name: Pet name.
@@ -154,57 +145,57 @@ class PetstoreUiClient(PetstoreClientProtocol):
             **kwargs: Additional fields for the pet payload.
 
         Raises:
-            NotImplementedError: Always raised because the UI flow is pending.
+            PermissionError: If called without an authenticated session.
         """
-        raise NotImplementedError(
-            "add_pet via UI is not yet implemented. "
-            "Use PetstoreApiClient for pet CRUD operations."
-        )
+        self._require_authenticated_session("add_pet")
+        return self._pet_management_page.add_pet(name=name, status=status, **kwargs)
 
     def get_pet(self, pet_id: int) -> dict[str, Any]:
-        """Signal that UI-based pet retrieval is not implemented yet.
+        """Retrieve a pet by id from the UI.
 
         Args:
             pet_id: Identifier of the pet to retrieve.
 
-        Raises:
-            NotImplementedError: Always raised because the UI flow is pending.
+        Returns:
+            A parsed pet dictionary.
         """
-        raise NotImplementedError("get_pet via UI is not yet implemented.")
+        return self._pet_management_page.get_pet(pet_id)
 
     def update_pet(self, pet_id: int, **kwargs: Any) -> dict[str, Any]:
-        """Signal that UI-based pet updates are not implemented yet.
+        """Update a pet through the UI.
 
         Args:
             pet_id: Identifier of the pet to update.
             **kwargs: Fields to update.
 
         Raises:
-            NotImplementedError: Always raised because the UI flow is pending.
+            PermissionError: If called without an authenticated session.
         """
-        raise NotImplementedError("update_pet via UI is not yet implemented.")
+        self._require_authenticated_session("update_pet")
+        return self._pet_management_page.update_pet(pet_id=pet_id, **kwargs)
 
     def delete_pet(self, pet_id: int) -> None:
-        """Signal that UI-based pet deletion is not implemented yet.
+        """Delete a pet through the UI.
 
         Args:
             pet_id: Identifier of the pet to delete.
 
         Raises:
-            NotImplementedError: Always raised because the UI flow is pending.
+            PermissionError: If called without an authenticated session.
         """
-        raise NotImplementedError("delete_pet via UI is not yet implemented.")
+        self._require_authenticated_session("delete_pet")
+        self._pet_management_page.delete_pet(pet_id=pet_id)
 
     def find_pets_by_status(self, status: str) -> list[dict[str, Any]]:
-        """Signal that UI-based pet search is not implemented yet.
+        """Find pets by status through the UI filter.
 
         Args:
             status: Pet status to search for.
 
-        Raises:
-            NotImplementedError: Always raised because the UI flow is pending.
+        Returns:
+            List of parsed pet dictionaries matching the status.
         """
-        raise NotImplementedError("find_pets_by_status via UI is not yet implemented.")
+        return self._pet_management_page.find_pets_by_status(status=status)
 
     # ------------------------------------------------------------------
     # Lifecycle

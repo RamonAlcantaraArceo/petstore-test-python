@@ -14,37 +14,31 @@ Usage
 
 from __future__ import annotations
 
-import factory
+from factory import DictFactory, Iterator, LazyAttribute, LazyFunction
 from faker import Faker
 
 fake = Faker()
 
 
-class PetFactory(factory.DictFactory):
+class PetFactory(DictFactory):
     """Generate pet payloads compatible with the Petstore API."""
 
-    id = factory.LazyFunction(lambda: fake.random_int(min=1_000_000, max=9_999_999))
-    name = factory.LazyFunction(fake.first_name)
-    photoUrls = factory.LazyFunction(lambda: [fake.image_url()])
-    status = factory.Iterator(["available", "pending", "sold"])
-    category = factory.LazyFunction(
-        lambda: {"id": fake.random_int(1, 10), "name": fake.word()}
-    )
-    tags = factory.LazyFunction(
-        lambda: [{"id": fake.random_int(1, 100), "name": fake.word()}]
-    )
+    id = LazyFunction(lambda: fake.random_int(min=1_000_000, max=9_999_999))
+    name = LazyFunction(fake.first_name)
+    photoUrls = LazyFunction(lambda: [fake.image_url()])
+    status = Iterator(["available", "pending", "sold"])
+    category = LazyFunction(lambda: {"id": fake.random_int(1, 10), "name": fake.word()})
+    tags = LazyFunction(lambda: [{"id": fake.random_int(1, 100), "name": fake.word()}])
 
 
-class UserFactory(factory.DictFactory):
+class UserFactory(DictFactory):
     """Generate user payloads compatible with the Petstore API."""
 
-    id = factory.LazyFunction(lambda: fake.random_int(min=1_000_000, max=9_999_999))
-    username = factory.LazyFunction(
-        lambda: fake.user_name() + str(fake.random_int(1, 9999))
-    )
-    firstName = factory.LazyFunction(fake.first_name)
-    lastName = factory.LazyFunction(fake.last_name)
-    email = factory.LazyAttribute(lambda o: f"{o.username}@example.com")
-    password = factory.LazyFunction(lambda: fake.password(length=12))
-    phone = factory.LazyFunction(fake.phone_number)
+    id = LazyFunction(lambda: fake.random_int(min=1_000_000, max=9_999_999))
+    username = LazyFunction(lambda: fake.user_name() + str(fake.random_int(1, 9999)))
+    firstName = LazyFunction(fake.first_name)
+    lastName = LazyFunction(fake.last_name)
+    email = LazyAttribute(lambda o: f"{o.username}@example.com")
+    password = LazyFunction(lambda: fake.password(length=12))
+    phone = LazyFunction(fake.phone_number)
     userStatus = 1

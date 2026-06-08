@@ -23,6 +23,9 @@ from petstore_openapi_client.api.user_api import UserApi
 from r3a_logger.logger import (
     initialize_logging,
 )
+from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 from framework.config import get_api_base_url, get_ui_base_url
 from framework.factories import UserFactory
@@ -250,6 +253,31 @@ def ui_base_url() -> str:
     return get_ui_base_url()
 
 
+def _build_chrome_driver(headless: bool = True) -> webdriver.Chrome:
+    """Build a Chrome WebDriver with sensible CI and local defaults.
+
+    Args:
+        headless: Whether to run Chrome without a visible window.
+
+    Returns:
+        A configured Chrome WebDriver instance.
+    """
+    options = ChromeOptions()
+    if headless:
+        options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument("--disable-extensions")
+
+    driver = webdriver.Chrome(options=options)
+
+    driver.set_window_position(2000, 100)
+
+    return driver
+
+
 @pytest.fixture
 def browser(ui_base_url: str) -> Generator[Any, None, None]:
     """Provide a configured Selenium WebDriver for each UI test.
@@ -258,9 +286,6 @@ def browser(ui_base_url: str) -> Generator[Any, None, None]:
     Skips (does not fail) when the ``--no-ui`` flag is passed.
     """
     pytest.importorskip("selenium", reason="selenium is required for UI tests")
-    from selenium.common.exceptions import WebDriverException  # noqa: PLC0415
-
-    from framework.ui_client import _build_chrome_driver  # noqa: PLC0415
 
     headless = os.getenv("HEADLESS", "true").lower() not in ("0", "false", "no")
     try:
@@ -282,7 +307,7 @@ def ui_client(browser: Any, ui_base_url: str) -> Generator[Any, None, None]:
     """Provide a :class:`PetstoreUiClient` backed by the ``browser`` fixture."""
     from framework.ui_client import PetstoreUiClient  # noqa: PLC0415
 
-    client = PetstoreUiClient(base_url=ui_base_url, driver=browser)
+    client = PetstoreUiClient(browser, base_url=ui_base_url)
     yield client
     client.close()
 
