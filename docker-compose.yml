@@ -14,6 +14,16 @@ services:
       API_KEY: ${API_KEY:-dev-api-key}
       APP_ENV: dev
       LOG_LEVEL: INFO
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/docs', timeout=5)\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
     security_opt:
       - no-new-privileges:true
     cap_drop:

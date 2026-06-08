@@ -10,6 +10,8 @@
 | `http://localhost:9901/` | Envoy admin UI |
 | `postgresql://localhost:5432/petstore` | PostgreSQL database |
 
+Use `docker compose up -d --wait` if you want Compose to block until the services with healthchecks are ready.
+
 ## Port overrides
 
 These host ports can be changed with compose environment variables:

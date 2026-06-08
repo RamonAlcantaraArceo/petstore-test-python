@@ -12,8 +12,8 @@ load_dotenv(".env.test", override=False)
 # load_dotenv(".env.local", override=False)
 
 DEFAULT_PETSTORE_API_BASE_URL = "http://localhost:8000/api/v1"
-DEFAULT_PETSTORE_UI_BASE_URL = "http://localhost:5173/petstore/"
-DEFAULT_STORYBOOK_BASE_URL = "http://localhost:6006"
+DEFAULT_PETSTORE_UI_BASE_URL = "http://localhost:8080/petstore/"
+DEFAULT_STORYBOOK_BASE_URL = "http://localhost:8080/storybook/"
 
 
 def get_api_base_url() -> str:

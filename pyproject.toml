@@ -57,7 +57,6 @@ addopts = [
     "--strict-markers",
     "--tb=short",
     "-p no:logger",
-    "-n=auto",
 ]
 markers = [
     "api: API tests using the requests library",

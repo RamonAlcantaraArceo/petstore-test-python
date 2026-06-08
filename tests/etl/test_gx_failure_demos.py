@@ -21,9 +21,9 @@ from tests.etl.gx_helpers import (
 @allure.feature("ETL – failure demos")
 @allure.story("Intentional failure examples")
 @pytest.mark.etl
-# @pytest.mark.skip(
-#     reason="Intentional failing demo. Unskip locally to view failure output."
-# )
+@pytest.mark.skip(
+    reason="Intentional failing demo. Unskip locally to view failure output."
+)
 class TestGxFailureDemos:
     """Demonstrate deterministic GX failures without affecting CI stability."""
 

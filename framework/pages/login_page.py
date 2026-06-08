@@ -20,7 +20,7 @@ class LoginPage:
             base_url: Root URL of the UI application.
         """
         self.driver = driver
-        self.base_url = base_url.rstrip("/")
+        self.base_url = base_url #.rstrip("/")
 
         self.full_app: FullApplicationPOM = FullApplicationPOM(driver)
         self.app_navigation: AppnavigationPOM = AppnavigationPOM(driver)
@@ -32,7 +32,11 @@ class LoginPage:
         Returns:
             Self, to allow method chaining.
         """
-        self.driver.get(self.base_url)
+        base_url = self.base_url.rstrip("/")
+        if "localhost:8080" in self.base_url:
+            base_url = base_url.replace("/petstore", "")
+
+        self.driver.get(base_url)
 
         self.full_app.wait_for_visibility(
             timeout=10

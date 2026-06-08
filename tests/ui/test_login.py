@@ -29,13 +29,12 @@ scenario_definition_only = pytest.mark.skip(
     reason="BDD scenario definition only; implementation steps will follow in next iteration."
 )
 
-
+@skip_if_no_ui
 @allure.feature("Authentication")
 @allure.story("Sign In / Sign Out flow")
 class TestSignInSignOutBddScenarios:
     """Scenario definitions for login/logout user journeys."""
 
-    @skip_if_no_ui
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.tag("ui", "auth", "bdd", "happy-path")
     @allure.title("Sign In with valid credentials")
@@ -69,7 +68,6 @@ class TestSignInSignOutBddScenarios:
         with allure.step("And the Sign In form is no longer shown"):
             assert ui_client.login_page._is_login_form_absent()
 
-    @skip_if_no_ui
     @scenario_definition_only
     @allure.severity(allure.severity_level.NORMAL)
     @allure.tag("ui", "auth", "bdd", "negative")
@@ -88,7 +86,6 @@ class TestSignInSignOutBddScenarios:
                     And the user does not see the authenticated navigation
         """
 
-    @skip_if_no_ui
     @scenario_definition_only
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.tag("ui", "auth", "bdd", "logout")
@@ -105,7 +102,6 @@ class TestSignInSignOutBddScenarios:
             And no authenticated user session indicator remains
         """
 
-    @skip_if_no_ui
     @scenario_definition_only
     @allure.severity(allure.severity_level.MINOR)
     @allure.tag("ui", "auth", "bdd", "validation")

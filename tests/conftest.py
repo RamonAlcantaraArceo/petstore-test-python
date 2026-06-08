@@ -273,7 +273,7 @@ def _build_chrome_driver(headless: bool = True) -> webdriver.Chrome:
 
     driver = webdriver.Chrome(options=options)
 
-    driver.set_window_position(2000, 100)
+    # driver.set_window_position(2000, 100)
 
     return driver
 
