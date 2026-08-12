@@ -57,8 +57,8 @@ class TestSignInSignOutBddScenarios:
             ui_client.login_page.open()
             assert ui_client.login_page.is_logged_out()
 
-        with allure.step('When the user signs in with "admin" / "secret"'):
-            ui_client.login(username="admin", password="secret")
+        with allure.step('When the user signs in with "admin1" / "secret"'):
+            ui_client.login(username="admin1", password="secret")
 
         with allure.step("Then the authenticated application navigation is visible"):
             assert ui_client.login_page.is_logged_in()

@@ -54,7 +54,7 @@ class TestPetManagementBddScenarios:
 
         with allure.step("Given the Petstore app is open and user signs in"):
             ui_client.login_page.open()
-            ui_client.login(username="admin", password="secret")
+            ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
 
         try:
@@ -115,7 +115,7 @@ class TestPetManagementBddScenarios:
 
         with allure.step("Given the Petstore app is open and user signs in"):
             ui_client.login_page.open()
-            ui_client.login(username="admin", password="secret")
+            ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
 
         try:
@@ -175,7 +175,7 @@ class TestPetManagementBddScenarios:
 
         with allure.step("Given the user signs in"):
             ui_client.login_page.open()
-            ui_client.login(username="admin", password="secret")
+            ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
 
         try:
@@ -231,7 +231,7 @@ class TestPetManagementBddScenarios:
 
         with allure.step("Given the user signs in and creates an available pet"):
             ui_client.login_page.open()
-            ui_client.login(username="admin", password="secret")
+            ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
 
             seed = PetFactory.build(status="available")
@@ -287,7 +287,7 @@ class TestPetManagementBddScenarios:
             "Given the user signs in and creates one pet per valid status"
         ):
             ui_client.login_page.open()
-            ui_client.login(username="admin", password="secret")
+            ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
 
             for status in valid_statuses:
