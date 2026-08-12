@@ -215,7 +215,9 @@ jobs:
         ports:
           - 8080:80
         env:
-          API_PROXY_TARGET: http://localhost:8000/api/v1
+          API_PROXY_TARGET: http://petstore:8000
+          API_BASE_URL: /api/v1
+          # API_PROXY_TARGET = "https://petstore-api-dev.ramon-alcantara.work"
 
     steps:
       - name: Checkout code
