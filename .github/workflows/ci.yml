@@ -238,6 +238,7 @@ jobs:
           HEADLESS: "true"
 
       - name: Upload UI test results and coverage
+        if: always()
         uses: ./.github/actions/upload-results
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
