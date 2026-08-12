@@ -34,6 +34,10 @@ inputs:
     required: false
     default: "latest"
 
+  github-token:
+    required: true
+    description: "Token for GitHub auth"
+
 runs:
   using: "composite"
   steps:
@@ -57,7 +61,7 @@ runs:
       shell: bash
       run: |
         uv config set http.auth.github.com.username token
-        uv config set http.auth.github.com.password ${{ secrets.GITHUB_TOKEN }}
+        uv config set http.auth.github.com.password ${{ inputs.github-token }}
         echo "Running: uv sync ${{ inputs.uv-sync-flags }}"
         uv sync ${{ inputs.uv-sync-flags }}
 
