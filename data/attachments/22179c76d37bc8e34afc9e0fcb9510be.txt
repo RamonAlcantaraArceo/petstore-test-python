@@ -1,0 +1,193 @@
+23:49:39 | DEBUG    | __init__ | Using selector: EpollSelector
+23:49:39 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f4fbf45bec0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:39 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f4fbf45bf60> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:39 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f4fc0c923f0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:39 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7f4fc0c923f0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:39 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7f4fbf310040> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+23:49:39 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7f4fbf3100e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:39 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7f4fc0cc0fb0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:39 | DEBUG    | request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***"
+    },
+    "body": {
+      "username": "lynchmichael5959",
+      "email": "lynchmichael5959@example.com",
+      "password": "7x@UroUe^6WT"
+    }
+  }
+23:49:39 | DEBUG    | request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Wed, 12 Aug 2026 23:49:38 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "144",
+      "Content-Type": "application/json",
+      "x-correlation-id": "3c1fe540-d304-44cf-915b-ae0289c392ea",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8983",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "username": "lynchmichael5959",
+      "first_name": null,
+      "last_name": null,
+      "email": "lynchmichael5959@example.com",
+      "phone": null,
+      "user_status": null,
+      "id": 4
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+23:49:39 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/user/login?username=lynchmichael5959&password=7x%40UroUe%5E6WT
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login?username=lynchmichael5959&password=7x%40UroUe%5E6WT",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+23:49:39 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/user/login?username=lynchmichael5959&password=7x%40UroUe%5E6WT [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Wed, 12 Aug 2026 23:49:38 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "505",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx5bmNobWljaGFlbDU5NTlAZXhhbXBsZS5jb20iLCJleHAiOjE3ODY1ODIxNzksImlhdCI6MTc4NjU3ODU3OSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJzdWIiOiI0IiwidXNlcl9tZXRhZGF0YSI6eyJmaXJzdF9uYW1lIjpudWxsLCJsYXN0X25hbWUiOm51bGwsInBob25lIjpudWxsLCJ1c2VyX3N0YXR1cyI6bnVsbCwidXNlcm5hbWUiOiJseW5jaG1pY2hhZWw1OTU5In19.kYtH_i0neBhSnSYITaJLIKvSdXlD_rnXA9Nj0uHNXqs",
+      "x-correlation-id": "c3e7543d-04d5-493c-aec7-fca9f778c46a",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8982",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx5bmNobWljaGFlbDU5NTlAZXhhbXBsZS5jb20iLCJleHAiOjE3ODY1ODIxNzksImlhdCI6MTc4NjU3ODU3OSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJzdWIiOiI0IiwidXNlcl9tZXRhZGF0YSI6eyJmaXJzdF9uYW1lIjpudWxsLCJsYXN0X25hbWUiOm51bGwsInBob25lIjpudWxsLCJ1c2VyX3N0YXR1cyI6bnVsbCwidXNlcm5hbWUiOiJseW5jaG1pY2hhZWw1OTU5In19.kYtH_i0neBhSnSYITaJLIKvSdXlD_rnXA9Nj0uHNXqs",
+      "token_type": "bearer",
+      "user": {
+        "id": "4",
+        "email": "lynchmichael5959@example.com",
+        "username": "lynchmichael5959"
+      }
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=lynchmichael5959&password=7x%40UroUe%5E6WT"
+  }
+23:49:39 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/user/lynchmichael5959
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/lynchmichael5959",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+23:49:39 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/user/lynchmichael5959 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Wed, 12 Aug 2026 23:49:38 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "144",
+      "Content-Type": "application/json",
+      "x-correlation-id": "4bf1f8f0-c558-44b3-9f39-36d59e362655",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8981",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "username": "lynchmichael5959",
+      "first_name": null,
+      "last_name": null,
+      "email": "lynchmichael5959@example.com",
+      "phone": null,
+      "user_status": null,
+      "id": 4
+    },
+    "url": "http://localhost:8000/api/v1/user/lynchmichael5959"
+  }
+23:49:39 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+23:49:39 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Wed, 12 Aug 2026 23:49:38 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "29",
+      "Content-Type": "application/json",
+      "x-correlation-id": "fedfe0fb-a83e-45e0-9d72-9c3dbce8fe81",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8980",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+23:49:39 | DEBUG    | request | Request: http://localhost:8000 DELETE /api/v1/user/lynchmichael5959
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/lynchmichael5959",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+23:49:39 | DEBUG    | request | Response: http://localhost:8000 DELETE /api/v1/user/lynchmichael5959 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "Date": "Wed, 12 Aug 2026 23:49:38 GMT",
+      "Server": "uvicorn",
+      "Content-Type": "application/json",
+      "x-correlation-id": "982869b0-77ad-4394-9776-7be1e36adc8f",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8979",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/user/lynchmichael5959"
+  }

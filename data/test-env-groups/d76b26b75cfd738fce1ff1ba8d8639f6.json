@@ -1,0 +1,1 @@
+{"id":"d76b26b75cfd738fce1ff1ba8d8639f6","fullName":"tests.ui.test_login.TestSignInSignOutBddScenarios#test_sign_in_requires_username_and_password","name":"Sign In requires both username and password","status":"skipped","testResultsByEnv":{"default":"190163eff80df99097519ce90bd74009"}}

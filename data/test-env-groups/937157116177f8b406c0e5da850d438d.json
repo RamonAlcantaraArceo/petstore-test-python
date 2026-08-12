@@ -1,0 +1,1 @@
+{"id":"937157116177f8b406c0e5da850d438d","fullName":"tests.ui.test_pet_management.TestPetManagementBddScenarios#test_pet_creation_supports_all_valid_statuses","name":"Pet creation supports available, pending, and sold statuses","status":"passed","testResultsByEnv":{"default":"a1585e3aff02ec5f2718cc00c252fa03"}}

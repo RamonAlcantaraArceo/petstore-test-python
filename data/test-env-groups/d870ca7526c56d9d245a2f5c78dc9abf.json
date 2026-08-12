@@ -1,0 +1,1 @@
+{"id":"d870ca7526c56d9d245a2f5c78dc9abf","fullName":"tests.ui.test_pet_management.TestPetManagementBddScenarios#test_status_filter_accepts_only_valid_status_values","name":"Status filter accepts only available, pending, and sold","status":"skipped","testResultsByEnv":{"default":"0790b59872649875d39ab12dc01a0157"}}

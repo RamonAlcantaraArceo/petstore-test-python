@@ -1,0 +1,1 @@
+{"id":"b218a582ba3865654b7845a3d91ed934","fullName":"tests.ui.test_login.TestSignInSignOutBddScenarios#test_sign_out_after_successful_sign_in","name":"Sign Out after successful Sign In returns to logged-out state","status":"skipped","testResultsByEnv":{"default":"df2455626c9ac99f3d90377d0b508123"}}

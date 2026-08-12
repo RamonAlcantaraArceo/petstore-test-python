@@ -1,1 +1,1 @@
-{"id":"74845bf6aecd9612f5f305670ceefaf1","fullName":"tests.api.test_pets.TestGetPet#test_get_pet_with_out_of_range_id","name":"Fetching an out-of-range pet id returns a client error","status":"passed","testResultsByEnv":{"default":"08b7d2b8f6de3f2fef687ef166f34614"}}
+{"id":"74845bf6aecd9612f5f305670ceefaf1","fullName":"tests.api.test_pets.TestGetPet#test_get_pet_with_out_of_range_id","name":"Fetching an out-of-range pet id returns a client error","status":"skipped","testResultsByEnv":{"default":"630d8b7bfc0b4a330e83e9a36acd4a84"}}

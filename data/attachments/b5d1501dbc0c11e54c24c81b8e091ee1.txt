@@ -1,0 +1,222 @@
+23:49:42 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7fed939a7ec0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:42 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7fed959fe930>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:42 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7fed959fe930>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:42 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7fed937b4040> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+23:49:42 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7fed952f7800>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+23:49:42 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/user1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/user1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU4MjE4MiwiaWF0IjoxNzg2NTc4NTgyLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.qyTUcVS5pmCJOHhdczGpEm_NcV6uEqzmaMpGeZbV5c4"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+23:49:42 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+23:49:42 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/user1 HTTP/1.1" 404 18
+23:49:42 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/user1 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Wed, 12 Aug 2026 23:49:42 GMT",
+      "server": "uvicorn",
+      "content-length": "18",
+      "content-type": "text/plain; charset=utf-8",
+      "x-correlation-id": "2301e027-a836-42a4-b015-58648f24a2aa",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8987",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "😢 404 Not Found",
+    "url": "http://localhost:8000/api/v1/user/user1"
+  }
+23:49:42 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU4MjE4MiwiaWF0IjoxNzg2NTc4NTgyLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.qyTUcVS5pmCJOHhdczGpEm_NcV6uEqzmaMpGeZbV5c4"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "user1",
+      "password": "password1",
+      "email": "user1@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+23:49:42 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 120
+23:49:42 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 12 Aug 2026 23:49:42 GMT",
+      "server": "uvicorn",
+      "content-length": "120",
+      "content-type": "application/json",
+      "x-correlation-id": "0666b362-08ed-47c1-9f76-fc2c5cf2106d",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8986",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "username": "user1",
+      "first_name": null,
+      "last_name": null,
+      "email": "user1@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 6
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+23:49:42 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/login?username=user1&password=password1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU4MjE4MiwiaWF0IjoxNzg2NTc4NTgyLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.qyTUcVS5pmCJOHhdczGpEm_NcV6uEqzmaMpGeZbV5c4"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "user1",
+      "password": "password1"
+    },
+    "json": null,
+    "data": null
+  }
+23:49:42 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/login?username=user1&password=password1 HTTP/1.1" 200 451
+23:49:42 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/login?username=user1&password=password1 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 12 Aug 2026 23:49:42 GMT",
+      "server": "uvicorn",
+      "content-length": "451",
+      "content-type": "application/json",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiZXhwIjoxNzg2NTgyMTgyLCJpYXQiOjE3ODY1Nzg1ODIsInJvbGUiOiJhdXRoZW50aWNhdGVkIiwic3ViIjoiNiIsInVzZXJfbWV0YWRhdGEiOnsiZmlyc3RfbmFtZSI6bnVsbCwibGFzdF9uYW1lIjpudWxsLCJwaG9uZSI6IiIsInVzZXJfc3RhdHVzIjpudWxsLCJ1c2VybmFtZSI6InVzZXIxIn19.4h8tMmxxUZLCKA1S3R9VKyuT2oLwk4eZgdlond6Butc",
+      "x-correlation-id": "8f07fd51-24fc-4aab-bc2f-c6baa2580e4f",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8985",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiZXhwIjoxNzg2NTgyMTgyLCJpYXQiOjE3ODY1Nzg1ODIsInJvbGUiOiJhdXRoZW50aWNhdGVkIiwic3ViIjoiNiIsInVzZXJfbWV0YWRhdGEiOnsiZmlyc3RfbmFtZSI6bnVsbCwibGFzdF9uYW1lIjpudWxsLCJwaG9uZSI6IiIsInVzZXJfc3RhdHVzIjpudWxsLCJ1c2VybmFtZSI6InVzZXIxIn19.4h8tMmxxUZLCKA1S3R9VKyuT2oLwk4eZgdlond6Butc",
+      "token_type": "bearer",
+      "user": {
+        "id": "6",
+        "email": "user1@example.com",
+        "username": "user1"
+      }
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=user1&password=password1"
+  }
+23:49:42 | INFO     | login | Logged in as user1
+23:49:42 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU4MjE4MiwiaWF0IjoxNzg2NTc4NTgyLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.qyTUcVS5pmCJOHhdczGpEm_NcV6uEqzmaMpGeZbV5c4"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+23:49:42 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/user/logout HTTP/1.1" 200 29
+23:49:42 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 12 Aug 2026 23:49:42 GMT",
+      "server": "uvicorn",
+      "content-length": "29",
+      "content-type": "application/json",
+      "x-correlation-id": "61238aa2-493f-45f3-bdd8-acc3f468ce9c",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8984",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+23:49:42 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/user/user1
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/user1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU4MjE4MiwiaWF0IjoxNzg2NTc4NTgyLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.qyTUcVS5pmCJOHhdczGpEm_NcV6uEqzmaMpGeZbV5c4"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+23:49:43 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/user/user1 HTTP/1.1" 204 0
+23:49:43 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/user/user1 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "date": "Wed, 12 Aug 2026 23:49:42 GMT",
+      "server": "uvicorn",
+      "content-type": "application/json",
+      "x-correlation-id": "e9e44dbf-cef0-4f87-a186-6e87139233f7",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8983",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/user/user1"
+  }
+23:49:43 | DEBUG    | close | Session closed

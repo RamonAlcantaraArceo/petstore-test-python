@@ -1,0 +1,145 @@
+23:49:43 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fed939a7420> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+23:49:43 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7fed959fe930>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+23:49:43 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fed939a77e0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+23:49:43 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fed939a7c40> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+23:49:43 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fed939a7ce0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+23:49:43 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU4MjE4MiwiaWF0IjoxNzg2NTc4NTgyLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.qyTUcVS5pmCJOHhdczGpEm_NcV6uEqzmaMpGeZbV5c4"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "Sharon",
+      "status": "available",
+      "photoUrls": [
+        "https://dummyimage.com/601x172"
+      ]
+    },
+    "data": null
+  }
+23:49:43 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+23:49:43 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 120
+23:49:43 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 12 Aug 2026 23:49:42 GMT",
+      "server": "uvicorn",
+      "content-length": "120",
+      "content-type": "application/json",
+      "x-correlation-id": "9045ca5d-393e-43c5-b849-63b70ddca5aa",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8955",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "Sharon",
+      "photoUrls": [
+        "https://dummyimage.com/601x172"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 7
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+23:49:43 | DEBUG    | _request | Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU4MjE4MiwiaWF0IjoxNzg2NTc4NTgyLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.qyTUcVS5pmCJOHhdczGpEm_NcV6uEqzmaMpGeZbV5c4"
+    },
+    "extra_headers": null,
+    "params": {
+      "status": "available"
+    },
+    "json": null,
+    "data": null
+  }
+23:49:43 | DEBUG    | _make_request | http://localhost:8000 "GET /api/v1/pet/findByStatus?status=available HTTP/1.1" 200 122
+23:49:43 | DEBUG    | _request | Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Wed, 12 Aug 2026 23:49:42 GMT",
+      "server": "uvicorn",
+      "content-length": "122",
+      "content-type": "application/json",
+      "x-correlation-id": "60559a98-80d9-4d70-947c-3d6b48765481",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8954",
+      "x-ratelimit-reset": "60"
+    },
+    "body": [
+      {
+        "name": "Sharon",
+        "photoUrls": [
+          "https://dummyimage.com/601x172"
+        ],
+        "category": null,
+        "tags": null,
+        "status": "available",
+        "id": 7
+      }
+    ],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=available"
+  }
+23:49:43 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/pet/7
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/7",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU4MjE4MiwiaWF0IjoxNzg2NTc4NTgyLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.qyTUcVS5pmCJOHhdczGpEm_NcV6uEqzmaMpGeZbV5c4"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+23:49:43 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/pet/7 HTTP/1.1" 204 0
+23:49:43 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/pet/7 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "date": "Wed, 12 Aug 2026 23:49:42 GMT",
+      "server": "uvicorn",
+      "content-type": "application/json",
+      "x-correlation-id": "bee2736f-f696-41a6-9e07-3112f4b44dc3",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8953",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/pet/7"
+  }
+23:49:43 | DEBUG    | close | Session closed

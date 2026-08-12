@@ -1,1 +1,0 @@
-{"id":"c12cdae8b9ca6310e45c943a0290247b","fullName":"tests.ui.test_login.TestLoginUi#test_login_then_logout_returns_to_login_page","name":"Logout after login returns to the login page","status":"passed","testResultsByEnv":{"default":"6f9cc6d98988b9d2697cf488e5964f34"}}
