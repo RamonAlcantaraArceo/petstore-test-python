@@ -209,7 +209,6 @@ jobs:
           - 8000:8000
         env:
           RATE_LIMIT_REQUESTS: 9000
-        env:
           SEED_DATASET: mixed_v2
       petstore-ui:
         image: ghcr.io/ramonalcantaraarceo/petstore-ui:latest
