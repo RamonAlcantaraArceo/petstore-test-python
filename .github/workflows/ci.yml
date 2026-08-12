@@ -213,7 +213,7 @@ jobs:
       petstore-ui:
         image: ghcr.io/ramonalcantaraarceo/petstore-ui:latest
         ports:
-          - 8080:8080
+          - 8080:80
         env:
           API_PROXY_TARGET: http://petstore:8000/api/v1
 
