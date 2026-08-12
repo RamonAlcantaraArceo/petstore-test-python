@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from contextlib import contextmanager
 from uuid import uuid4
 
 import allure
@@ -11,6 +12,25 @@ import pytest
 from framework.assertions import assert_that
 from framework.factories import PetFactory
 from framework.ui_client import PetstoreUiClient
+
+
+@contextmanager
+def step_with_screenshot(name, ui_client):
+    with allure.step(name):
+        allure.attach(
+            ui_client._driver.get_screenshot_as_png(),
+            name=f"OnEntry-{name}",
+            attachment_type=allure.attachment_type.PNG,
+        )
+        try:
+            yield
+        finally:
+            allure.attach(
+                ui_client._driver.get_screenshot_as_png(),
+                name=f"OnExit-{name}",
+                attachment_type=allure.attachment_type.PNG,
+            )
+
 
 pytestmark = pytest.mark.ui
 
@@ -52,13 +72,17 @@ class TestPetManagementBddScenarios:
         )
         created_pet_id: int | None = None
 
-        with allure.step("Given the Petstore app is open and user signs in"):
+        with step_with_screenshot(
+            "Given the Petstore app is open and user signs in", ui_client
+        ):
             ui_client.login_page.open()
             ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
 
         try:
-            with allure.step("When the user creates a pet from generated test data"):
+            with step_with_screenshot(
+                "When the user creates a pet from generated test data", ui_client
+            ):
                 created = ui_client.add_pet(
                     name=pet_data["name"],
                     status=pet_data["status"],
@@ -71,13 +95,15 @@ class TestPetManagementBddScenarios:
                 assert_that(created["name"]).equals(pet_data["name"])
                 assert_that(created["status"]).equals(pet_data["status"])
 
-            with allure.step("And retrieves the created pet by id"):
+            with step_with_screenshot("And retrieves the created pet by id", ui_client):
                 retrieved = ui_client.get_pet(created_pet_id)
                 assert_that(retrieved["id"]).equals(created_pet_id)
                 assert_that(retrieved["name"]).equals(pet_data["name"])
                 assert_that(retrieved["status"]).equals(pet_data["status"])
 
-            with allure.step("Then the user can delete the pet and it is removed"):
+            with step_with_screenshot(
+                "Then the user can delete the pet and it is removed", ui_client
+            ):
                 ui_client.delete_pet(created_pet_id)
 
                 with pytest.raises(KeyError):
@@ -113,13 +139,17 @@ class TestPetManagementBddScenarios:
         updated_name = f"{pet_data['name']}-updated"
         updated_status = "sold" if pet_data["status"] != "sold" else "pending"
 
-        with allure.step("Given the Petstore app is open and user signs in"):
+        with step_with_screenshot(
+            "Given the Petstore app is open and user signs in", ui_client
+        ):
             ui_client.login_page.open()
             ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
 
         try:
-            with allure.step("When the user creates a pet from generated test data"):
+            with step_with_screenshot(
+                "When the user creates a pet from generated test data", ui_client
+            ):
                 created = ui_client.add_pet(
                     name=pet_data["name"],
                     status=pet_data["status"],
@@ -129,7 +159,7 @@ class TestPetManagementBddScenarios:
                 created_pet_id = created["id"]
                 assert_that(created["name"]).equals(pet_data["name"])
 
-            with allure.step("And updates the pet name and status"):
+            with step_with_screenshot("And updates the pet name and status", ui_client):
                 updated = ui_client.update_pet(
                     created_pet_id,
                     name=updated_name,
@@ -139,7 +169,9 @@ class TestPetManagementBddScenarios:
                 assert_that(updated["name"]).equals(updated_name)
                 assert_that(updated["status"]).equals(updated_status)
 
-            with allure.step("Then the user can delete the updated pet"):
+            with step_with_screenshot(
+                "Then the user can delete the updated pet", ui_client
+            ):
                 ui_client.delete_pet(created_pet_id)
                 with pytest.raises(KeyError):
                     ui_client.get_pet(created_pet_id)
@@ -173,14 +205,16 @@ class TestPetManagementBddScenarios:
         created_ids: list[int] = []
         valid_statuses = ("available", "pending", "sold")
 
-        with allure.step("Given the user signs in"):
+        with step_with_screenshot("Given the user signs in", ui_client):
             ui_client.login_page.open()
             ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
 
         try:
             for status in valid_statuses:
-                with allure.step(f"When a pet is created with status '{status}'"):
+                with step_with_screenshot(
+                    f"When a pet is created with status '{status}'", ui_client
+                ):
                     pet_data = PetFactory.build(
                         status=status,
                         name=_unique_name(f"{status}-pet"),
@@ -194,8 +228,9 @@ class TestPetManagementBddScenarios:
                     created_ids.append(created["id"])
                     assert_that(created["status"]).equals(status)
 
-                with allure.step(
-                    "Then the created pet can be retrieved with the same status"
+                with step_with_screenshot(
+                    "Then the created pet can be retrieved with the same status",
+                    ui_client,
                 ):
                     retrieved = ui_client.get_pet(created["id"])
                     assert_that(retrieved["name"]).equals(pet_data["name"])
@@ -229,7 +264,9 @@ class TestPetManagementBddScenarios:
         created_pet_id: int | None = None
         transition_sequence = ["available", "pending", "sold", "available"]
 
-        with allure.step("Given the user signs in and creates an available pet"):
+        with step_with_screenshot(
+            "Given the user signs in and creates an available pet", ui_client
+        ):
             ui_client.login_page.open()
             ui_client.login(username="admin1", password="secret")
             assert_that(ui_client.is_logged_in()).is_true()
@@ -247,11 +284,15 @@ class TestPetManagementBddScenarios:
 
         try:
             for next_status in transition_sequence[1:]:
-                with allure.step(f"When status is updated to '{next_status}'"):
+                with step_with_screenshot(
+                    f"When status is updated to '{next_status}'", ui_client
+                ):
                     updated = ui_client.update_pet(created_pet_id, status=next_status)
                     created_pet_id = updated["id"]
 
-                with allure.step("Then the pet reflects the target status"):
+                with step_with_screenshot(
+                    "Then the pet reflects the target status", ui_client
+                ):
                     assert_that(updated["status"]).equals(next_status)
 
         finally:
@@ -283,8 +324,8 @@ class TestPetManagementBddScenarios:
         created_by_status: dict[str, int] = {}
         valid_statuses = ("available", "pending", "sold")
 
-        with allure.step(
-            "Given the user signs in and creates one pet per valid status"
+        with step_with_screenshot(
+            "Given the user signs in and creates one pet per valid status", ui_client
         ):
             ui_client.login_page.open()
             ui_client.login(username="admin1", password="secret")
@@ -306,17 +347,21 @@ class TestPetManagementBddScenarios:
 
         try:
             for status in valid_statuses:
-                with allure.step(f"When filtering by '{status}'"):
+                with step_with_screenshot(f"When filtering by '{status}'", ui_client):
                     filtered = ui_client.find_pets_by_status(status)
                     filtered_ids = {pet["id"] for pet in filtered}
 
-                with allure.step("Then matching status pets are returned"):
+                with step_with_screenshot(
+                    "Then matching status pets are returned", ui_client
+                ):
                     assert_that(created_by_status[status] in filtered_ids).is_true()
                     assert_that(
                         all(pet["status"] == status for pet in filtered)
                     ).is_true()
 
-            with allure.step("And invalid status values are rejected"):
+            with step_with_screenshot(
+                "And invalid status values are rejected", ui_client
+            ):
                 with pytest.raises(ValueError):
                     ui_client.find_pets_by_status("invalid-status")
 
@@ -341,11 +386,15 @@ class TestPetManagementBddScenarios:
         Creating, updating, and deleting pets requires an authenticated user session;
         after logout, those operations are no longer permitted from the UI.
         """
-        with allure.step("Given the user opens the Petstore UI in logged-out state"):
+        with step_with_screenshot(
+            "Given the user opens the Petstore UI in logged-out state", ui_client
+        ):
             ui_client.login_page.open()
             assert_that(ui_client.login_page.is_logged_out()).is_true()
             assert_that(ui_client.is_logged_in()).is_false()
 
-        with allure.step("When an unauthenticated user tries to create a pet"):
+        with step_with_screenshot(
+            "When an unauthenticated user tries to create a pet", ui_client
+        ):
             with pytest.raises(PermissionError):
                 ui_client.add_pet(name="unauthorized-pet", status="available")
