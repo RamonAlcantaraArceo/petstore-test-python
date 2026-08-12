@@ -56,6 +56,8 @@ runs:
     - name: Install dependencies
       shell: bash
       run: |
+        uv config set http.auth.github.com.username token
+        uv config set http.auth.github.com.password ${{ secrets.GITHUB_TOKEN }}
         echo "Running: uv sync ${{ inputs.uv-sync-flags }}"
         uv sync ${{ inputs.uv-sync-flags }}
 
