@@ -22,7 +22,7 @@ concurrency:
 
 env:
   PETSTORE_API_BASE_URL: "http://localhost:8000/api/v1"
-  PETSTORE_UI_BASE_URL: "http://localhost:5173/petstore/"
+  PETSTORE_UI_BASE_URL: "http://localhost:8080/petstore/"
   PETSTORE_API_KEY: ${{ secrets.PETSTORE_API_KEY }}
   # UI tests are opt-in; set to "1" in a separate workflow or matrix leg
   RUN_UI_TESTS: "0"
@@ -67,6 +67,8 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          RATE_LIMIT_REQUESTS: 9000
 
     steps:
       - name: Checkout code
@@ -111,6 +113,8 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          RATE_LIMIT_REQUESTS: 9000
 
     steps:
       - name: Checkout code
@@ -155,6 +159,8 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          RATE_LIMIT_REQUESTS: 9000
 
     steps:
       - name: Checkout code
@@ -201,6 +207,8 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          RATE_LIMIT_REQUESTS: 9000
         env:
           SEED_DATASET: mixed_v2
       petstore-ui:
