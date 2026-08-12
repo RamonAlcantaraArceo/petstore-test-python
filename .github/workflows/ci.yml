@@ -201,6 +201,14 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          SEED_DATASET: mixed_v2
+      petstore-ui:
+        image: ghcr.io/ramonalcantaraarceo/petstore-ui:latest
+        ports:
+          - 8080:8080
+        env:
+          API_PROXY_TARGET: http://petstore:8000/api/v1
 
     steps:
       - name: Checkout code
