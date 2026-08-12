@@ -217,6 +217,10 @@ jobs:
         env:
           API_PROXY_TARGET: http://petstore:8000
           API_BASE_URL: /api/v1
+          API_KEY: ${{ secrets.PETSTORE_API_KEY }}
+          APP_ENV : dev
+          LOG_LEVEL : INFO
+          STORAGE_MODE : memory
           # API_PROXY_TARGET = "https://petstore-api-dev.ramon-alcantara.work"
 
     steps:
