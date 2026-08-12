@@ -214,8 +214,11 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-ui:latest
         ports:
           - 8080:80
+        options: --add-host=host.docker.internal:host-gateway
         env:
-          API_PROXY_TARGET: http://petstore:8000
+          # The UI container reaches the API through its runner-published port.
+          # localhost here would refer to the UI container itself.
+          API_PROXY_TARGET: http://host.docker.internal:8000
           API_BASE_URL: /api/v1
           API_KEY: ${{ secrets.PETSTORE_API_KEY }}
           APP_ENV : dev
