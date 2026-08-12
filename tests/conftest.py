@@ -271,6 +271,17 @@ def _build_chrome_driver(headless: bool = True) -> webdriver.Chrome:
     options.add_argument("--window-size=1920,1080")
     options.add_argument("--disable-extensions")
 
+    # Because of the weak passwords used in the demo app, 
+    # Chrome's password manager will pop up a 
+    # "This password is not secure" dialog.
+    # This is a nuisance for automated tests, so we disable 
+    # the password manager and leak detection
+    options.add_experimental_option("prefs", {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False,
+        "password_leak_detection_enabled": False
+    })
+
     driver = webdriver.Chrome(options=options)
 
     # driver.set_window_position(2000, 100)
