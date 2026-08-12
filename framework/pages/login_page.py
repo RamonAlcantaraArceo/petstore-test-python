@@ -20,7 +20,7 @@ class LoginPage:
             base_url: Root URL of the UI application.
         """
         self.driver = driver
-        self.base_url = base_url #.rstrip("/")
+        self.base_url = base_url  # .rstrip("/")
 
         self.full_app: FullApplicationPOM = FullApplicationPOM(driver)
         self.app_navigation: AppnavigationPOM = AppnavigationPOM(driver)

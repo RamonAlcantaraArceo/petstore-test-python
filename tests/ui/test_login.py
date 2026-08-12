@@ -29,6 +29,7 @@ scenario_definition_only = pytest.mark.skip(
     reason="BDD scenario definition only; implementation steps will follow in next iteration."
 )
 
+
 @skip_if_no_ui
 @allure.feature("Authentication")
 @allure.story("Sign In / Sign Out flow")
