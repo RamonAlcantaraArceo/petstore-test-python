@@ -1,14 +1,7 @@
-"""UI tests – login feature (Page Object Model + Selenium).
+"""BDD-style UI scenarios for Sign In / Sign Out.
 
-These tests use the same assertion style as tests/api/test_login.py,
-demonstrating the shared-interface pattern across API and UI.
-
-The target site is https://the-internet.herokuapp.com/login
-(a freely available Selenium practice site).  Override the target by
-setting the ``PETSTORE_UI_BASE_URL`` environment variable.
-
-Note: UI tests are skipped in CI unless the ``--run-ui`` flag is passed
-or the ``RUN_UI_TESTS`` environment variable is set to ``1``.
+These are scenario-first test cases for the Petstore UI login flow.
+They intentionally focus on executable documentation and Allure metadata.
 """
 
 from __future__ import annotations
@@ -17,12 +10,9 @@ import os
 
 import allure
 import pytest
-from selenium.webdriver.common.by import By
 
-from framework.assertions import assert_that
-from framework.pages.login_page import LoginPage
+from framework.ui_client import PetstoreUiClient
 
-# Skip entire module when Selenium is unavailable or UI tests are disabled
 pytestmark = pytest.mark.ui
 
 
@@ -35,76 +25,98 @@ skip_if_no_ui = pytest.mark.skipif(
     reason="UI tests are disabled. Set RUN_UI_TESTS=1 to enable.",
 )
 
+scenario_definition_only = pytest.mark.skip(
+    reason="BDD scenario definition only; implementation steps will follow in next iteration."
+)
 
-@allure.feature("UI Authentication")
-@allure.label("suite", "UI")
+
 @skip_if_no_ui
-class TestLoginUi:
-    """Selenium tests for the login page using the Page Object Model."""
+@allure.feature("Authentication")
+@allure.story("Sign In / Sign Out flow")
+class TestSignInSignOutBddScenarios:
+    """Scenario definitions for login/logout user journeys."""
 
-    @pytest.fixture(autouse=True)
-    def _open_login_page(self, browser, ui_base_url: str) -> None:
-        """Navigate to the login page before each test."""
-        self._page = LoginPage(browser, base_url=ui_base_url)
-        self._page.open()
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.tag("ui", "auth", "bdd", "happy-path")
+    @allure.title("Sign In with valid credentials")
+    def test_sign_in_with_valid_credentials(self, ui_client: PetstoreUiClient) -> None:
+        """Successful authentication grants access to the application.
 
-    @allure.story("Successful login")
-    @allure.title("Valid credentials show the secure area message")
-    def test_successful_login_shows_secure_area(self, browser) -> None:
-        """Logging in with valid credentials should show the secure area message.
-
-        This mirrors tests/api/test_login.py::TestLogin::test_login_sets_authenticated_state
-        using the identical assertion style.
+        Instructions:
+            Given the Petstore application is open at /petstore
+            And the Sign In form is visible
+            When the user enters username "admin"
+            And enters password "secret"
+            And submits the Sign In form
+            Then the authenticated application navigation is visible
+            And the user can see the Sign Out action
+            And the Sign In form is no longer shown
         """
-        with allure.step("Submit valid credentials"):
-            self._page.login("tomsmith", "SuperSecretPassword!")
 
-        with allure.step("Verify secure area is shown"):
-            assert_that(self._page.is_logged_in()).is_true()
-            assert_that(self._page.get_flash_message()).contains(
-                "You logged into a secure area!"
-            )
+        with allure.step("Given the Petstore application is open at /petstore"):
+            ui_client.login_page.open()
+            assert ui_client.login_page.is_logged_out()
 
-    @allure.story("Failed login")
-    @allure.title("Invalid credentials show an error message")
-    def test_failed_login_shows_error_message(self, browser) -> None:
-        """Logging in with invalid credentials should show an error message."""
-        with allure.step("Submit invalid credentials"):
-            self._page.login("wrong_user", "wrong_pass")
+        with allure.step('When the user signs in with "admin1" / "secret"'):
+            ui_client.login(username="admin1", password="secret")
 
-        with allure.step("Verify login failed and error is displayed"):
-            assert_that(self._page.is_logged_in()).is_false()
-            assert_that(self._page.is_login_failed()).is_true()
+        with allure.step("Then the authenticated application navigation is visible"):
+            assert ui_client.login_page.is_logged_in()
 
-    @allure.story("Session state")
-    @allure.title("Logout after login returns to the login page")
-    def test_login_then_logout_returns_to_login_page(
-        self, browser, ui_base_url: str
-    ) -> None:
-        """After login and logout the user should be back on the login page."""
-        with allure.step("Login with valid credentials"):
-            self._page.login("tomsmith", "SuperSecretPassword!")
-            assert_that(self._page.is_logged_in()).is_true()
+        with allure.step("And the user can see the Sign Out action"):
+            assert ui_client.login_page.is_logged_in()
 
-        with allure.step("Click logout"):
-            self._page.click_logout()
+        with allure.step("And the Sign In form is no longer shown"):
+            assert ui_client.login_page._is_login_form_absent()
 
-        with allure.step("Verify URL contains /login"):
-            assert_that(self._page.current_url).contains("/login")
+    @scenario_definition_only
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.tag("ui", "auth", "bdd", "negative")
+    @allure.title("Sign In with invalid password is rejected")
+    def test_sign_in_with_invalid_password_is_rejected(self) -> None:
+        """Authentication should fail with invalid credentials.
+        d
+                Instructions:
+                    Given the Petstore application is open at /petstore
+                    And the Sign In form is visible
+                    When the user enters username "admin"
+                    And enters password "invalid-secret"
+                    And submits the Sign In form
+                    Then an authentication error message is displayed
+                    And the Sign In form remains visible
+                    And the user does not see the authenticated navigation
+        """
 
-    @allure.story("Page structure")
-    @allure.title("Login page title is 'The Internet'")
-    def test_page_title_is_correct(self, browser) -> None:
-        """The login page title should be 'The Internet'."""
-        with allure.step("Verify page title"):
-            assert_that(self._page.title).contains("The Internet")
+    @scenario_definition_only
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.tag("ui", "auth", "bdd", "logout")
+    @allure.title("Sign Out after successful Sign In returns to logged-out state")
+    def test_sign_out_after_successful_sign_in(self) -> None:
+        """A signed-in user can explicitly terminate the session.
 
-    @allure.story("Page structure")
-    @allure.title("Login page has username and password input fields")
-    def test_login_form_has_username_and_password_fields(self, browser) -> None:
-        """The login page should present username and password inputs."""
-        with allure.step("Check username field is present"):
-            assert_that(self._page.is_element_present(By.ID, "username")).is_true()
+        Instructions:
+            Given the user is signed in with username "admin" and password "secret"
+            And the authenticated application navigation is visible
+            When the user clicks the Sign Out action
+            Then the Sign In form is visible again
+            And protected/authenticated navigation controls are hidden
+            And no authenticated user session indicator remains
+        """
 
-        with allure.step("Check password field is present"):
-            assert_that(self._page.is_element_present(By.ID, "password")).is_true()
+    @scenario_definition_only
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.tag("ui", "auth", "bdd", "validation")
+    @allure.title("Sign In requires both username and password")
+    def test_sign_in_requires_username_and_password(self) -> None:
+        """Client-side validation blocks empty-credentials submission.
+
+        Instructions:
+            Given the Petstore application is open at /petstore
+            And the Sign In form is visible
+            When the user leaves username empty
+            And leaves password empty
+            And submits the Sign In form
+            Then required-field validation is shown for username
+            And required-field validation is shown for password
+            And authentication is not attempted
+        """

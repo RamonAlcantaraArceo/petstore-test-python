@@ -137,7 +137,7 @@ assert_response(response).is_ok().json_has_key("id")
 | Variable                | Default                              | Description                        |
 |-------------------------|--------------------------------------|------------------------------------|
 | `PETSTORE_API_BASE_URL` | `http://localhost:8000`              | Petstore API root                  |
-| `PETSTORE_UI_BASE_URL`  | `https://the-internet.herokuapp.com` | Web UI root                        |
+| `PETSTORE_UI_BASE_URL`  | `http://localhost:5173/petstore/`    | Web UI root                        |
 | `RUN_UI_TESTS`          | `0`                                  | Set to `1` to enable UI tests      |
 | `HEADLESS`              | `true`                               | Set to `false` for visible browser |
 

@@ -126,7 +126,7 @@ class TestUserPetIntegrationClient:
                 username=username,
                 password=password,
             )
-            assert_that(login_result).has_key("token")
+            assert_that(login_result).has_key("access_token").has_key("token_type")
 
             pet = await gen_pet_api_client.add_pet(
                 pet_create=PetCreate(

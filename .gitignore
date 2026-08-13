@@ -61,3 +61,8 @@ site/
 
 # === Logs ===
 .logs/
+logs
+tests/poms_tests/screenshots/
+junit-*.xml
+
+.gx_context/

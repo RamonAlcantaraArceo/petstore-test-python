@@ -1,0 +1,123 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: petstore
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-localpassword}
+      POSTGRES_DB: petstore
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U petstore"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    image: petstore-api-api
+    ports:
+      - "8000:8000"
+    environment:
+      STORAGE_MODE: local
+      DATABASE_URL: postgresql+asyncpg://petstore:${POSTGRES_PASSWORD:-localpassword}@postgres:5432/petstore
+      API_KEY: ${API_KEY:-test-api-key}
+      APP_ENV: dev
+      LOG_LEVEL: INFO,
+      SEED_DATASET: mixed_v3
+      RATE_LIMIT_BYPASS_KEY: MELON
+      RATE_LIMIT_REQUESTS: 400
+      FAILURE_INJECTION_ENABLED: false
+      FAILURE_INJECTION_PROBABILITY: 0.1
+      DELAY_INJECTION_ENABLED: false
+      DELAY_INJECTION_PROBABILITY: 0.2
+      DELAY_INJECTION_MAX_SECONDS: 2.0
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/docs', timeout=5)\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp/app:mode=1777,size=100M
+      - /tmp:mode=1777,size=10M
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  petstore-ui:
+    image: petstore-ui-petstore-ui
+    ports:
+      - '8080:80'
+    restart: unless-stopped
+    environment:
+      # Browser-facing API path written into config.js (keep relative to avoid CORS).
+      # Default: /api/v1
+      API_BASE_URL: '${API_BASE_URL:-/api/v1}'
+      # Backend URL used by the nginx reverse proxy.
+      # Default: the compose-exposed API port on host.docker.internal.
+      API_PROXY_TARGET: '${API_PROXY_TARGET:-http://host.docker.internal:8000/api/v1}'
+      # Optional API key — injected server-side by nginx (never sent to the browser).
+      # Set in a .env file: API_KEY=your-key
+      API_KEY: ${API_KEY:-test-api-key}
+
+  petstore-grpc:
+    image: petstore-grpc-petstore-grpc
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${HOST_GRPC_PORT:-50051}:50051" # native gRPC
+      - "${HOST_GRPC_WEB_PORT:-8081}:8080" # gRPC-Web via Envoy
+      - "${HOST_ENVOY_ADMIN_PORT:-9901}:9901" # Envoy admin UI
+    environment:
+      PORT: 50051
+      STORAGE_MODE: "${STORAGE_MODE:-postgres}"
+      VERSION: "${VERSION:-local}"
+      BUILD_DATE: ${BUILD_DATE:-today}
+      GIT_COMMIT_SHA: ${GIT_COMMIT_SHA:-dead-beef}
+      DATABASE_URL: "${DATABASE_URL:-postgresql+asyncpg://petstore:${POSTGRES_PASSWORD:-localpassword}@postgres:5432/petstore}"
+      DATABASE_POOLER_URL: "${DATABASE_POOLER_URL:-postgresql+asyncpg://petstore:${POSTGRES_PASSWORD:-localpassword}@postgres:5432/petstore}"
+      # SEED_DATASET: "${SEED_DATASET:-mixed_v2}"
+      LOG_LEVEL: "${LOG_LEVEL:-INFO}"
+      ENVOY_LOG_LEVEL: "${ENVOY_LOG_LEVEL:-info}"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8080/grpcui/', timeout=5)\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  petstore-graphql:
+    image: petstore-graphql-app
+    ports:
+      - "${HOST_GRAPHQL_PORT:-8001}:8000"
+    command: uv run uvicorn app.main:app --app-dir src --host 0.0.0.0 --port 8000 --reload
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/docs', timeout=5)\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+# volumes:
+#   postgres_data:

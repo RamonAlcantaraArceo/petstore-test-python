@@ -22,7 +22,7 @@ concurrency:
 
 env:
   PETSTORE_API_BASE_URL: "http://localhost:8000/api/v1"
-  PETSTORE_UI_BASE_URL: "https://the-internet.herokuapp.com"
+  PETSTORE_UI_BASE_URL: "http://localhost:8080/petstore/"
   PETSTORE_API_KEY: ${{ secrets.PETSTORE_API_KEY }}
   # UI tests are opt-in; set to "1" in a separate workflow or matrix leg
   RUN_UI_TESTS: "0"
@@ -42,6 +42,8 @@ jobs:
 
       - name: Setup environment
         uses: ./.github/actions/setup-env
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run ruff (lint)
         run: uv run ruff check .
@@ -65,6 +67,8 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          RATE_LIMIT_REQUESTS: 9000
 
     steps:
       - name: Checkout code
@@ -109,6 +113,8 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          RATE_LIMIT_REQUESTS: 9000
 
     steps:
       - name: Checkout code
@@ -153,6 +159,8 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          RATE_LIMIT_REQUESTS: 9000
 
     steps:
       - name: Checkout code
@@ -199,6 +207,24 @@ jobs:
         image: ghcr.io/ramonalcantaraarceo/petstore-api:latest
         ports:
           - 8000:8000
+        env:
+          RATE_LIMIT_REQUESTS: 9000
+          SEED_DATASET: mixed_v2
+      petstore-ui:
+        image: ghcr.io/ramonalcantaraarceo/petstore-ui:latest
+        ports:
+          - 8080:80
+        options: --add-host=host.docker.internal:host-gateway
+        env:
+          # The UI container reaches the API through its runner-published port.
+          # localhost here would refer to the UI container itself.
+          API_PROXY_TARGET: http://host.docker.internal:8000
+          API_BASE_URL: /api/v1
+          API_KEY: ${{ secrets.PETSTORE_API_KEY }}
+          APP_ENV : dev
+          LOG_LEVEL : INFO
+          STORAGE_MODE : memory
+          # API_PROXY_TARGET = "https://petstore-api-dev.ramon-alcantara.work"
 
     steps:
       - name: Checkout code
@@ -221,6 +247,7 @@ jobs:
           HEADLESS: "true"
 
       - name: Upload UI test results and coverage
+        if: always()
         uses: ./.github/actions/upload-results
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}

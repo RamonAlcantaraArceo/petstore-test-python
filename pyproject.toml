@@ -8,6 +8,8 @@ license = { text = "MIT" }
 authors = [{ name = "petstore-test-python contributors" }]
 dependencies = [
     "petstore-openapi-client-pydantic",
+    "pytest-dotenv>=0.5.2",
+    "pytest-xdist>=3.8.0",
     "r3a-minikit @ https://github.com/RamonAlcantaraArceo/r3a-minikit/releases/download/v0.0.2/r3a_minikit-0.0.2-py3-none-any.whl",
 ]
 
@@ -33,6 +35,11 @@ dev = [
     # Linting / formatting
     "ruff>=0.4.0",
     "black>=24.0.0",
+    # Database
+    "psycopg[binary]>=3.1.0",
+    "sqlalchemy>=2.0.0",
+    # ETL / data quality
+    "great-expectations>=1.4.0",
     # Pre-commit
     "pre-commit>=3.7.0",
     # Docs
@@ -49,6 +56,7 @@ dev = [
 addopts = [
     "--strict-markers",
     "--tb=short",
+    "-p no:logger",
 ]
 markers = [
     "api: API tests using the requests library",
@@ -57,9 +65,20 @@ markers = [
     "e2e: End-to-end tests covering full user journeys",
     "performance: Performance / benchmark tests (manual only, excluded from CI)",
     "slow: Tests that take a long time to run",
+    "db: Database layer tests asserting data directly against PostgreSQL",
+    "etl: ETL data-quality tests using Great Expectations",
+    "smoke: tbd",
+    "functional: tbd",
 ]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+
+env_files = ".env.test"
+
+filterwarnings = [
+    "ignore:.*sre_constants.*:DeprecationWarning",
+    "ignore:.*sre_parse.*:DeprecationWarning",
+]
 
 # ---------------------------------------------------------------------------
 # Coverage
@@ -79,7 +98,7 @@ fail_under = 0
 python_version = "3.12"
 strict = true
 ignore_missing_imports = true
-exclude = ["tests/performance"]
+exclude = ["tests/performance", "framework/poms"]
 
 [[tool.mypy.overrides]]
 module = "framework.factories"

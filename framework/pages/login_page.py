@@ -1,94 +1,109 @@
-"""Login Page Object.
-
-Models the login page of the Petstore web UI.  The target demo site is
-https://the-internet.herokuapp.com/login (a freely available test site
-that provides a stable login form – it is a good stand-in while the
-petstore does not ship a traditional login form in its swagger UI).
-
-Set the ``PETSTORE_UI_BASE_URL`` environment variable or the ``base_url``
-constructor argument to point at your actual application under test.
-
-Example
--------
-::
-
-    page = LoginPage(driver, base_url="https://the-internet.herokuapp.com")
-    page.open().login("tomsmith", "SuperSecretPassword!")
-    assert page.is_logged_in()
-"""
+"""Page object for the Petstore Sign In modal flow using generated POMs."""
 
 from __future__ import annotations
 
-import os
+from selenium.webdriver.remote.webdriver import WebDriver
 
-from selenium.webdriver.common.by import By
-
-from framework.pages.base_page import BasePage
-
-DEFAULT_UI_BASE_URL = os.getenv(
-    "PETSTORE_UI_BASE_URL", "https://the-internet.herokuapp.com"
-)
+from framework.poms.app.full_application_pom import FullApplicationPOM
+from framework.poms.molecules.loginform_pom import LoginformPOM
+from framework.poms.organisms.appnavigation_pom import AppnavigationPOM
 
 
-class LoginPage(BasePage):
-    """Page Object for the Login page."""
+class LoginPage:
+    """Handle Sign In / Sign Out interactions against the Petstore UI."""
 
-    URL = "/login"
+    def __init__(self, driver: WebDriver, base_url: str) -> None:
+        """Create a login page wrapper.
 
-    # ------------------------------------------------------------------
-    # Locators
-    # ------------------------------------------------------------------
-    _USERNAME_INPUT = (By.ID, "username")
-    _PASSWORD_INPUT = (By.ID, "password")
-    _SUBMIT_BUTTON = (By.CSS_SELECTOR, "button[type='submit']")
-    _FLASH_MESSAGE = (By.ID, "flash")
-    _LOGOUT_BUTTON = (By.CSS_SELECTOR, "a.button.secondary.radius")
+        Args:
+            driver: Selenium WebDriver used to interact with the page.
+            base_url: Root URL of the UI application.
+        """
+        self.driver = driver
+        self.base_url = base_url  # .rstrip("/")
 
-    # ------------------------------------------------------------------
-    # Actions
-    # ------------------------------------------------------------------
+        self.full_app: FullApplicationPOM = FullApplicationPOM(driver)
+        self.app_navigation: AppnavigationPOM = AppnavigationPOM(driver)
+        self.login_form: LoginformPOM = LoginformPOM(driver)
 
-    def fill_username(self, username: str) -> LoginPage:
-        self.type_text(*self._USERNAME_INPUT, text=username)
-        return self
+    def open(self) -> LoginPage:
+        """Open the application and wait for the login surface to be ready.
 
-    def fill_password(self, password: str) -> LoginPage:
-        self.type_text(*self._PASSWORD_INPUT, text=password)
-        return self
+        Returns:
+            Self, to allow method chaining.
+        """
+        base_url = self.base_url.rstrip("/")
+        if "localhost:8080" in self.base_url:
+            base_url = base_url.replace("/petstore", "")
 
-    def click_login(self) -> LoginPage:
-        self.click(*self._SUBMIT_BUTTON)
+        self.driver.get(base_url)
+
+        self.full_app.wait_for_visibility(
+            timeout=10
+        )  # Wait for the full app to load before checking for login form
+
+        if not self._is_login_form_visible():
+            self.app_navigation.primary_button().click_element()  # Click "Login" in nav to open login form
+            self.login_form.wait_for_visibility(
+                timeout=10
+            )  # Wait for login form to be visible
+
         return self
 
     def login(self, username: str, password: str) -> LoginPage:
-        """Fill the form and submit it in one call."""
-        return self.fill_username(username).fill_password(password).click_login()
+        """Submit credentials through the login form.
 
-    def get_flash_message(self) -> str:
-        """Return the text of the flash / alert message."""
-        try:
-            return self.wait_for_visible(*self._FLASH_MESSAGE).text
-        except Exception:
-            return ""
+        Args:
+            username: User name to submit.
+            password: Password to submit.
 
-    def click_logout(self) -> LoginPage:
-        """Click the logout button (only available after login)."""
-        self.click(*self._LOGOUT_BUTTON)
+        Returns:
+            Self, to allow method chaining.
+        """
+
+        self.login_form.username_input().type_into(username)
+        self.login_form.password_input().type_into(password)
+        self.login_form.primary_button().click_element()
+
         return self
 
-    # ------------------------------------------------------------------
-    # State queries
-    # ------------------------------------------------------------------
+    def click_logout(self) -> LoginPage:
+        """Click the logout button in the navigation bar.
+
+        Returns:
+            Self, to allow method chaining.
+        """
+        element = self.app_navigation.secondary_button().wait_for_visibility(timeout=2)
+        assert element
+        element.click()
+
+        return self
+
+    def is_logged_out(self) -> bool:
+        """Return whether the login button is visible."""
+        return (
+            self.app_navigation.primary_button().wait_for_visibility(
+                timeout=2, raise_on_timeout=False
+            )
+            is not None
+        )
 
     def is_logged_in(self) -> bool:
-        """Return True if a successful-login indicator is on the page."""
-        message = self.get_flash_message()
-        return "You logged into a secure area!" in message
-
-    def is_login_failed(self) -> bool:
-        """Return True when an error message is displayed."""
-        message = self.get_flash_message()
+        """Return whether the logout button is visible."""
         return (
-            "Your username is invalid!" in message
-            or "Your password is invalid!" in message
+            self.app_navigation.secondary_button().wait_for_visibility(
+                timeout=2, raise_on_timeout=False
+            )
+            is not None
         )
+
+    def _is_login_form_visible(self) -> bool:
+        """Return whether the login form is currently visible."""
+        return (
+            self.login_form.wait_for_visibility(timeout=2, raise_on_timeout=False)
+            is not None
+        )
+
+    def _is_login_form_absent(self) -> bool:
+        """Return whether the login form is currently absent from the DOM."""
+        return self.login_form.wait_for_absence(timeout=2, raise_on_timeout=False)

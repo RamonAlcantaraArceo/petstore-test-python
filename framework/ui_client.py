@@ -19,47 +19,20 @@ Example
 from __future__ import annotations
 
 import logging
-import os
 from typing import Any
 
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.common.exceptions import WebDriverException
 
-try:
-    from webdriver_manager.chrome import ChromeDriverManager
-
-    _WDM_AVAILABLE = True
-except ImportError:
-    _WDM_AVAILABLE = False
-
+from framework.config import get_ui_base_url
+from framework.interfaces import PetstoreClientProtocol
 from framework.pages.login_page import LoginPage
+from framework.pages.pet_management_page import PetManagementPage
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_UI_BASE_URL = os.getenv(
-    "PETSTORE_UI_BASE_URL", "https://the-internet.herokuapp.com"
-)
 
-
-def _build_chrome_driver(headless: bool = True) -> webdriver.Chrome:
-    """Build a Chrome WebDriver with sensible CI/local defaults."""
-    options = ChromeOptions()
-    if headless:
-        options.add_argument("--headless=new")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--window-size=1920,1080")
-    options.add_argument("--disable-extensions")
-
-    if _WDM_AVAILABLE:
-        service = ChromeService(ChromeDriverManager().install())
-        return webdriver.Chrome(service=service, options=options)
-    return webdriver.Chrome(options=options)
-
-
-class PetstoreUiClient:
+class PetstoreUiClient(PetstoreClientProtocol):
     """Browser-based client for the Petstore web UI.
 
     Implements the same interface as :class:`~framework.api_client.PetstoreApiClient`
@@ -78,65 +51,159 @@ class PetstoreUiClient:
 
     def __init__(
         self,
-        base_url: str = DEFAULT_UI_BASE_URL,
+        driver: webdriver.Remote,
+        base_url: str | None = None,
         headless: bool = True,
-        driver: webdriver.Remote | None = None,
     ) -> None:
-        self._base_url = base_url.rstrip("/")
-        self._driver = driver or _build_chrome_driver(headless=headless)
+        """Create a browser-backed Petstore client.
+
+        Args:
+            base_url: Root URL of the UI application.
+            headless: Whether to run Chrome in headless mode.
+            driver: Optional pre-configured WebDriver to reuse.
+        """
+        resolved_base_url = base_url or get_ui_base_url()
+        self._base_url = resolved_base_url.rstrip("/")
+        self._driver = driver
         self._login_page = LoginPage(self._driver, base_url=self._base_url)
+        self._pet_management_page = PetManagementPage(
+            self._driver, base_url=self._base_url
+        )
         self._logged_in = False
+
+    @property
+    def login_page(self) -> LoginPage:
+        """Expose the LoginPage for direct interactions in tests."""
+        return self._login_page
+
+    @property
+    def pet_management_page(self) -> PetManagementPage:
+        """Expose the PetManagementPage for direct interactions in tests."""
+        return self._pet_management_page
 
     # ------------------------------------------------------------------
     # Auth
     # ------------------------------------------------------------------
 
     def login(self, username: str, password: str) -> PetstoreUiClient:
-        """Navigate to the login page and submit the form."""
-        self._login_page.open().login(username, password)
+        """Navigate to the login page and submit credentials.
+
+        Args:
+            username: User name to submit.
+            password: Password to submit.
+
+        Returns:
+            Self, to allow method chaining.
+        """
+        if not self._login_page._is_login_form_visible():
+            self._login_page.open()
+        self._login_page.login(username, password)
         self._logged_in = self._login_page.is_logged_in()
         return self
 
     def logout(self) -> PetstoreUiClient:
-        """Click the logout button."""
+        """Log out through the UI.
+
+        Returns:
+            Self, to allow method chaining.
+        """
         self._login_page.click_logout()
-        self._logged_in = False
+        self._logged_in = self._login_page.is_logged_in()
         return self
 
     def is_logged_in(self) -> bool:
+        """Return whether the client believes it is authenticated."""
         return self._logged_in
 
+    def _require_authenticated_session(self, operation_name: str) -> None:
+        """Require a logged-in session before mutating pet data.
+
+        Args:
+            operation_name: Name of the attempted operation.
+
+        Raises:
+            PermissionError: If the current UI session is not authenticated.
+        """
+        if not self._logged_in:
+            raise PermissionError(
+                f"{operation_name} requires an authenticated UI session. "
+                "Log in before managing pets."
+            )
+
     # ------------------------------------------------------------------
-    # Pets (stub – wire up to your real UI once the front-end exists)
+    # Pets
     # ------------------------------------------------------------------
 
     def add_pet(
         self, name: str, status: str = "available", **kwargs: Any
     ) -> dict[str, Any]:
-        raise NotImplementedError(
-            "add_pet via UI is not yet implemented. "
-            "Use PetstoreApiClient for pet CRUD operations."
-        )
+        """Create a pet through the UI.
+
+        Args:
+            name: Pet name.
+            status: Desired pet status.
+            **kwargs: Additional fields for the pet payload.
+
+        Raises:
+            PermissionError: If called without an authenticated session.
+        """
+        self._require_authenticated_session("add_pet")
+        return self._pet_management_page.add_pet(name=name, status=status, **kwargs)
 
     def get_pet(self, pet_id: int) -> dict[str, Any]:
-        raise NotImplementedError("get_pet via UI is not yet implemented.")
+        """Retrieve a pet by id from the UI.
+
+        Args:
+            pet_id: Identifier of the pet to retrieve.
+
+        Returns:
+            A parsed pet dictionary.
+        """
+        return self._pet_management_page.get_pet(pet_id)
 
     def update_pet(self, pet_id: int, **kwargs: Any) -> dict[str, Any]:
-        raise NotImplementedError("update_pet via UI is not yet implemented.")
+        """Update a pet through the UI.
+
+        Args:
+            pet_id: Identifier of the pet to update.
+            **kwargs: Fields to update.
+
+        Raises:
+            PermissionError: If called without an authenticated session.
+        """
+        self._require_authenticated_session("update_pet")
+        return self._pet_management_page.update_pet(pet_id=pet_id, **kwargs)
 
     def delete_pet(self, pet_id: int) -> None:
-        raise NotImplementedError("delete_pet via UI is not yet implemented.")
+        """Delete a pet through the UI.
+
+        Args:
+            pet_id: Identifier of the pet to delete.
+
+        Raises:
+            PermissionError: If called without an authenticated session.
+        """
+        self._require_authenticated_session("delete_pet")
+        self._pet_management_page.delete_pet(pet_id=pet_id)
 
     def find_pets_by_status(self, status: str) -> list[dict[str, Any]]:
-        raise NotImplementedError("find_pets_by_status via UI is not yet implemented.")
+        """Find pets by status through the UI filter.
+
+        Args:
+            status: Pet status to search for.
+
+        Returns:
+            List of parsed pet dictionaries matching the status.
+        """
+        return self._pet_management_page.find_pets_by_status(status=status)
 
     # ------------------------------------------------------------------
     # Lifecycle
     # ------------------------------------------------------------------
 
     def close(self) -> None:
-        """Quit the browser."""
+        """Quit the underlying browser session."""
         try:
             self._driver.quit()
-        except Exception as exc:
+        except WebDriverException as exc:
             logger.warning("Exception while closing browser: %s", exc)

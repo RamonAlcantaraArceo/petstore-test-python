@@ -29,6 +29,7 @@ It uses `pytest` (never `unittest`) with the following layers:
 - All page interactions live in `framework/pages/`.
 - Page objects extend `BasePage` and return `self` for method chaining.
 - Locators are class-level tuples `(By.ID, "selector")`.
+- In `tests/ui/` and `tests/e2e/`, minimize direct raw `WebElement` interactions in tests; prefer POM methods and assertions as the primary interface.
 
 ### File Organisation
 - One test class per feature/endpoint.
@@ -53,8 +54,9 @@ Never use `pip install` directly in this project.
 
 - All code must pass `ruff`, `black`, and `mypy` before merging.
 - Run `uv run pre-commit run --all-files` before opening a PR.
-- Type annotations are **required** on all framework code.
-- Test files may omit return type annotations for brevity.
+- All functions must include type hints for parameters and return values.
+- Avoid using `Any` unless it is a last resort and justified with an inline comment explaining why a precise type is not feasible.
+- All functions must include docstrings using Google style.
 
 ## CI/CD
 

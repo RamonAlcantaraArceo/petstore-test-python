@@ -11,6 +11,7 @@ with ``pytest-benchmark``'s histogram and comparison features.
 from __future__ import annotations
 
 import asyncio
+import os
 from collections.abc import Generator
 
 import pytest
@@ -43,6 +44,10 @@ def gen_pet_api_client_sync(
         runner.close()
 
 
+@pytest.mark.skipif(
+    os.getenv("CI", None) == "true",
+    reason="Runs only in local environments due to performance test nature.",
+)
 @pytest.mark.performance
 class TestApiPerformance:
     """Benchmark key API operations."""

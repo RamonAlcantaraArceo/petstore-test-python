@@ -91,7 +91,7 @@ class TestUserRegistrationJourneyClient:
                 username=username,
                 password=password,
             )
-            assert_that(login_result).has_key("token")
+            assert_that(login_result).has_key("access_token").has_key("token_type")
 
             profile = await gen_user_api_client.get_user_by_name(username=username)
             assert_that(profile.username).equals(username)
