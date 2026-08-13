@@ -1,0 +1,193 @@
+03:11:26 | DEBUG    | __init__ | Using selector: EpollSelector
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7fdaf66dfec0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7fdaf66dff60> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7fdaf7f82240>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7fdaf7f82240>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7fdaf646c040> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7fdaf646c0e0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7fdaf8c9d430>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***"
+    },
+    "body": {
+      "username": "michelle699275",
+      "email": "michelle699275@example.com",
+      "password": "$U94WGhchZ@Q"
+    }
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "140",
+      "Content-Type": "application/json",
+      "x-correlation-id": "eafca7f7-1a21-4383-a973-301a7b7f5c02",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8983",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "username": "michelle699275",
+      "first_name": null,
+      "last_name": null,
+      "email": "michelle699275@example.com",
+      "phone": null,
+      "user_status": null,
+      "id": 4
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/user/login?username=michelle699275&password=%24U94WGhchZ%40Q
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login?username=michelle699275&password=%24U94WGhchZ%40Q",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/user/login?username=michelle699275&password=%24U94WGhchZ%40Q [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "496",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pY2hlbGxlNjk5Mjc1QGV4YW1wbGUuY29tIiwiZXhwIjoxNzg2NTk0Mjg2LCJpYXQiOjE3ODY1OTA2ODYsInJvbGUiOiJhdXRoZW50aWNhdGVkIiwic3ViIjoiNCIsInVzZXJfbWV0YWRhdGEiOnsiZmlyc3RfbmFtZSI6bnVsbCwibGFzdF9uYW1lIjpudWxsLCJwaG9uZSI6bnVsbCwidXNlcl9zdGF0dXMiOm51bGwsInVzZXJuYW1lIjoibWljaGVsbGU2OTkyNzUifX0.IgrM6Ep3niBRK_HLuD_tYT1iU-5N_cRurEjLiQa2eEA",
+      "x-correlation-id": "8435a32a-070b-44d3-a9d1-a36fcd40b859",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8982",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pY2hlbGxlNjk5Mjc1QGV4YW1wbGUuY29tIiwiZXhwIjoxNzg2NTk0Mjg2LCJpYXQiOjE3ODY1OTA2ODYsInJvbGUiOiJhdXRoZW50aWNhdGVkIiwic3ViIjoiNCIsInVzZXJfbWV0YWRhdGEiOnsiZmlyc3RfbmFtZSI6bnVsbCwibGFzdF9uYW1lIjpudWxsLCJwaG9uZSI6bnVsbCwidXNlcl9zdGF0dXMiOm51bGwsInVzZXJuYW1lIjoibWljaGVsbGU2OTkyNzUifX0.IgrM6Ep3niBRK_HLuD_tYT1iU-5N_cRurEjLiQa2eEA",
+      "token_type": "bearer",
+      "user": {
+        "id": "4",
+        "email": "michelle699275@example.com",
+        "username": "michelle699275"
+      }
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=michelle699275&password=%24U94WGhchZ%40Q"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/user/michelle699275
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/michelle699275",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/user/michelle699275 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "140",
+      "Content-Type": "application/json",
+      "x-correlation-id": "18b86ff2-8e1d-45a5-9e6e-087fcb56560c",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8981",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "username": "michelle699275",
+      "first_name": null,
+      "last_name": null,
+      "email": "michelle699275@example.com",
+      "phone": null,
+      "user_status": null,
+      "id": 4
+    },
+    "url": "http://localhost:8000/api/v1/user/michelle699275"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/user/logout
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/logout",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/user/logout [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "29",
+      "Content-Type": "application/json",
+      "x-correlation-id": "724588f8-35d4-4809-9af2-5f98bfff7d90",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8980",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "message": "User logged out"
+    },
+    "url": "http://localhost:8000/api/v1/user/logout"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 DELETE /api/v1/user/michelle699275
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/michelle699275",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 DELETE /api/v1/user/michelle699275 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Type": "application/json",
+      "x-correlation-id": "310a7ac6-2a82-4e31-9b60-eb6f621c3177",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8979",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/user/michelle699275"
+  }

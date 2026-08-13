@@ -1,0 +1,327 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "POST /api/v1/user/auth HTTP/1.1" 200 533
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f8aa555f420> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f8aa6dae780>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f8aa555f7e0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f8aa555fc40> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f8aa555fce0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI4NiwiaWF0IjoxNzg2NTkwNjg2LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.hEwt5AdOlNGhNPAp3vUjFiXZXSLrEaOQIGpXkhG3NRU"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "Bobby",
+      "status": "available",
+      "photoUrls": [
+        "https://picsum.photos/263/998"
+      ]
+    },
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 118
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "server": "uvicorn",
+      "content-length": "118",
+      "content-type": "application/json",
+      "x-correlation-id": "fdca8625-1ec4-4aaf-889a-6e4230f1bbbc",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8999",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "Bobby",
+      "photoUrls": [
+        "https://picsum.photos/263/998"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 GET /api/v1/pet/1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI4NiwiaWF0IjoxNzg2NTkwNjg2LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.hEwt5AdOlNGhNPAp3vUjFiXZXSLrEaOQIGpXkhG3NRU"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/pet/1 HTTP/1.1" 200 118
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 GET /api/v1/pet/1 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "server": "uvicorn",
+      "content-length": "118",
+      "content-type": "application/json",
+      "x-correlation-id": "3f41c8b7-d958-4607-8e30-5b4e7825369a",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8998",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "Bobby",
+      "photoUrls": [
+        "https://picsum.photos/263/998"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/pet/1"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 GET /api/v1/pet/1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI4NiwiaWF0IjoxNzg2NTkwNjg2LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.hEwt5AdOlNGhNPAp3vUjFiXZXSLrEaOQIGpXkhG3NRU"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/pet/1 HTTP/1.1" 200 118
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 GET /api/v1/pet/1 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "server": "uvicorn",
+      "content-length": "118",
+      "content-type": "application/json",
+      "x-correlation-id": "200e3de6-1619-46a4-b1cc-4584f7950eeb",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8997",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "Bobby",
+      "photoUrls": [
+        "https://picsum.photos/263/998"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/pet/1"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 PUT /api/v1/pet
+  {
+    "event": "request",
+    "method": "PUT",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI4NiwiaWF0IjoxNzg2NTkwNjg2LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.hEwt5AdOlNGhNPAp3vUjFiXZXSLrEaOQIGpXkhG3NRU"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "UpdatedViaIntegration",
+      "photoUrls": [
+        "https://picsum.photos/263/998"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "pending",
+      "id": 1
+    },
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "PUT /api/v1/pet HTTP/1.1" 200 132
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 PUT /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "server": "uvicorn",
+      "content-length": "132",
+      "content-type": "application/json",
+      "x-correlation-id": "aa1e1162-3e27-4b3f-9f28-4346ff7d3e2b",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8996",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "UpdatedViaIntegration",
+      "photoUrls": [
+        "https://picsum.photos/263/998"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "pending",
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 GET /api/v1/pet/1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI4NiwiaWF0IjoxNzg2NTkwNjg2LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.hEwt5AdOlNGhNPAp3vUjFiXZXSLrEaOQIGpXkhG3NRU"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/pet/1 HTTP/1.1" 200 132
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 GET /api/v1/pet/1 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "server": "uvicorn",
+      "content-length": "132",
+      "content-type": "application/json",
+      "x-correlation-id": "ff492d3f-166f-471e-adc8-21ca8b76e8cf",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8995",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "UpdatedViaIntegration",
+      "photoUrls": [
+        "https://picsum.photos/263/998"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "pending",
+      "id": 1
+    },
+    "url": "http://localhost:8000/api/v1/pet/1"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 DELETE /api/v1/pet/1
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI4NiwiaWF0IjoxNzg2NTkwNjg2LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.hEwt5AdOlNGhNPAp3vUjFiXZXSLrEaOQIGpXkhG3NRU"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "DELETE /api/v1/pet/1 HTTP/1.1" 204 0
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 DELETE /api/v1/pet/1 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "server": "uvicorn",
+      "content-type": "application/json",
+      "x-correlation-id": "9c335e1f-8a65-4931-b463-c48041608e79",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8994",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/pet/1"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 GET /api/v1/pet/1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI4NiwiaWF0IjoxNzg2NTkwNjg2LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.hEwt5AdOlNGhNPAp3vUjFiXZXSLrEaOQIGpXkhG3NRU"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/pet/1 HTTP/1.1" 404 18
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 GET /api/v1/pet/1 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "server": "uvicorn",
+      "content-length": "18",
+      "content-type": "text/plain; charset=utf-8",
+      "x-correlation-id": "c92fcb37-4c4f-4f21-8478-66e1cb061a58",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8993",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "😢 404 Not Found",
+    "url": "http://localhost:8000/api/v1/pet/1"
+  }
+DEBUG    framework.api_client:api_client.py:343 Session closed

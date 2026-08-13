@@ -1,0 +1,241 @@
+03:11:26 | DEBUG    | __init__ | Using selector: EpollSelector
+03:11:26 | DEBUG    | __init__ | Using selector: EpollSelector
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f8aa555f420> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7f8aa6dae780>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f8aa555f7e0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f8aa555fc40> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+03:11:26 | DEBUG    | evaluate | LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7f8aa555fce0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***"
+    },
+    "body": {
+      "name": "Arthur",
+      "photoUrls": [
+        "https://placekitten.com/120/562"
+      ],
+      "status": "available"
+    }
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "121",
+      "Content-Type": "application/json",
+      "x-correlation-id": "64f599e7-26b7-4896-89c9-10abdb8b4886",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8978",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "Arthur",
+      "photoUrls": [
+        "https://placekitten.com/120/562"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 6
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/pet/6
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/6",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/pet/6 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "121",
+      "Content-Type": "application/json",
+      "x-correlation-id": "34ca12ef-97ef-44f6-a1ce-d7c958c13909",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8977",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "Arthur",
+      "photoUrls": [
+        "https://placekitten.com/120/562"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 6
+    },
+    "url": "http://localhost:8000/api/v1/pet/6"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 PUT /api/v1/pet
+  {
+    "event": "request",
+    "method": "PUT",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***"
+    },
+    "body": {
+      "name": "UpdatedViaIntegration",
+      "photoUrls": [
+        "https://placekitten.com/120/562"
+      ],
+      "status": "pending",
+      "id": 6
+    }
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 PUT /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "134",
+      "Content-Type": "application/json",
+      "x-correlation-id": "e70e680f-0657-4ed8-9fff-343d94b8e79f",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8976",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "UpdatedViaIntegration",
+      "photoUrls": [
+        "https://placekitten.com/120/562"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "pending",
+      "id": 6
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/pet/6
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/6",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/pet/6 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "134",
+      "Content-Type": "application/json",
+      "x-correlation-id": "f1b5a6c0-34f2-409f-b43a-68532d89d25d",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8975",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "UpdatedViaIntegration",
+      "photoUrls": [
+        "https://placekitten.com/120/562"
+      ],
+      "category": null,
+      "tags": null,
+      "status": "pending",
+      "id": 6
+    },
+    "url": "http://localhost:8000/api/v1/pet/6"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 DELETE /api/v1/pet/6
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/6",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 DELETE /api/v1/pet/6 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "Server": "uvicorn",
+      "Content-Type": "application/json",
+      "x-correlation-id": "090e573f-4b11-4d11-b977-418fcb8a591a",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8974",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/pet/6"
+  }
+03:11:26 | DEBUG    | request | Request: http://localhost:8000 GET /api/v1/pet/6
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/6",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+03:11:26 | DEBUG    | request | Response: http://localhost:8000 GET /api/v1/pet/6 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:25 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "18",
+      "Content-Type": "text/plain; charset=utf-8",
+      "x-correlation-id": "7e30dbaa-0f11-447f-840b-d1ba882f8083",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8973",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "😢 404 Not Found",
+    "url": "http://localhost:8000/api/v1/pet/6"
+  }

@@ -1,0 +1,182 @@
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function UserFactory.<lambda> at 0x7efc1b553ec0> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7efc1d6376b0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.last_name of <faker.providers.person.en_US.Provider object at 0x7efc1d6376b0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:118 LazyAttribute: Evaluating <function UserFactory.<lambda> at 0x7efc1b408040> on <Resolver for <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.phone_number of <faker.providers.phone_number.en_US.Provider object at 0x7efc1d414aa0>> on <BuildStep for <StepBuilder(<FactoryOptions for UserFactory>, strategy='build')>>
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 GET /api/v1/user/user1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/user1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/user/user1 HTTP/1.1" 404 18
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 GET /api/v1/user/user1 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-length": "18",
+      "content-type": "text/plain; charset=utf-8",
+      "x-correlation-id": "83f5f60e-e937-422e-a843-72457879a90d",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8991",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "😢 404 Not Found",
+    "url": "http://localhost:8000/api/v1/user/user1"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 POST /api/v1/user
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/user",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "username": "user1",
+      "password": "password1",
+      "email": "user1@example.com",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "userStatus": 1
+    },
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "POST /api/v1/user HTTP/1.1" 200 120
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 POST /api/v1/user [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-length": "120",
+      "content-type": "application/json",
+      "x-correlation-id": "57fb89ba-6cea-45de-989f-9870d8d551ec",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8990",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "username": "user1",
+      "first_name": null,
+      "last_name": null,
+      "email": "user1@example.com",
+      "phone": "",
+      "user_status": null,
+      "id": 5
+    },
+    "url": "http://localhost:8000/api/v1/user"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 GET /api/v1/user/login?username=user1&password=password1
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/user/login",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": {
+      "username": "user1",
+      "password": "password1"
+    },
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/user/login?username=user1&password=password1 HTTP/1.1" 200 451
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 GET /api/v1/user/login?username=user1&password=password1 [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-length": "451",
+      "content-type": "application/json",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiZXhwIjoxNzg2NTk0MjkwLCJpYXQiOjE3ODY1OTA2OTAsInJvbGUiOiJhdXRoZW50aWNhdGVkIiwic3ViIjoiNSIsInVzZXJfbWV0YWRhdGEiOnsiZmlyc3RfbmFtZSI6bnVsbCwibGFzdF9uYW1lIjpudWxsLCJwaG9uZSI6IiIsInVzZXJfc3RhdHVzIjpudWxsLCJ1c2VybmFtZSI6InVzZXIxIn19.lpaY8UeiPILzLYXm04bGAYKZASk9IzJYlEynYsc8OBk",
+      "x-correlation-id": "95774377-c144-4f07-8fd1-deaed8b7274f",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8989",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiZXhwIjoxNzg2NTk0MjkwLCJpYXQiOjE3ODY1OTA2OTAsInJvbGUiOiJhdXRoZW50aWNhdGVkIiwic3ViIjoiNSIsInVzZXJfbWV0YWRhdGEiOnsiZmlyc3RfbmFtZSI6bnVsbCwibGFzdF9uYW1lIjpudWxsLCJwaG9uZSI6IiIsInVzZXJfc3RhdHVzIjpudWxsLCJ1c2VybmFtZSI6InVzZXIxIn19.lpaY8UeiPILzLYXm04bGAYKZASk9IzJYlEynYsc8OBk",
+      "token_type": "bearer",
+      "user": {
+        "id": "5",
+        "email": "user1@example.com",
+        "username": "user1"
+      }
+    },
+    "url": "http://localhost:8000/api/v1/user/login?username=user1&password=password1"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 DELETE /api/v1/user/user1
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/user/user1",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "DELETE /api/v1/user/user1 HTTP/1.1" 204 0
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 DELETE /api/v1/user/user1 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-type": "application/json",
+      "x-correlation-id": "70af28a1-22dc-4e83-9412-8572ed1fba52",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8988",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/user/user1"
+  }
+DEBUG    framework.api_client:api_client.py:343 Session closed

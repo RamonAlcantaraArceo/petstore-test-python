@@ -1,0 +1,123 @@
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "ToDelete",
+      "status": "available",
+      "photoUrls": []
+    },
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 90
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-length": "90",
+      "content-type": "application/json",
+      "x-correlation-id": "da70ada8-efd5-492a-a9ee-00b5d4bfb4db",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8961",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "ToDelete",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 6
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 DELETE /api/v1/pet/6
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/6",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "DELETE /api/v1/pet/6 HTTP/1.1" 204 0
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 DELETE /api/v1/pet/6 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-type": "application/json",
+      "x-correlation-id": "3d09a87e-fbcf-4166-b9e1-a264be1728a7",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8960",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/pet/6"
+  }
+DEBUG    framework.api_client:api_client.py:114 Request: http://localhost:8000 GET /api/v1/pet/6
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/6",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8000 "GET /api/v1/pet/6 HTTP/1.1" 404 18
+DEBUG    framework.api_client:api_client.py:154 Response: http://localhost:8000 GET /api/v1/pet/6 [404]
+  {
+    "event": "response",
+    "status_code": 404,
+    "reason": "Not Found",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-length": "18",
+      "content-type": "text/plain; charset=utf-8",
+      "x-correlation-id": "2262c112-3ae0-454d-97cc-c9aa0c347e67",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8959",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "😢 404 Not Found",
+    "url": "http://localhost:8000/api/v1/pet/6"
+  }
+DEBUG    framework.api_client:api_client.py:343 Session closed

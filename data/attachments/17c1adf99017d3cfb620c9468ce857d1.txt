@@ -1,0 +1,194 @@
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fdaf66df420> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <bound method Provider.first_name of <faker.providers.person.en_US.Provider object at 0x7fdaf7f82240>> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fdaf66df7e0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:264 Iterator: Fetching next value from <factory.utils.ResetableIterator object at 0x7fdaf801a6f0>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fdaf66dfc40> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    factory.generate:declarations.py:101 LazyFunction: Evaluating <function PetFactory.<lambda> at 0x7fdaf66dfce0> on <BuildStep for <StepBuilder(<FactoryOptions for PetFactory>, strategy='build')>>
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***"
+    },
+    "body": {
+      "name": "James",
+      "photoUrls": [],
+      "status": "available"
+    }
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "87",
+      "Content-Type": "application/json",
+      "x-correlation-id": "5074b3e1-a56c-436b-8449-f5ed07492eab",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8988",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "James",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "available",
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 PUT /api/v1/pet
+  {
+    "event": "request",
+    "method": "PUT",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***"
+    },
+    "body": {
+      "name": "James",
+      "photoUrls": [],
+      "status": "sold",
+      "id": 2
+    }
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 PUT /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "82",
+      "Content-Type": "application/json",
+      "x-correlation-id": "160f02bd-babc-45c1-8c2a-f01e7b76780f",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8987",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "James",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "sold",
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=available",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=available [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "2",
+      "Content-Type": "application/json",
+      "x-correlation-id": "56da15a8-d6b7-453b-9b0a-6401c77597f3",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8986",
+      "x-ratelimit-reset": "60"
+    },
+    "body": [],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=available"
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 GET /api/v1/pet/findByStatus?status=sold
+  {
+    "event": "request",
+    "method": "GET",
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=sold",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 GET /api/v1/pet/findByStatus?status=sold [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Length": "84",
+      "Content-Type": "application/json",
+      "x-correlation-id": "8e1dee95-1a35-4cc5-81b4-fad91a7716e3",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8985",
+      "x-ratelimit-reset": "60"
+    },
+    "body": [
+      {
+        "name": "James",
+        "photoUrls": [],
+        "category": null,
+        "tags": null,
+        "status": "sold",
+        "id": 2
+      }
+    ],
+    "url": "http://localhost:8000/api/v1/pet/findByStatus?status=sold"
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:186 Request: http://localhost:8000 DELETE /api/v1/pet/2
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/2",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "OpenAPI-Generator/0.0.0/python",
+      "Authorization": "***REDACTED***",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  }
+DEBUG    petstore_openapi_client.rest:rest.py:206 Response: http://localhost:8000 DELETE /api/v1/pet/2 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "Date": "Thu, 13 Aug 2026 03:11:26 GMT",
+      "Server": "uvicorn",
+      "Content-Type": "application/json",
+      "x-correlation-id": "9fe9e308-df50-4f62-9bec-9fb043a37ec6",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8984",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/pet/2"
+  }

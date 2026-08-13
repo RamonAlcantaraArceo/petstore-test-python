@@ -1,0 +1,86 @@
+03:11:30 | DEBUG    | _request | Request: http://localhost:8000 POST /api/v1/pet
+  {
+    "event": "request",
+    "method": "POST",
+    "url": "http://localhost:8000/api/v1/pet",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": {
+      "name": "DeprecatedDog",
+      "status": "sold",
+      "photoUrls": []
+    },
+    "data": null
+  }
+03:11:30 | DEBUG    | _new_conn | Starting new HTTP connection (1): localhost:8000
+03:11:30 | DEBUG    | _make_request | http://localhost:8000 "POST /api/v1/pet HTTP/1.1" 200 90
+03:11:30 | DEBUG    | _request | Response: http://localhost:8000 POST /api/v1/pet [200]
+  {
+    "event": "response",
+    "status_code": 200,
+    "reason": "OK",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-length": "90",
+      "content-type": "application/json",
+      "x-correlation-id": "c6da8cba-7880-443b-a314-8e809b0909d2",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8976",
+      "x-ratelimit-reset": "60"
+    },
+    "body": {
+      "name": "DeprecatedDog",
+      "photoUrls": [],
+      "category": null,
+      "tags": null,
+      "status": "sold",
+      "id": 2
+    },
+    "url": "http://localhost:8000/api/v1/pet"
+  }
+03:11:30 | DEBUG    | _request | Request: http://localhost:8000 DELETE /api/v1/pet/2
+  {
+    "event": "request",
+    "method": "DELETE",
+    "url": "http://localhost:8000/api/v1/pet/2",
+    "headers": {
+      "User-Agent": "python-requests/2.33.1",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBleGFtcGxlLmNvbSIsImV4cCI6MTc4NjU5NDI5MCwiaWF0IjoxNzg2NTkwNjkwLCJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEiLCJ1c2VyX21ldGFkYXRhIjp7ImZpcnN0X25hbWUiOiJEZXYiLCJsYXN0X25hbWUiOiJVc2VyIiwicGhvbmUiOiI1NTUtMTIzNCIsInVzZXJfc3RhdHVzIjoxLCJ1c2VybmFtZSI6ImRldnVzZXIifX0.PvGXZGyEmeOvuudBnTFLn5M19w75_OXajiC2ccv9KkM"
+    },
+    "extra_headers": null,
+    "params": null,
+    "json": null,
+    "data": null
+  }
+03:11:30 | DEBUG    | _make_request | http://localhost:8000 "DELETE /api/v1/pet/2 HTTP/1.1" 204 0
+03:11:30 | DEBUG    | _request | Response: http://localhost:8000 DELETE /api/v1/pet/2 [204]
+  {
+    "event": "response",
+    "status_code": 204,
+    "reason": "No Content",
+    "headers": {
+      "date": "Thu, 13 Aug 2026 03:11:29 GMT",
+      "server": "uvicorn",
+      "content-type": "application/json",
+      "x-correlation-id": "c90a884f-9425-41a9-9b2a-f5c3a762cfa8",
+      "x-ratelimit-limit": "9000",
+      "x-ratelimit-remaining": "8975",
+      "x-ratelimit-reset": "60"
+    },
+    "body": "",
+    "url": "http://localhost:8000/api/v1/pet/2"
+  }
+03:11:30 | DEBUG    | close | Session closed
